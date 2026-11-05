@@ -27,6 +27,6 @@ def test_train_composes_the_real_config_with_overrides(monkeypatch: pytest.Monke
     seen: list[str] = []
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr("fruity.lib.training.train.train", lambda config: seen.append(config.model.net.model_name))
-    monkeypatch.setattr("sys.argv", ["fruity", "train", "experiment=convnext"])
+    monkeypatch.setattr("sys.argv", ["fruity", "train", "experiment=convnext_large"])
     cli.main()
     assert seen == ["convnext_large"]

@@ -1,0 +1,9 @@
+# @package _global_
+tags: [comparison, convnext_tiny]
+
+datamodule:
+  batch_size: 64
+
+model:
+  net:
+    model_name: convnext_tiny

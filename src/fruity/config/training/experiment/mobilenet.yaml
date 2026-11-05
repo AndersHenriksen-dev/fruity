@@ -1,0 +1,9 @@
+# @package _global_
+tags: [comparison, mobilenet]
+
+datamodule:
+  batch_size: 64
+
+model:
+  net:
+    model_name: mobilenetv3_large_100

@@ -1,0 +1,9 @@
+# @package _global_
+tags: [comparison, efficientnet]
+
+datamodule:
+  batch_size: 64
+
+model:
+  net:
+    model_name: efficientnet_b0

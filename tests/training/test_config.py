@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hydra
+import pytest
 from omegaconf import DictConfig
 
 from fruity.lib.shared.settings import CONFIG_DIR
@@ -19,5 +20,14 @@ def test_the_default_config_composes() -> None:
     assert config.datamodule.image_size == 224
 
 
-def test_an_experiment_overrides_the_model() -> None:
-    assert _compose("experiment=convnext").model.net.model_name == "convnext_large"
+@pytest.mark.parametrize(
+    ("experiment", "model"),
+    [
+        ("mobilenet", "mobilenetv3_large_100"),
+        ("efficientnet", "efficientnet_b0"),
+        ("convnext_tiny", "convnext_tiny"),
+        ("convnext_large", "convnext_large"),
+    ],
+)
+def test_an_experiment_overrides_the_model(experiment: str, model: str) -> None:
+    assert _compose(f"experiment={experiment}").model.net.model_name == model

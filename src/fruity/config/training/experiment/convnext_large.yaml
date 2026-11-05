@@ -1,11 +1,9 @@
 # @package _global_
+tags: [comparison, convnext_large]
+
 datamodule:
-  batch_size: 64
+  batch_size: 32
 
 model:
   net:
     model_name: convnext_large
-
-trainer:
-  max_epochs: 10
-  precision: 16-mixed

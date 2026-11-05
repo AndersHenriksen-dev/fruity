@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import hydra
@@ -53,6 +54,7 @@ def test_a_run_trains_tests_and_saves_a_model_that_serving_can_load(tmp_path: Pa
                 "model.net.pretrained=false",
                 "trainer.max_epochs=1",
                 "trainer.accelerator=cpu",
+                "trainer.precision=32",
                 "~callbacks.rich_progress_bar",
                 "test=true",
             ],
@@ -61,6 +63,9 @@ def test_a_run_trains_tests_and_saves_a_model_that_serving_can_load(tmp_path: Pa
     metrics = train(config)
 
     assert 0.0 <= metrics["test/acc"] <= 1.0
+    summary = json.loads((tmp_path / "metrics.json").read_text(encoding="utf-8"))
+    assert summary["model"] == "resnet18"
+    assert summary["fit_seconds"] > 0
     classifier = load_classifier("resnet18", tmp_path / "serving/model.pth", tmp_path / "serving/labels.json", 64)
     assert classifier.labels == dict(enumerate(CLASSES))
     assert classify(classifier, Image.new("RGB", (80, 60)), top_k=1)[0].label in CLASSES
