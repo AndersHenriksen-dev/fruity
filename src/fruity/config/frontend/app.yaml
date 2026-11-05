@@ -1,0 +1,2 @@
+# Read by lib/frontend/app.py: where the API is
+api_endpoint: http://127.0.0.1:8000/batch/classification

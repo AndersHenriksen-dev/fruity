@@ -1,77 +1,99 @@
-[build-system]
-requires = ["setuptools", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "fruity"
-version = "0.0.1"
-description = "Classification of 131 types of fruits and vegetables"
-authors = [
-  { name = "Group14", email = "your@email.com" },
-]
-license = { file = "LICENSE" }
+version = "0.2.0"
+description = "A food image classifier, trained, deployed and measured as a small production service"
 readme = "README.md"
-requires-python = "==3.10.9"
-dynamic = ["dependencies", "optional-dependencies"]
+requires-python = ">=3.12,<3.13"
+license = "MIT"
+authors = [{ name = "Anders Henriksen", email = "anhenr.dev@gmail.com" }]
+dependencies = ["pydantic>=2.9", "pyyaml>=6.0"]
 
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
+[project.optional-dependencies]
+serving = ["fastapi>=0.115", "pillow>=11", "python-multipart>=0.0.20", "uvicorn>=0.34"]
+training = [
+    "hydra-colorlog>=1.2",
+    "hydra-core>=1.3",
+    "lightning>=2.5",
+    "rich>=13.7",
+    "timm>=1.0",
+    "torch>=2.8",
+    "torchmetrics>=1.6",
+    "torchvision>=0.23",
+    "wandb>=0.19",
+]
+frontend = ["requests>=2.32", "streamlit>=1.40"]
 
-[tool.setuptools.dynamic.optional-dependencies]
-dev = {file = ['requirements_dev.txt']}
+[project.scripts]
+fruity = "fruity.cli:main"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28",
+    "mypy>=1.13",
+    "pre-commit>=4.0",
+    "pytest>=8.3",
+    "ruff>=0.8",
+    "types-pyyaml>=6.0",
+    "types-requests>=2.32",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# CUDA on the Windows machine that trains. CPU on Linux, where CI runs, because it needs no GPU and is 2 GB smaller.
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'win32'" },
+    { index = "pytorch-cpu", marker = "sys_platform == 'linux'" },
+]
+torchvision = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'win32'" },
+    { index = "pytorch-cpu", marker = "sys_platform == 'linux'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
 
 [tool.ruff]
-# Exclude a variety of commonly ignored directories.
-exclude = [
-    ".bzr",
-    ".direnv",
-    ".eggs",
-    ".git",
-    ".git-rewrite",
-    ".hg",
-    ".ipynb_checkpoints",
-    ".mypy_cache",
-    ".nox",
-    ".pants.d",
-    ".pyenv",
-    ".pytest_cache",
-    ".pytype",
-    ".ruff_cache",
-    ".svn",
-    ".tox",
-    ".venv",
-    ".vscode",
-    "__pypackages__",
-    "_build",
-    "buck-out",
-    "build",
-    "dist",
-    "node_modules",
-    "site-packages",
-    "venv",
-]
-extend-exclude = ["reports"]
+target-version = "py312"
 line-length = 120
-select = ["I"]  #isort
 
 [tool.ruff.lint]
-# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
-select = ["F", "N", "D", "E", "W"] #pyflakes, pep8-naming, pydocstyle
-ignore = []
+# E/F/I/W: pyflakes, pycodestyle and import order. ANN: every function has input and output types.
+# D: Google-style docstrings. B/SIM/C4/UP: bugbear, simplification, comprehensions, pyupgrade.
+# COM812: a trailing comma on multi-line calls, so exploded arguments stay exploded. RUF: ruff's own checks.
+select = ["E", "F", "I", "W", "ANN", "D", "B", "SIM", "C4", "UP", "COM812", "RUF"]
 
-# Allow fix for all enabled rules (when `--fix`) is provided.
-fixable = ["ALL"]
-unfixable = []
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
-[tool.ruff.format]
-# Like Black, use double quotes for strings.
-quote-style = "double"
+[tool.ruff.lint.per-file-ignores]
+# Test names and classes already say what they cover. Module docstrings are still required.
+"tests/**" = ["D101", "D102", "D103"]
 
-# Like Black, indent with spaces, rather than tabs.
-indent-style = "space"
+[tool.mypy]
+python_version = "3.12"
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+strict_equality = true
 
-# Like Black, respect magic trailing commas.
-skip-magic-trailing-comma = false
+# These ship without type information.
+[[tool.mypy.overrides]]
+module = ["hydra.*", "timm.*", "torchvision.*", "wandb.*"]
+ignore_missing_imports = true
 
-# Like Black, automatically detect the appropriate line ending.
-line-ending = "auto"
+[tool.pytest.ini_options]
+testpaths = ["tests"]

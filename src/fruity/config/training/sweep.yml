@@ -1,0 +1,21 @@
+# Read by Weights & Biases: wandb sweep --project fruity src/fruity/config/training/sweep.yml
+program: src/fruity/lib/training/train.py
+method: bayes
+metric:
+  goal: maximize
+  name: val/acc
+
+parameters:
+  model.optimizer.lr:
+    min: 0.00001
+    max: 0.001
+  model.optimizer.weight_decay:
+    min: 0.0
+    max: 0.05
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - logging.run=true
+  - ${args_no_hyphens}

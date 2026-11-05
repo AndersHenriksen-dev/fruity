@@ -1,1 +1,1 @@
-"""Fruity is a Python library for fruit classification."""
+"""A food image classifier, trained, deployed and measured as a small production service."""

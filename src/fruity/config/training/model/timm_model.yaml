@@ -1,0 +1,15 @@
+_target_: fruity.lib.training.model.Classifier
+num_classes: 101
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 0.0003
+  weight_decay: 0.01
+
+net:
+  _target_: timm.create_model
+  model_name: resnet18
+  in_chans: 3
+  num_classes: ${model.num_classes}
+  pretrained: true
