@@ -1,2 +1,3 @@
-# Read by lib/frontend/app.py: where the API is
+# Read by lib/frontend/app.py: where the API is. The first request after idle starts a replica, so allow it time.
 api_endpoint: http://127.0.0.1:8000/batch/classification
+timeout_seconds: 120

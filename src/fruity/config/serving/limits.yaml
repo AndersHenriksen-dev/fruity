@@ -1,0 +1,5 @@
+# Read by lib/serving/limits.py: what one replica accepts
+requests_per_minute: 120
+max_upload_bytes: 10000000
+max_batch_files: 8
+max_image_pixels: 40000000

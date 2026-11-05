@@ -9,6 +9,7 @@ uv sync --all-extras                 # install
 uv run pre-commit install            # once: ruff, mypy, line endings and gitleaks on every commit
 uv run fruity train experiment=convnext   # train; Hydra overrides follow
 uv run fruity serve                  # serve the model on http://127.0.0.1:8000
+uv run fruity predict photo.jpg      # name the food in one image
 uv run streamlit run src/fruity/lib/frontend/app.py   # the demo page
 uv run ruff check . && uv run ruff format --check . && uv run mypy src && uv run pytest   # what CI checks
 ```

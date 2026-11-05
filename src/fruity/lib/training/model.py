@@ -21,7 +21,7 @@ class StageMetrics(torch.nn.Module):
         super().__init__()
         self.loss = MeanMetric()
         self.top1 = MulticlassAccuracy(num_classes, average="micro")
-        self.top5 = MulticlassAccuracy(num_classes, top_k=5, average="micro")
+        self.top5 = MulticlassAccuracy(num_classes, top_k=min(5, num_classes), average="micro")
 
 
 class Classifier(LightningModule):
