@@ -18,7 +18,7 @@ OptimizerFactory = Callable[[Iterable[torch.nn.Parameter]], torch.optim.Optimize
 def build_schedule(optimizer: torch.optim.Optimizer, total_steps: int, warmup_fraction: float) -> SequentialLR:
     """Raise the learning rate from near zero, then lower it along a cosine.
 
-    Starting at the full rate can wreck pretrained weights in the first steps, while the new final layer is still random.
+    A full rate from the first step can wreck pretrained weights, while the new final layer is still random.
 
     Args:
         optimizer: The optimizer whose rate to change.
