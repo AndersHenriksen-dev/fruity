@@ -1,0 +1,7 @@
+_target_: fruity.lib.training.data.Food101DataModule
+data_dir: data
+image_size: 224
+val_fraction: 0.1
+split_seed: 42
+batch_size: 64
+num_workers: 8

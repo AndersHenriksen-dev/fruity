@@ -1,6 +1,0 @@
-#@package __global__
-defaults:
-  - override /trainer: gpu
-
-datamodule:
-  num_workers: 31
