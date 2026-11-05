@@ -1,5 +1,6 @@
 _target_: fruity.lib.training.model.Classifier
 num_classes: 101
+warmup_fraction: 0.05
 
 optimizer:
   _target_: torch.optim.AdamW
