@@ -15,22 +15,30 @@ class FrontendConfig(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     api_endpoint: str
+    timeout_seconds: int
 
 
-CONFIG = config_for(__name__, FrontendConfig)
+# `streamlit run` makes this file `__main__`, so its name has to be spelled out to find its config.
+CONFIG = config_for("fruity.lib.frontend.app", FrontendConfig)
 
 
 def main() -> None:
     """Show the page."""
     st.title("What food is this?")
     uploads = st.file_uploader("Food photos", type=["png", "jpg", "jpeg"], accept_multiple_files=True)
-    if uploads and st.button("Classify"):
-        files = [("files", (upload.name, upload.getvalue(), upload.type)) for upload in uploads]
-        response = requests.post(CONFIG.api_endpoint, files=files, timeout=120)
-        response.raise_for_status()
-        results = response.json()
-        for upload in uploads:
-            st.image(upload, caption=results.get(upload.name, "Unknown"))
+    if not (uploads and st.button("Classify")):
+        return
+    files = [("files", (upload.name, upload.getvalue(), upload.type)) for upload in uploads]
+    response = requests.post(CONFIG.api_endpoint, files=files, timeout=CONFIG.timeout_seconds)
+    if not response.ok:
+        st.error(response.json().get("detail", "The classifier could not answer."))
+        return
+    for upload, result in zip(uploads, response.json(), strict=True):
+        answers = ", ".join(
+            f"{prediction['label'].replace('_', ' ')} ({prediction['probability']:.0%})"
+            for prediction in result["predictions"]
+        )
+        st.image(upload, caption=answers)
 
 
 main()

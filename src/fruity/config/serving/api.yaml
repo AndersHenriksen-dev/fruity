@@ -2,5 +2,5 @@
 model_name: convnext_large
 weights_path: models/model.pth
 labels_path: models/labels.json
-num_classes: 101
 image_size: 224
+top_k: 3

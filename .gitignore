@@ -15,6 +15,7 @@ build/
 # Training data, runs and weights: the weights are published as a release, never committed
 data/
 outputs/
+*.log
 wandb/
 lightning_logs/
 *.ckpt

@@ -10,8 +10,7 @@ from lightning.pytorch import LightningDataModule
 from torch.utils.data import DataLoader, Dataset, Subset
 from torchvision import datasets, transforms
 
-IMAGENET_MEAN = (0.485, 0.456, 0.406)
-IMAGENET_STD = (0.229, 0.224, 0.225)
+from fruity.lib.shared.preprocess import IMAGENET_MEAN, IMAGENET_STD, evaluation_transform
 
 
 def training_transform(image_size: int) -> transforms.Compose:
@@ -21,18 +20,6 @@ def training_transform(image_size: int) -> transforms.Compose:
             transforms.RandomResizedCrop(image_size),
             transforms.RandomHorizontalFlip(),
             transforms.TrivialAugmentWide(),
-            transforms.ToTensor(),
-            transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
-        ],
-    )
-
-
-def evaluation_transform(image_size: int) -> transforms.Compose:
-    """Build the fixed preprocessing used for validation, testing and serving."""
-    return transforms.Compose(
-        [
-            transforms.Resize(int(image_size * 256 / 224)),
-            transforms.CenterCrop(image_size),
             transforms.ToTensor(),
             transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
         ],
