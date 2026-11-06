@@ -23,12 +23,18 @@ def main() -> None:
     predict = commands.add_parser("predict", help="name the food in an image file")
     predict.add_argument("image", type=Path)
 
+    commands.add_parser("compare", help="measure the trained models, choose one and write the results")
+
     args, rest = parser.parse_known_args()
     if args.command == "train":
         from fruity.lib.training.train import main as train
 
         sys.argv = ["fruity train", *rest]
         train()
+    elif args.command == "compare":
+        from fruity.lib.evaluation.compare import main as compare
+
+        compare()
     elif args.command == "predict":
         from PIL import Image
 

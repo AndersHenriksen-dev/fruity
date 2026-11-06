@@ -30,6 +30,13 @@ training = [
     "wandb>=0.19",
 ]
 frontend = ["pydantic>=2.9", "requests>=2.32", "streamlit>=1.40"]
+evaluation = [
+    "matplotlib>=3.11.2",
+    "onnx>=1.23.2",
+    "onnxruntime>=1.31.1",
+    "onnxscript>=0.7.2",
+    "psutil>=7.2.2",
+]
 
 [project.scripts]
 fruity = "fruity.cli:main"
@@ -100,7 +107,7 @@ strict_equality = true
 
 # These ship without type information.
 [[tool.mypy.overrides]]
-module = ["hydra.*", "timm.*", "torchvision.*", "wandb.*"]
+module = ["hydra.*", "onnxruntime.*", "psutil.*", "timm.*", "torchvision.*", "wandb.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
