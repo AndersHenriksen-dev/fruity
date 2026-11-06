@@ -49,6 +49,8 @@ def small_test(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         "photos_dir": tmp_path / "images",
         "stages": [1, 2],
         "stage_seconds": 2,
+        "soak_users": 1,
+        "soak_seconds": 2,
         "cold_starts": 2,
         "idle_seconds": 0,
     }
@@ -90,6 +92,15 @@ def test_cold_starts_add_to_the_stages_already_measured(service: str, small_test
 )
 def test_it_allows_this_projects_own_service(host: str) -> None:
     assert check_host(host, run.CONFIG.allowed_hosts)
+
+
+def test_a_steady_load_is_saved_beside_the_stages(service: str, small_test: Path) -> None:
+    run.measure_stages(service, small_test, None)
+    run.measure_soak(service, small_test, None)
+    results = json.loads((small_test / "load_test.json").read_text(encoding="utf-8"))
+    assert len(results["stages"]) == 2
+    assert results["soak"]["requests"] > 0
+    assert "Steady load" in (small_test / "LOAD.md").read_text(encoding="utf-8")
 
 
 @pytest.mark.parametrize(

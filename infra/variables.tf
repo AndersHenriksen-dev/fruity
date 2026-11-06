@@ -9,6 +9,17 @@ variable "image_repository" {
   default     = "ghcr.io/andershenriksen-dev/fruity"
 }
 
+variable "allowed_ip_ranges" {
+  description = "Who may reach the apps, in CIDR notation. An empty list would let in everyone, so it is refused."
+  type        = list(string)
+  sensitive   = true
+
+  validation {
+    condition     = length(var.allowed_ip_ranges) > 0
+    error_message = "At least one address is needed: with no rules, the apps accept everyone."
+  }
+}
+
 variable "alert_email" {
   description = "Where alerts go."
   type        = string
@@ -27,7 +38,7 @@ variable "requests_per_minute" {
 }
 
 variable "log_daily_quota_gb" {
-  description = "Stop collecting logs for the day after this much, so noisy logs cannot use up the credit."
+  description = "Stop collecting logs for the day after this much, so noisy logs cannot run up a bill."
   type        = number
   default     = 0.2
 }

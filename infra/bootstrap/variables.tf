@@ -20,10 +20,16 @@ variable "github_repository" {
   default     = "AndersHenriksen-dev/fruity"
 }
 
-variable "budget_usd" {
-  description = "The monthly spend on this project, in USD, that sends an email."
+variable "budget_amount" {
+  description = "The monthly spend the account may reach, in its billing currency, which is DKK. 60 DKK stays under USD 10."
   type        = number
-  default     = 5
+  default     = 60
+}
+
+variable "deployment_hours" {
+  description = "How long after this is applied the service is removed."
+  type        = number
+  default     = 24
 }
 
 variable "budget_email" {

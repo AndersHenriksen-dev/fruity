@@ -41,8 +41,10 @@ jobs:
       - run: terraform fmt -check -recursive infra
       - run: terraform -chdir=infra init -backend=false -input=false
       - run: terraform -chdir=infra validate
+      - run: terraform -chdir=infra test
       - run: terraform -chdir=infra/bootstrap init -input=false
       - run: terraform -chdir=infra/bootstrap validate
+      - run: terraform -chdir=infra/bootstrap test
 
   secrets:
     name: Secret scan

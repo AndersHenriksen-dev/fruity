@@ -26,6 +26,7 @@ env:
   TF_VAR_image_tag: ${{ github.sha }}
   TF_VAR_alert_email: ${{ vars.ALERT_EMAIL }}
   TF_VAR_requests_per_minute: ${{ vars.REQUESTS_PER_MINUTE || '120' }}
+  TF_VAR_allowed_ip_ranges: '["${{ secrets.ALLOWED_IP }}/32"]'
 
 jobs:
   images:
@@ -71,6 +72,11 @@ jobs:
         with:
           terraform_wrapper: false
       - run: terraform init -input=false -backend-config="storage_account_name=${{ vars.STATE_STORAGE_ACCOUNT }}"
+      - name: Let this runner reach the service for the smoke test
+        run: |
+          runner_ip="$(curl --fail --silent --show-error https://api.ipify.org)"
+          echo "::add-mask::$runner_ip"
+          echo 'TF_VAR_allowed_ip_ranges=["${{ secrets.ALLOWED_IP }}/32","'"$runner_ip"'/32"]' >> "$GITHUB_ENV"
       - run: terraform apply -input=false -auto-approve
       - name: Smoke test
         run: |

@@ -32,6 +32,7 @@ def main() -> None:
     loadtest.add_argument("--output", type=Path, required=True, help="the folder for the results")
     loadtest.add_argument("--azure-resource-id", help="the API's resource ID, to read replica counts from Azure")
     loadtest.add_argument("--cold-starts", action="store_true", help="measure cold starts instead of load")
+    loadtest.add_argument("--soak", action="store_true", help="hold a steady load for most of the deployment")
 
     args, rest = parser.parse_known_args()
     if args.command == "train":
@@ -52,10 +53,12 @@ def main() -> None:
 
         fetch()
     elif args.command == "loadtest":
-        from fruity.lib.loadtest.run import measure_cold_starts, measure_stages
+        from fruity.lib.loadtest.run import measure_cold_starts, measure_soak, measure_stages
 
         if args.cold_starts:
             measure_cold_starts(args.host, args.output)
+        elif args.soak:
+            measure_soak(args.host, args.output, args.azure_resource_id)
         else:
             measure_stages(args.host, args.output, args.azure_resource_id)
     elif args.command == "predict":

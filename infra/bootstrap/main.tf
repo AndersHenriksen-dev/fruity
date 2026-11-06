@@ -1,5 +1,5 @@
 # Run once by hand, signed in with `az login`, before the first deploy. Everything CI needs and may not create itself:
-# a place for Terraform state, and an identity that can only touch the service's resource group.
+# a place for Terraform state, an identity that can only touch the service's resource group, and the spending limit.
 terraform {
   required_version = ">= 1.17"
   required_providers {
@@ -18,6 +18,7 @@ provider "azurerm" {
   resource_provider_registrations = "none"
   resource_providers_to_register = [
     "Microsoft.App",
+    "Microsoft.Automation",
     "Microsoft.Consumption",
     "Microsoft.Insights",
     "Microsoft.ManagedIdentity",
@@ -78,43 +79,4 @@ resource "azurerm_role_assignment" "deploy_state" {
   scope                = azurerm_storage_account.state.id
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = azurerm_user_assigned_identity.deploy.principal_id
-}
-
-# Scoped to this project, because other projects share the subscription and its credit. A budget only sends email:
-# it does not stop anything. On a free account the spending limit is what stops charges.
-resource "azurerm_consumption_budget_resource_group" "service" {
-  name              = "fruity"
-  resource_group_id = azurerm_resource_group.service.id
-  amount            = var.budget_usd
-  time_grain        = "Monthly"
-
-  time_period {
-    start_date = formatdate("YYYY-MM-01'T'00:00:00'Z'", plantimestamp())
-  }
-
-  notification {
-    operator       = "GreaterThanOrEqualTo"
-    threshold      = 50
-    threshold_type = "Actual"
-    contact_emails = [var.budget_email]
-  }
-
-  notification {
-    operator       = "GreaterThanOrEqualTo"
-    threshold      = 100
-    threshold_type = "Actual"
-    contact_emails = [var.budget_email]
-  }
-
-  notification {
-    operator       = "GreaterThanOrEqualTo"
-    threshold      = 100
-    threshold_type = "Forecasted"
-    contact_emails = [var.budget_email]
-  }
-
-  # Azure requires a start date in the current month. Keep the first one, or every later plan would replace the budget.
-  lifecycle {
-    ignore_changes = [time_period]
-  }
 }
