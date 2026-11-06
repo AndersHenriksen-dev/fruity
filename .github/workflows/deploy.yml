@@ -1,0 +1,100 @@
+name: Deploy
+
+# The service runs only while it is being measured. DEPLOY_ENABLED stays off otherwise, so merging to main can never
+# bring back a service that was taken down.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      action:
+        description: Bring the service up, or remove it
+        type: choice
+        options: [apply, destroy]
+        default: apply
+
+concurrency: deploy
+
+permissions:
+  contents: read
+
+env:
+  ARM_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+  ARM_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+  ARM_USE_OIDC: "true"
+  TF_VAR_image_tag: ${{ github.sha }}
+
+jobs:
+  images:
+    name: Build and push images
+    if: vars.DEPLOY_ENABLED == 'true' && inputs.action != 'destroy'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        image: [api, frontend]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/${{ matrix.image }}.Dockerfile
+          push: true
+          tags: ghcr.io/andershenriksen-dev/fruity/${{ matrix.image }}:${{ github.sha }}
+
+  deploy:
+    name: Apply and smoke test
+    needs: images
+    if: vars.DEPLOY_ENABLED == 'true' && inputs.action != 'destroy'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      id-token: write # signs in to Azure with a short-lived token, so no key is stored
+    defaults:
+      run:
+        working-directory: infra
+    steps:
+      - uses: actions/checkout@v5
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+      - run: terraform init -input=false -backend-config="storage_account_name=${{ vars.STATE_STORAGE_ACCOUNT }}"
+      - run: terraform apply -input=false -auto-approve
+      - name: Smoke test
+        run: |
+          api="$(terraform output -raw api_url)"
+          # A replica may be starting from zero, so allow it time.
+          curl --fail --silent --show-error --retry 10 --retry-delay 10 --retry-all-errors "$api/health"
+          # A 1 by 1 pixel PNG: this proves the model answers over HTTP, not that the answer is right.
+          echo 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4z8DwHwAFAAH/iZk9HQAAAABJRU5ErkJggg==' | base64 -d > pixel.png
+          answers="$(curl --fail --silent --show-error --retry 5 --retry-delay 10 --retry-all-errors \
+            -F 'file=@pixel.png;type=image/png' "$api/image/classification")"
+          echo "$answers"
+          test "$(echo "$answers" | jq length)" -eq 3
+
+  destroy:
+    name: Remove the service
+    if: github.event_name == 'workflow_dispatch' && inputs.action == 'destroy'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      id-token: write
+    defaults:
+      run:
+        working-directory: infra
+    steps:
+      - uses: actions/checkout@v5
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform init -input=false -backend-config="storage_account_name=${{ vars.STATE_STORAGE_ACCOUNT }}"
+      - run: terraform destroy -input=false -auto-approve

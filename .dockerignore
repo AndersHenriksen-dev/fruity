@@ -1,0 +1,7 @@
+# Only what the images need, so data, weights, runs and secrets can never reach a build.
+*
+!src/
+!pyproject.toml
+!uv.lock
+!README.md
+**/__pycache__/
