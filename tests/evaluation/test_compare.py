@@ -54,7 +54,7 @@ def workspace(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     (tmp_path / "probes.json").write_text(json.dumps(probes), encoding="utf-8")
     datamodule = Food101DataModule(str(tmp_path / "data"), 32, 0.25, 42, 4, 0)
     datamodule.setup()
-    monkeypatch.setattr(compare, "_load_datamodule", lambda: datamodule)
+    monkeypatch.setattr(compare, "load_datamodule", lambda: datamodule)
     overrides = {
         "runs_dir": tmp_path / "runs",
         "experiments": list(MODELS),

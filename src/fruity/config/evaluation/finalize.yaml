@@ -1,0 +1,15 @@
+# Read by lib/evaluation/finalize.py: the runs that compete to be the final model, and where its files and results go
+comparison_results: evals/comparison.json
+comparison_experiment: convnext_tiny
+comparison_run: outputs/comparison/final_convnext_tiny
+sweep_runs:
+  - outputs/train/runs/2026-11-06_07-48-45
+  - outputs/train/runs/2026-11-06_08-11-29
+  - outputs/train/runs/2026-11-06_08-34-17
+  - outputs/train/runs/2026-11-06_08-56-54
+  - outputs/train/runs/2026-11-06_09-19-31
+  - outputs/train/runs/2026-11-06_09-42-12
+output_dir: outputs/final
+results_path: evals/final.json
+report_path: evals/FINAL.md
+max_export_gap: 0.001

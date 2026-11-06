@@ -27,3 +27,9 @@ The best validation accuracy is 90.05%, from `convnext_large`, so the floor is 8
 Plain ONNX scores the same 88.05% as PyTorch at about the same speed, and needs ONNX Runtime instead of PyTorch in the serving image. Quantized ONNX is 4 times smaller and twice as fast, but scores 85.76%. That is below the 87.05% floor from entry 4, so the rule that excludes the smaller models excludes it too.
 
 Quantizing only `Conv`, `MatMul` and `Gemm` layers is deliberate. Quantizing every layer took `convnext_tiny` to about 20%, as `evals/quantization_settings.json` shows for 1,500 validation images. Even with this setting, quantization costs some models far more than others: `efficientnet_b0` falls to 29.83% and `mobilenetv3_large_100` to 63.87%, as `evals/comparison.json` shows. So a quantized model always needs its accuracy measured before use.
+
+## 6. The final weights come from the sweep's best run, and the gain is within noise
+
+A Weights & Biases sweep of 6 runs tried learning rates from 3e-5 to 3e-4 and weight decay from 0 to 0.1. Its best run reached 88.16% on validation against 88.05% from the comparison run. The rule was set before the sweep: the best validation score wins, so the sweep's run is the final model. The 0.11 point gain is about 8 images and well inside what sampling alone can move, so it is not evidence of a better model. The clearer finding is that rates above 1e-4 score lower. The numbers are in `evals/FINAL.md`.
+
+The test set is read by `fruity finalize` only, after the run and the form are fixed and the ONNX file has matched PyTorch on validation. `evals/final.json` is the lock: while it exists, the command rewrites the report and does not read the test set.

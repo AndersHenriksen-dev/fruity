@@ -48,7 +48,7 @@ CONFIG = config_for(__name__, CompareConfig)
 _TOP_K = 3
 
 
-def _load_datamodule() -> Food101DataModule:
+def load_datamodule() -> Food101DataModule:
     """Build the data as training does, from the same config file."""
     settings = read_config(CONFIG_DIR / "training" / "datamodule" / "foods_101.yaml", dict[str, object])
     datamodule: Food101DataModule = hydra.utils.instantiate(settings)
@@ -56,7 +56,7 @@ def _load_datamodule() -> Food101DataModule:
     return datamodule
 
 
-def _gpu_predictor(net: torch.nn.Module) -> Predict:
+def gpu_predictor(net: torch.nn.Module) -> Predict:
     """Run a PyTorch model on the GPU if there is one, which only speeds up scoring."""
     device = "cuda" if torch.cuda.is_available() else "cpu"
     net.to(device)
@@ -69,7 +69,7 @@ def _gpu_predictor(net: torch.nn.Module) -> Predict:
     return predict
 
 
-def _image_reader(datamodule: Food101DataModule) -> tuple[datasets.Food101, list[int]]:
+def image_reader(datamodule: Food101DataModule) -> tuple[datasets.Food101, list[int]]:
     """Give the raw validation images, in a fixed random order, without the labels or preprocessing."""
     raw = datasets.Food101(datamodule.data_dir, split="train")
     _, val = split_indices(len(raw), datamodule.val_fraction, datamodule.split_seed)
@@ -87,7 +87,7 @@ def _time_pytorch(classifier: Classifier, raw: datasets.Food101, indices: list[i
         return time_calls(call, indices, CONFIG.latency_warmup)
 
 
-def _time_onnx(path: Path, classifier: Classifier, raw: datasets.Food101, indices: list[int]) -> Latency:
+def time_onnx(path: Path, classifier: Classifier, raw: datasets.Food101, indices: list[int]) -> Latency:
     """Time an ONNX model from image file to answer. The thread limit must be set as the session opens."""
 
     def call(index: int) -> object:
@@ -123,6 +123,12 @@ def _calibration_images(datamodule: Food101DataModule) -> Iterator[torch.Tensor]
         yield plain[index][0]
 
 
+def worst_classes(scores: Scores, labels: dict[int, str]) -> list[ClassAccuracy]:
+    """Name the classes a model gets wrong most often, worst first."""
+    worst = sorted(labels, key=lambda index: scores.per_class[index])[: CONFIG.worst_classes]
+    return [ClassAccuracy(label=labels[index], top1=scores.per_class[index]) for index in worst]
+
+
 def _measure_model(experiment: str, learning_rate: float, datamodule: Food101DataModule) -> ModelResult:
     """Score and time one trained model as PyTorch, as ONNX and as quantized ONNX."""
     run = CONFIG.runs_dir / f"final_{experiment}"
@@ -130,26 +136,25 @@ def _measure_model(experiment: str, learning_rate: float, datamodule: Food101Dat
     weights = run / "serving" / "model.pth"
     classifier = load_classifier(saved["model"], weights, run / "serving" / "labels.json", datamodule.image_size)
     num_classes = len(classifier.labels)
-    raw, indices = _image_reader(datamodule)
+    raw, indices = image_reader(datamodule)
     sample = indices[: CONFIG.latency_warmup + CONFIG.latency_images]
 
     # One loader for all three forms, because its workers stay alive and take over a minute to start.
     batches = datamodule.val_dataloader()
 
-    scores = score(_gpu_predictor(classifier.net), batches, num_classes)
+    scores = score(gpu_predictor(classifier.net), batches, num_classes)
     pytorch = _runtime_result(weights, scores, _time_pytorch(classifier, raw, sample))
 
     plain_path = run / "onnx" / "model.onnx"
     export_onnx(classifier.net, datamodule.image_size, plain_path)
     plain_scores = score(OnnxModel(plain_path), batches, num_classes)
-    onnx = _runtime_result(plain_path, plain_scores, _time_onnx(plain_path, classifier, raw, sample))
+    onnx = _runtime_result(plain_path, plain_scores, time_onnx(plain_path, classifier, raw, sample))
 
     quantized_path = run / "onnx" / "model_quantized.onnx"
     quantize_onnx(plain_path, quantized_path, _calibration_images(datamodule))
     quantized_scores = score(OnnxModel(quantized_path), batches, num_classes)
-    quantized = _runtime_result(quantized_path, quantized_scores, _time_onnx(quantized_path, classifier, raw, sample))
+    quantized = _runtime_result(quantized_path, quantized_scores, time_onnx(quantized_path, classifier, raw, sample))
 
-    worst = sorted(range(num_classes), key=lambda index: scores.per_class[index])[: CONFIG.worst_classes]
     return ModelResult(
         name=saved["model"],
         experiment=experiment,
@@ -158,7 +163,7 @@ def _measure_model(experiment: str, learning_rate: float, datamodule: Food101Dat
         pytorch=pytorch,
         onnx=onnx,
         onnx_quantized=quantized,
-        worst_classes=[ClassAccuracy(label=classifier.labels[index], top1=scores.per_class[index]) for index in worst],
+        worst_classes=worst_classes(scores, classifier.labels),
     )
 
 
@@ -176,7 +181,7 @@ def main() -> None:
         results = [ModelResult.model_validate(entry) for entry in saved]
     done = {result.experiment for result in results}
     probes = json.loads(CONFIG.probes_path.read_text(encoding="utf-8"))
-    datamodule = _load_datamodule()
+    datamodule = load_datamodule()
     for experiment in CONFIG.experiments:
         if experiment in done:
             continue

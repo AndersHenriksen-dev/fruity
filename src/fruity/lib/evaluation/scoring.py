@@ -14,6 +14,7 @@ Predict = Callable[[torch.Tensor], torch.Tensor]
 class Scores:
     """How often a model was right, overall and for each class."""
 
+    images: int
     top1: float
     top5: float
     per_class: list[float]
@@ -28,7 +29,7 @@ def score(predict: Predict, batches: Iterable[tuple[torch.Tensor, torch.Tensor]]
         num_classes: How many classes there are.
 
     Returns:
-        Top-1 and top-5 accuracy, and the top-1 accuracy of each class.
+        How many images were scored, top-1 and top-5 accuracy, and the top-1 accuracy of each class.
     """
     top5_hits = 0
     per_class_hits = torch.zeros(num_classes)
@@ -40,4 +41,4 @@ def score(predict: Predict, batches: Iterable[tuple[torch.Tensor, torch.Tensor]]
         per_class_seen += torch.bincount(labels, minlength=num_classes)
     seen = float(per_class_seen.sum())
     per_class = per_class_hits / per_class_seen.clamp(min=1)
-    return Scores(float(per_class_hits.sum()) / seen, top5_hits / seen, per_class.tolist())
+    return Scores(int(seen), float(per_class_hits.sum()) / seen, top5_hits / seen, per_class.tolist())
