@@ -15,9 +15,9 @@ from pydantic import BaseModel
 
 from fruity.lib.evaluation import compare
 from fruity.lib.evaluation.onnx_model import OnnxModel, export_onnx
+from fruity.lib.evaluation.pytorch_model import load_classifier
 from fruity.lib.evaluation.scoring import Scores, score
 from fruity.lib.evaluation.selection import ClassAccuracy
-from fruity.lib.serving.inference import load_classifier
 from fruity.lib.shared.settings import config_for, read_config
 
 _Z_95 = 1.96

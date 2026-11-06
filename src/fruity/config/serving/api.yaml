@@ -1,6 +1,6 @@
-# Read by lib/serving/api.py: the model the API serves
-model_name: convnext_tiny
-weights_path: models/model.pth
+# Read by lib/serving/api.py: the model the API serves. `fruity fetch` puts the files there.
+model_path: models/model.onnx
 labels_path: models/labels.json
 image_size: 224
 top_k: 3
+threads: 1

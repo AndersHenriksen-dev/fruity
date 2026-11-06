@@ -25,6 +25,7 @@ def main() -> None:
 
     commands.add_parser("compare", help="measure the trained models, choose one and write the results")
     commands.add_parser("finalize", help="fix the final model and score it on the test set, once")
+    commands.add_parser("fetch", help="download the published model and verify its checksums")
 
     args, rest = parser.parse_known_args()
     if args.command == "train":
@@ -40,13 +41,17 @@ def main() -> None:
         from fruity.lib.evaluation.finalize import main as finalize
 
         finalize()
+    elif args.command == "fetch":
+        from fruity.lib.serving.fetch import main as fetch
+
+        fetch()
     elif args.command == "predict":
         from PIL import Image
 
         from fruity.lib.serving.api import CONFIG
         from fruity.lib.serving.inference import classify, load_classifier
 
-        classifier = load_classifier(CONFIG.model_name, CONFIG.weights_path, CONFIG.labels_path, CONFIG.image_size)
+        classifier = load_classifier(CONFIG.model_path, CONFIG.labels_path, CONFIG.image_size, CONFIG.threads)
         for answer in classify(classifier, Image.open(args.image), CONFIG.top_k):
             print(f"{answer.label}: {answer.probability:.1%}")
     else:

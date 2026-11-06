@@ -1,0 +1,7 @@
+# Read by lib/serving/fetch.py: the published model. The checksum of model.onnx is the one in evals/final.json.
+base_url: https://github.com/AndersHenriksen-dev/fruity/releases/download/model-v1
+target_dir: models
+timeout_seconds: 300
+files:
+  model.onnx: b20fb5b94508b1f4992ac446d4a1700c936d5a8ad268dd0c86791a3fd5647656
+  labels.json: 13f893d204f5f82339e87d86af13efe29edf97fe25ea2797e77e39846124a161
