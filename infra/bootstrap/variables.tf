@@ -15,9 +15,9 @@ variable "state_storage_account" {
 }
 
 variable "github_repository" {
-  description = "The repository whose main branch may deploy."
+  description = "The repository whose main branch may deploy, as GitHub writes it in its tokens: with its owner and repository IDs, so a renamed or recreated repository gets no access."
   type        = string
-  default     = "AndersHenriksen-dev/fruity"
+  default     = "AndersHenriksen-dev@55695767/fruity@1447348716"
 }
 
 variable "budget_amount" {
