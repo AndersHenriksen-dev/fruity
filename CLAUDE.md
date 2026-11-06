@@ -15,6 +15,7 @@ uv run fruity serve                  # serve the model on http://127.0.0.1:8000
 uv run fruity predict photo.jpg      # name the food in one image
 uv run streamlit run src/fruity/lib/frontend/app.py   # the demo page
 uv run ruff check . && uv run ruff format --check . && uv run mypy src && uv run pytest   # what CI checks
+docker compose up --build            # the whole service on one machine, with no cloud account
 ```
 
 ## Index of `.claude/` and related files
@@ -60,4 +61,6 @@ src/fruity/
 |   `-- shared/            what they all use: nothing here imports them
 `-- config/                the same subfolders as lib/: serving/api.py reads serving/api.yaml
 tests/                     the same subfolders again
+docker/                    one image per app
+infra/                     the service on Azure, and how to bring it up and take it down: see infra/README.md
 ```
