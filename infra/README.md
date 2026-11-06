@@ -2,7 +2,7 @@
 
 The service on Azure Container Apps, in Terraform. It is deployed to be measured and then removed, so it runs only for a short, known period.
 
-- `bootstrap/`: run once by hand. Creates the resource group, the storage for Terraform state, the identity GitHub Actions signs in with, and the spending limit below. Its own state stays on the machine that ran it. The 48 hours start when it is applied.
+- `bootstrap/`: run once by hand. Creates the resource group, the storage for Terraform state, the identity GitHub Actions signs in with, and the spending limit below. Its own state stays on the machine that ran it. The 24 hours start when it is applied.
 - This folder: the service. CI applies it through `.github/workflows/deploy.yml`.
 
 The deploy identity is a Contributor on the `fruity` resource group only, and it signs in with a short-lived token, so no key is stored in GitHub.
@@ -14,7 +14,7 @@ Azure has no spending limit for this subscription type, so nothing makes a charg
 | Limit | What it does | What it leaves open |
 |---|---|---|
 | Replica caps | At most 2 API replicas at 0.5 vCPU and 1 GiB, and 1 demo replica at 0.25 vCPU and 0.5 GiB. At the retail prices checked when this was written, that is at most about USD 0.135 an hour. | Time, which the timer limits |
-| Timer | A runbook inside Azure removes the apps 48 hours after bootstrap. Over 48 hours, the caps above allow about USD 6.50 before the monthly free grant, and about USD 1 after it. | The runbook failing |
+| Timer | A runbook inside Azure removes the apps 24 hours after bootstrap. Over 24 hours, the caps above allow about USD 3.25 before the monthly free grant, which is larger than that. | The runbook failing |
 | Allowed addresses | Only the listed addresses and the demo page reach the apps. | Requests from elsewhere, if Azure bills blocked requests, which its pricing page does not say |
 | Budget | At 30 DKK of actual spend, half the 60 DKK limit, the same runbook removes the apps. It also emails at 25% and 100%. | Azure's cost data arrives 8 to 24 hours late and budgets are checked every 24 hours, so this can act up to about two days after the spend |
 
@@ -51,7 +51,7 @@ gh variable delete REQUESTS_PER_MINUTE --repo AndersHenriksen-dev/fruity
 gh workflow run deploy.yml --ref main --repo AndersHenriksen-dev/fruity
 ```
 
-The stages take about 15 minutes, and the steady load 44 hours, on a computer that must stay on with the same address. Cold starts take over an hour, because the service must scale to zero before each one. The load test refuses any host except this service. Results go to `evals/LOAD.md`.
+The stages take about 15 minutes, and the steady load 20 hours, on a computer that must stay on with the same address. Cold starts take over an hour, because the service must scale to zero before each one. The load test refuses any host except this service. Results go to `evals/LOAD.md`.
 
 Before relying on the timer, start the runbook once by hand and check that the apps are removed, then deploy again.
 

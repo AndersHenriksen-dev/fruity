@@ -29,7 +29,7 @@ variable "budget_amount" {
 variable "deployment_hours" {
   description = "How long after this is applied the service is removed."
   type        = number
-  default     = 48
+  default     = 24
 }
 
 variable "budget_email" {

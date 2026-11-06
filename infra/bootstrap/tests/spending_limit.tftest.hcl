@@ -68,6 +68,11 @@ run "the_timer_runs_the_teardown_once" {
   }
 
   assert {
+    condition     = var.deployment_hours == 24
+    error_message = "A longer deployment raises the most this can cost, so update infra/README.md."
+  }
+
+  assert {
     condition     = azurerm_automation_job_schedule.teardown.runbook_name == azurerm_automation_runbook.teardown.name
     error_message = "The timer must start the teardown."
   }
