@@ -16,6 +16,7 @@ uv run fruity predict photo.jpg      # name the food in one image
 uv run streamlit run src/fruity/lib/frontend/app.py   # the demo page
 uv run ruff check . && uv run ruff format --check . && uv run mypy src && uv run pytest   # what CI checks
 docker compose up --build            # the whole service on one machine, with no cloud account
+uv run fruity loadtest --host URL --output DIR   # measure this project's own service, capped by config/loadtest/run.yaml
 ```
 
 ## Index of `.claude/` and related files
@@ -58,6 +59,7 @@ src/fruity/
 |   |-- evaluation/        measuring trained models and choosing one
 |   |-- serving/           the HTTP API
 |   |-- frontend/          the demo page
+|   |-- loadtest/          measuring the running service under load
 |   `-- shared/            what they all use: nothing here imports them
 `-- config/                the same subfolders as lib/: serving/api.py reads serving/api.yaml
 tests/                     the same subfolders again

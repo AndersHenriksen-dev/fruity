@@ -24,6 +24,8 @@ env:
   ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
   ARM_USE_OIDC: "true"
   TF_VAR_image_tag: ${{ github.sha }}
+  TF_VAR_alert_email: ${{ vars.ALERT_EMAIL }}
+  TF_VAR_requests_per_minute: ${{ vars.REQUESTS_PER_MINUTE || '120' }}
 
 jobs:
   images:

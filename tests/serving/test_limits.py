@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from fruity.lib.serving.limits import RateLimiter
+from fruity.lib.serving.limits import LIMITS, RateLimiter, with_environment
 
 
 def test_it_allows_up_to_the_limit_and_no_more() -> None:
@@ -28,3 +28,11 @@ def test_a_refused_request_does_not_extend_the_wait() -> None:
     limiter.allow()
     now[0] = 60.0
     assert limiter.allow()
+
+
+def test_a_deployment_can_set_the_request_limit() -> None:
+    assert with_environment(LIMITS, {"FRUITY_REQUESTS_PER_MINUTE": "6000"}).requests_per_minute == 6000
+
+
+def test_without_the_variable_the_limit_comes_from_the_config() -> None:
+    assert with_environment(LIMITS, {}) == LIMITS

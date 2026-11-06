@@ -27,6 +27,12 @@ def main() -> None:
     commands.add_parser("finalize", help="fix the final model and score it on the test set, once")
     commands.add_parser("fetch", help="download the published model and verify its checksums")
 
+    loadtest = commands.add_parser("loadtest", help="measure this project's own service under load")
+    loadtest.add_argument("--host", required=True, help="the service's URL")
+    loadtest.add_argument("--output", type=Path, required=True, help="the folder for the results")
+    loadtest.add_argument("--azure-resource-id", help="the API's resource ID, to read replica counts from Azure")
+    loadtest.add_argument("--cold-starts", action="store_true", help="measure cold starts instead of load")
+
     args, rest = parser.parse_known_args()
     if args.command == "train":
         from fruity.lib.training.train import main as train
@@ -45,6 +51,13 @@ def main() -> None:
         from fruity.lib.serving.fetch import main as fetch
 
         fetch()
+    elif args.command == "loadtest":
+        from fruity.lib.loadtest.run import measure_cold_starts, measure_stages
+
+        if args.cold_starts:
+            measure_cold_starts(args.host, args.output)
+        else:
+            measure_stages(args.host, args.output, args.azure_resource_id)
     elif args.command == "predict":
         from PIL import Image
 

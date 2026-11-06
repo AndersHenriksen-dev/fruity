@@ -6,15 +6,17 @@ needs. Each replica counts on its own, so the service's limit is this one times 
 
 from __future__ import annotations
 
+import os
 import time
 from collections import deque
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 
 from pydantic import BaseModel, ConfigDict
 
 from fruity.lib.shared.settings import config_for
 
 WINDOW_SECONDS = 60.0
+REQUESTS_PER_MINUTE_VARIABLE = "FRUITY_REQUESTS_PER_MINUTE"
 
 
 class LimitsConfig(BaseModel):
@@ -28,7 +30,13 @@ class LimitsConfig(BaseModel):
     max_image_pixels: int
 
 
-LIMITS = config_for(__name__, LimitsConfig)
+def with_environment(limits: LimitsConfig, environment: Mapping[str, str]) -> LimitsConfig:
+    """Let a deployment raise the request limit, because a load test would otherwise measure only the limit."""
+    override = environment.get(REQUESTS_PER_MINUTE_VARIABLE)
+    return limits.model_copy(update={"requests_per_minute": int(override)}) if override else limits
+
+
+LIMITS = with_environment(config_for(__name__, LimitsConfig), os.environ)
 
 
 class RateLimiter:
