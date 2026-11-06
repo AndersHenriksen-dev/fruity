@@ -145,6 +145,15 @@ def test_it_reads_the_totals_from_locust(tmp_path: Path) -> None:
     assert read_locust_stats(path)["Failure Count"] == 1
 
 
+def test_a_run_where_no_request_finished_counts_as_zero_and_not_a_crash(tmp_path: Path) -> None:
+    path = tmp_path / "stats.csv"
+    path.write_text(
+        "Type,Name,Request Count,Failure Count,Requests/s,50%,95%,99%\n,Aggregated,0,0,0.0,N/A,N/A,N/A\n",
+        encoding="utf-8",
+    )
+    assert read_locust_stats(path)["95%"] == 0
+
+
 def test_it_finds_the_most_replicas_and_allows_for_empty_points() -> None:
     answer = {"value": [{"timeseries": [{"data": [{"maximum": 1.0}, {"maximum": 2.0}, {}]}]}]}
     assert read_max_replicas(answer) == 2.0

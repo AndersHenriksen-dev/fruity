@@ -105,8 +105,9 @@ def read_locust_stats(path: Path) -> dict[str, float]:
     with path.open(encoding="utf-8", newline="") as file:
         for row in csv.DictReader(file):
             if row["Name"] == "Aggregated":
+                # Locust writes N/A when no request finished, such as a short run during a cold start.
                 return {
-                    key: float(row[key])
+                    key: 0.0 if row[key] == "N/A" else float(row[key])
                     for key in ("Request Count", "Failure Count", "Requests/s", "50%", "95%", "99%")
                 }
     raise ValueError(f"{path} has no totals.")
