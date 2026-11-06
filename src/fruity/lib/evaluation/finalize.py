@@ -226,7 +226,8 @@ def _write_report(result: FinalResult, path: Path) -> None:
         "## Limits",
         "",
         "- Test accuracy is above validation accuracy, most likely because the data differs. "
-        "The dataset's authors reviewed the test images by hand and left noise, including some wrong labels, in the training images on purpose. "
+        "The dataset's authors reviewed the test images by hand and left noise, including some wrong labels, "
+        "in the training images on purpose. "
         "Validation images come from the training images, and real uploads may be messier than the test set too.",
         f"- Sampling alone could move the test top-1 by about {_margin_points(result.test):.2f} points at 95% "
         f"confidence, and a validation top-1 by about {_margin_points(result.validation):.2f} points. "
