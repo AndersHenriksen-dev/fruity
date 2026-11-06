@@ -19,3 +19,14 @@ variable "github_repository" {
   type        = string
   default     = "AndersHenriksen-dev/fruity"
 }
+
+variable "budget_usd" {
+  description = "The monthly spend on this project, in USD, that sends an email."
+  type        = number
+  default     = 5
+}
+
+variable "budget_email" {
+  description = "Where the budget emails go."
+  type        = string
+}
