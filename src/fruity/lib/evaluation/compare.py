@@ -17,13 +17,12 @@ from torchvision import datasets
 
 from fruity.lib.evaluation.latency import Latency, one_core, time_calls
 from fruity.lib.evaluation.onnx_model import OnnxModel, export_onnx, quantize_onnx
+from fruity.lib.evaluation.pytorch_model import Classifier, classify, load_classifier
 from fruity.lib.evaluation.report import draw_chart, write_results
 from fruity.lib.evaluation.scoring import Predict, Scores, score
 from fruity.lib.evaluation.selection import ClassAccuracy, ModelResult, RuntimeResult, choose_model
-from fruity.lib.serving.inference import Classifier, classify, load_classifier
-from fruity.lib.shared.preprocess import evaluation_transform
 from fruity.lib.shared.settings import CONFIG_DIR, config_for, read_config
-from fruity.lib.training.data import Food101DataModule, split_indices
+from fruity.lib.training.data import Food101DataModule, evaluation_transform, split_indices
 
 
 class CompareConfig(BaseModel):

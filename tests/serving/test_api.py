@@ -11,7 +11,7 @@ from fastapi.testclient import TestClient
 from PIL import Image
 
 from fruity.lib.serving import api
-from tests.serving.conftest import LABELS, MODEL_NAME
+from tests.serving.conftest import IMAGE_SIZE, LABELS
 
 
 def _image(mode: str = "RGB", size: tuple[int, int] = (80, 60), image_format: str = "PNG") -> bytes:
@@ -22,8 +22,8 @@ def _image(mode: str = "RGB", size: tuple[int, int] = (80, 60), image_format: st
 
 @pytest.fixture
 def client(saved_model: tuple[Path, Path], monkeypatch: pytest.MonkeyPatch) -> Iterator[TestClient]:
-    weights, labels = saved_model
-    config = api.ApiConfig(model_name=MODEL_NAME, weights_path=weights, labels_path=labels, image_size=64, top_k=2)
+    model, labels = saved_model
+    config = api.ApiConfig(model_path=model, labels_path=labels, image_size=IMAGE_SIZE, top_k=2, threads=1)
     monkeypatch.setattr(api, "CONFIG", config)
     with TestClient(api.app) as test_client:
         yield test_client

@@ -12,7 +12,7 @@ from lightning.pytorch import LightningDataModule, Trainer
 from PIL import Image
 from torch.utils.data import DataLoader, TensorDataset
 
-from fruity.lib.serving.inference import classify, load_classifier
+from fruity.lib.evaluation.pytorch_model import classify, load_classifier
 from fruity.lib.shared.settings import CONFIG_DIR
 from fruity.lib.training.train import train
 

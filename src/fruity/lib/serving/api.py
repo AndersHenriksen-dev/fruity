@@ -30,11 +30,11 @@ class ApiConfig(BaseModel):
 
     model_config = ConfigDict(extra="forbid", protected_namespaces=())
 
-    model_name: str
-    weights_path: Path
+    model_path: Path
     labels_path: Path
     image_size: int
     top_k: int
+    threads: int
 
 
 class FileResult(BaseModel):
@@ -79,12 +79,7 @@ def loaded_classifier(request: Request) -> Classifier:
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     """Load the model once, when the service starts, and start counting requests."""
     app.state.rate_limiter = RateLimiter(LIMITS.requests_per_minute)
-    app.state.classifier = load_classifier(
-        CONFIG.model_name,
-        CONFIG.weights_path,
-        CONFIG.labels_path,
-        CONFIG.image_size,
-    )
+    app.state.classifier = load_classifier(CONFIG.model_path, CONFIG.labels_path, CONFIG.image_size, CONFIG.threads)
     yield
     app.state.classifier = None
 

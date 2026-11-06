@@ -1,4 +1,7 @@
-"""Using a trained model: loading it and naming the food in an image. The API and the command line share this."""
+"""Using the deployed model: loading it and naming the food in an image. The API and the command line share this.
+
+The model runs on ONNX Runtime, so the serving image needs no PyTorch.
+"""
 
 from __future__ import annotations
 
@@ -6,12 +9,11 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-import timm
-import torch
+import numpy as np
+import onnxruntime
 from PIL import Image
-from torchvision import transforms
 
-from fruity.lib.shared.preprocess import evaluation_transform
+from fruity.lib.shared.preprocess import prepare_image
 
 
 @dataclass(frozen=True)
@@ -26,29 +28,30 @@ class Prediction:
 class Classifier:
     """A loaded model with what it takes to use it."""
 
-    net: torch.nn.Module
+    session: onnxruntime.InferenceSession
     labels: dict[int, str]
-    preprocess: transforms.Compose
+    image_size: int
 
 
-def load_classifier(model_name: str, weights_path: Path, labels_path: Path, image_size: int) -> Classifier:
-    """Load the weights and labels that one training run saved together.
+def load_classifier(model_path: Path, labels_path: Path, image_size: int, threads: int) -> Classifier:
+    """Load the model file and its labels.
 
     Args:
-        model_name: The timm architecture the weights belong to.
-        weights_path: The saved weights.
-        labels_path: The saved class names, which also say how many classes there are.
-        image_size: The image size the model was trained on.
+        model_path: The ONNX file.
+        labels_path: The saved class names, by output index.
+        image_size: The image size the model takes.
+        threads: How many threads one call may use. A container should say, because ONNX Runtime counts the host's
+            cores and not the container's share of them. Zero lets ONNX Runtime decide.
 
     Returns:
-        The model in evaluation mode, with its labels and preprocessing.
+        The model, ready to run on the CPU.
     """
     saved = json.loads(labels_path.read_text(encoding="utf-8"))
     labels = {int(index): str(label) for index, label in saved.items()}
-    net = timm.create_model(model_name, pretrained=False, in_chans=3, num_classes=len(labels))
-    net.load_state_dict(torch.load(weights_path, map_location="cpu"))
-    net.eval()
-    return Classifier(net, labels, evaluation_transform(image_size))
+    options = onnxruntime.SessionOptions()
+    options.intra_op_num_threads = threads
+    session = onnxruntime.InferenceSession(str(model_path), options, providers=["CPUExecutionProvider"])
+    return Classifier(session, labels, image_size)
 
 
 def classify(classifier: Classifier, image: Image.Image, top_k: int) -> list[Prediction]:
@@ -62,11 +65,10 @@ def classify(classifier: Classifier, image: Image.Image, top_k: int) -> list[Pre
     Returns:
         The answers, with the probability of each.
     """
-    batch = classifier.preprocess(image.convert("RGB")).unsqueeze(0)
-    with torch.no_grad():
-        probabilities = classifier.net(batch).softmax(dim=1)[0]
-    top = probabilities.topk(min(top_k, len(classifier.labels)))
-    return [
-        Prediction(classifier.labels[int(index)], float(probability))
-        for probability, index in zip(top.values, top.indices, strict=True)
-    ]
+    batch = prepare_image(image.convert("RGB"), classifier.image_size)[np.newaxis]
+    input_name = classifier.session.get_inputs()[0].name
+    logits: np.ndarray = classifier.session.run(None, {input_name: batch})[0][0]
+    shifted = np.exp(logits - logits.max())
+    probabilities = shifted / shifted.sum()
+    top = np.argsort(probabilities)[::-1][:top_k]
+    return [Prediction(classifier.labels[int(index)], float(probabilities[index])) for index in top]

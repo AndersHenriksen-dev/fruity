@@ -5,12 +5,14 @@ The test set stays untouched until the final numbers, so it cannot influence whi
 
 from __future__ import annotations
 
+from functools import partial
+
 import torch
 from lightning.pytorch import LightningDataModule
 from torch.utils.data import DataLoader, Dataset, Subset
 from torchvision import datasets, transforms
 
-from fruity.lib.shared.preprocess import IMAGENET_MEAN, IMAGENET_STD, evaluation_transform
+from fruity.lib.shared.preprocess import IMAGENET_MEAN, IMAGENET_STD, prepare_image
 
 
 def training_transform(image_size: int) -> transforms.Compose:
@@ -24,6 +26,11 @@ def training_transform(image_size: int) -> transforms.Compose:
             transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
         ],
     )
+
+
+def evaluation_transform(image_size: int) -> transforms.Compose:
+    """Build the preprocessing used for validation and testing, the same code the service runs."""
+    return transforms.Compose([partial(prepare_image, image_size=image_size), torch.from_numpy])
 
 
 def split_indices(size: int, val_fraction: float, seed: int) -> tuple[list[int], list[int]]:
