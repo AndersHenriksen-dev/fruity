@@ -5,5 +5,7 @@ datamodule:
   batch_size: 64
 
 model:
+  optimizer:
+    lr: 0.001
   net:
     model_name: mobilenetv3_large_100

@@ -17,3 +17,13 @@ The hand-in used a custom split at 100x100 pixels, so its 76% cannot be compared
 ## 3. Each model gets its own learning rate, chosen on validation data
 
 One shared rate would compare the setting as much as the models. `convnext_tiny` at a rate of 3e-4 reached 15.5% validation accuracy after one epoch, and 80.7% at 5e-5. So each model gets a one-epoch probe of two rates, on validation data, and keeps the better one. The probes are saved in `evals/lr_probe.json`. A warmup and a cosine decay apply to all of them, because a full rate from the first step can wreck pretrained weights while the new final layer is still random.
+
+## 4. The rule picks `convnext_tiny`
+
+The best validation accuracy is 90.05%, from `convnext_large`, so the floor is 87.05%. The two models under 20 MB reach 83.23% and 82.20%, which is below it. `convnext_tiny` reaches 88.05% and is the smallest model above it, with a p95 of 98 ms on one core against a limit of 1 second. Giving up 2 points of accuracy makes the model 7 times smaller and about 6 times faster than `convnext_large`. The numbers are in `evals/RESULTS.md`.
+
+## 5. The service runs plain ONNX, not quantized ONNX
+
+Plain ONNX scores the same 88.05% as PyTorch at about the same speed, and needs ONNX Runtime instead of PyTorch in the serving image. Quantized ONNX is 4 times smaller and twice as fast, but scores 85.76%. That is below the 87.05% floor from entry 4, so the rule that excludes the smaller models excludes it too.
+
+Quantizing only `Conv`, `MatMul` and `Gemm` layers is deliberate. Quantizing every layer took `convnext_tiny` to about 20%, as `evals/quantization_settings.json` shows for 1,500 validation images. Even with this setting, quantization costs some models far more than others: `efficientnet_b0` falls to 29.83% and `mobilenetv3_large_100` to 63.87%, as `evals/comparison.json` shows. So a quantized model always needs its accuracy measured before use.
