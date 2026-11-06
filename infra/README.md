@@ -40,7 +40,7 @@ gh workflow run deploy.yml --ref main --repo AndersHenriksen-dev/fruity
 
 The load test takes about 15 minutes and refuses any host except this service. Cold starts take over an hour, because the service must scale to zero before each one. Results go to `evals/LOAD.md`.
 
-The dashboard and three alerts come with the service: 5xx answers, a slow average response, and memory near the limit. Alerts go to the address in the `ALERT_EMAIL` repository variable, which must be set before the first deploy. At 20 users the average response goes over the 1 second limit, so the load test sets off the slow answer alert on purpose.
+The dashboard and three alerts come with the service: 5xx answers, a slow average response, and memory near the limit. Alerts go to the address in the `ALERT_EMAIL` repository variable, which must be set before the first deploy. The slow answer alert is meant to fire during the load test, which proves it works. If the average stays under its limit of 1 second, lower `slow_answer_ms` for that run.
 
 ## Take it down
 
