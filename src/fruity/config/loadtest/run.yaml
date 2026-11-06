@@ -5,6 +5,9 @@ allowed_hosts:
   - fruity-api\..+\.azurecontainerapps\.io
 stages: [1, 2, 5, 10, 20]
 stage_seconds: 120
+# Leaves time inside the 48-hour deployment for the stages and the cold starts.
+soak_users: 10
+soak_seconds: 158400
 photos_meta: data/food-101/meta/train.json
 photos_dir: data/food-101/images
 photos: 20

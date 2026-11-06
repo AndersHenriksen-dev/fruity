@@ -1,7 +1,16 @@
-# Both apps scale to zero when idle, so they use no compute between requests.
-# The API's size comes from measuring its image at 0.25, 0.5 and 1 vCPU.
+# The replica counts and sizes set the most compute can cost per hour, which infra/README.md works out.
+# The API's size comes from measuring its image at 0.25, 0.5 and 1 vCPU. It scales to zero when idle.
 data "azurerm_resource_group" "service" {
   name = "fruity"
+}
+
+locals {
+  # Requests are the one cost replica limits do not cap, so strangers cannot reach the apps at all.
+  # The demo page calls the API over its public address, so its outbound addresses are allowed too.
+  api_allowed_ip_ranges = concat(
+    var.allowed_ip_ranges,
+    [for address in azurerm_container_app.frontend.outbound_ip_addresses : "${address}/32"],
+  )
 }
 
 resource "azurerm_log_analytics_workspace" "logs" {
@@ -32,6 +41,15 @@ resource "azurerm_container_app" "api" {
     traffic_weight {
       latest_revision = true
       percentage      = 100
+    }
+
+    dynamic "ip_security_restriction" {
+      for_each = local.api_allowed_ip_ranges
+      content {
+        name             = "allowed-${ip_security_restriction.key}"
+        action           = "Allow"
+        ip_address_range = ip_security_restriction.value
+      }
     }
   }
 
@@ -83,10 +101,20 @@ resource "azurerm_container_app" "frontend" {
       latest_revision = true
       percentage      = 100
     }
+
+    dynamic "ip_security_restriction" {
+      for_each = var.allowed_ip_ranges
+      content {
+        name             = "allowed-${ip_security_restriction.key}"
+        action           = "Allow"
+        ip_address_range = ip_security_restriction.value
+      }
+    }
   }
 
   template {
-    min_replicas = 0
+    # Stays up for the whole deployment, so the monitoring shows both apps.
+    min_replicas = 1
     max_replicas = 1
 
     container {
@@ -96,8 +124,9 @@ resource "azurerm_container_app" "frontend" {
       memory = "0.5Gi"
 
       env {
-        name  = "FRUITY_API_ENDPOINT"
-        value = "https://${azurerm_container_app.api.ingress[0].fqdn}/batch/classification"
+        name = "FRUITY_API_ENDPOINT"
+        # Built from the name, because the API's allowed addresses depend on this app.
+        value = "https://fruity-api.${azurerm_container_app_environment.service.default_domain}/batch/classification"
       }
     }
   }

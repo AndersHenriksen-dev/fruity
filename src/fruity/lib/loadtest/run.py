@@ -39,6 +39,8 @@ class LoadConfig(BaseModel):
     allowed_hosts: list[str]
     stages: list[int]
     stage_seconds: int
+    soak_users: int
+    soak_seconds: int
     photos_meta: Path
     photos_dir: Path
     photos: int
@@ -72,6 +74,7 @@ class LoadResults(BaseModel):
 
     target: str
     stages: list[Stage] = []
+    soak: Stage | None = None
     cold_starts_seconds: list[float] = []
 
 
@@ -109,7 +112,7 @@ def read_locust_stats(path: Path) -> dict[str, float]:
     raise ValueError(f"{path} has no totals.")
 
 
-def _run_stage(host: str, users: int, photos: list[Path]) -> Stage:
+def _run_stage(host: str, users: int, seconds: int, photos: list[Path]) -> Stage:
     """Hold a number of users against the service and read what Locust measured."""
     started = datetime.now(UTC)
     with tempfile.TemporaryDirectory() as folder:
@@ -130,19 +133,19 @@ def _run_stage(host: str, users: int, photos: list[Path]) -> Stage:
                 "--spawn-rate",
                 str(users),
                 "--run-time",
-                f"{CONFIG.stage_seconds}s",
+                f"{seconds}s",
                 "--csv",
                 str(prefix),
             ],
             # Locust exits with 1 when any request failed, and failures are a result here.
             check=False,
-            timeout=CONFIG.stage_seconds + _LOCUST_GRACE_SECONDS,
+            timeout=seconds + _LOCUST_GRACE_SECONDS,
             env={**os.environ, PHOTOS_VARIABLE: os.pathsep.join(str(photo) for photo in photos)},
         )
         stats = read_locust_stats(Path(f"{prefix}_stats.csv"))
     return Stage(
         users=users,
-        seconds=CONFIG.stage_seconds,
+        seconds=seconds,
         requests=int(stats["Request Count"]),
         failures=int(stats["Failure Count"]),
         requests_per_second=stats["Requests/s"],
@@ -169,7 +172,7 @@ def read_max_replicas(metrics: dict[str, list[dict[str, list[dict[str, list[dict
 def _add_replica_counts(results: LoadResults, resource_id: str, az: str) -> None:
     """Ask Azure how many replicas ran in each stage. Its metrics arrive some minutes late, so wait for them first."""
     time.sleep(CONFIG.metrics_delay_seconds)
-    for stage in results.stages:
+    for stage in [*results.stages, *([results.soak] if results.soak else [])]:
         finished = datetime.fromisoformat(stage.finished) + timedelta(minutes=1)
         answer = subprocess.run(
             [
@@ -258,10 +261,34 @@ def measure_stages(host: str, output: Path, resource_id: str | None) -> None:
     results.stages = []
     photos = _choose_photos()
     for users in CONFIG.stages:
-        results.stages.append(_run_stage(host, users, photos))
+        results.stages.append(_run_stage(host, users, CONFIG.stage_seconds, photos))
         _save(results, output)
         stage = results.stages[-1]
         print(f"{users} users: {stage.p95_ms:.0f} ms p95, {stage.failures} failures", flush=True)
+    if resource_id and az:
+        _add_replica_counts(results, resource_id, az)
+        _save(results, output)
+
+
+def measure_soak(host: str, output: Path, resource_id: str | None) -> None:
+    """Hold a steady load for most of the deployment, so the monitoring has a long, real record to show.
+
+    Args:
+        host: The service's URL.
+        output: The folder for the results.
+        resource_id: The API's Azure resource ID, or None for a service that has no Azure metrics.
+
+    Raises:
+        RuntimeError: If replica counts are asked for and the Azure CLI is missing, so that this fails before the run.
+    """
+    az = shutil.which("az")
+    if resource_id and az is None:
+        raise RuntimeError("Reading replica counts needs the Azure CLI.")
+    target = check_host(host, CONFIG.allowed_hosts)
+    results = _load_results(output, target)
+    results.soak = _run_stage(host, CONFIG.soak_users, CONFIG.soak_seconds, _choose_photos())
+    _save(results, output)
+    print(f"{results.soak.requests} requests, {results.soak.failures} failures", flush=True)
     if resource_id and az:
         _add_replica_counts(results, resource_id, az)
         _save(results, output)

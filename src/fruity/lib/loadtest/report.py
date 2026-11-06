@@ -34,6 +34,23 @@ def _stage_table(results: LoadResults) -> list[str]:
     return rows
 
 
+def _soak_lines(results: LoadResults) -> list[str]:
+    """Summarize the long steady run, if there was one."""
+    soak = results.soak
+    if soak is None:
+        return []
+    replicas = "" if soak.max_replicas is None else f" At most {soak.max_replicas:.0f} replicas ran."
+    return [
+        "## Steady load",
+        "",
+        f"{soak.users} users for {soak.seconds / 3600:.1f} hours: {soak.requests:,} requests, "
+        f"{soak.failures:,} failures, "
+        f"{soak.requests_per_second:.1f} requests per second, p50 {soak.p50_ms:.0f} ms, p95 {soak.p95_ms:.0f} ms, "
+        f"p99 {soak.p99_ms:.0f} ms.{replicas}",
+        "",
+    ]
+
+
 def _cold_start_lines(results: LoadResults) -> list[str]:
     """Summarize the cold starts, if any were measured."""
     if not results.cold_starts_seconds:
@@ -104,6 +121,7 @@ def write_report(results: LoadResults, output: Path) -> None:
             "",
         ]
     lines += [
+        *_soak_lines(results),
         *_cold_start_lines(results),
         "## Limits",
         "",
