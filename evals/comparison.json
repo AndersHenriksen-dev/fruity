@@ -1,0 +1,198 @@
+[
+  {
+    "name": "mobilenetv3_large_100",
+    "experiment": "mobilenet",
+    "learning_rate": 0.001,
+    "fit_seconds": 651.7975820000283,
+    "pytorch": {
+      "size_mb": 17.502227,
+      "top1": 0.8220462046204621,
+      "top5": 0.947062706270627,
+      "latency_p50_ms": 12.761299964040518,
+      "latency_p95_ms": 13.840270042419434
+    },
+    "onnx": {
+      "size_mb": 17.611084,
+      "top1": 0.8221782178217821,
+      "top5": 0.947062706270627,
+      "latency_p50_ms": 7.590000052005053,
+      "latency_p95_ms": 8.581415074877441
+    },
+    "onnx_quantized": {
+      "size_mb": 4.746119,
+      "top1": 0.6386798679867987,
+      "top5": 0.8516171617161716,
+      "latency_p50_ms": 8.068899973295629,
+      "latency_p95_ms": 9.048710006754845
+    },
+    "worst_classes": [
+      {
+        "label": "steak",
+        "top1": 0.5
+      },
+      {
+        "label": "ravioli",
+        "top1": 0.6029411554336548
+      },
+      {
+        "label": "pork_chop",
+        "top1": 0.6285714507102966
+      },
+      {
+        "label": "chocolate_mousse",
+        "top1": 0.6527777910232544
+      },
+      {
+        "label": "panna_cotta",
+        "top1": 0.6849315166473389
+      }
+    ]
+  },
+  {
+    "name": "efficientnet_b0",
+    "experiment": "efficientnet",
+    "learning_rate": 0.001,
+    "fit_seconds": 797.8870979000349,
+    "pytorch": {
+      "size_mb": 16.804627,
+      "top1": 0.8323432343234324,
+      "top5": 0.9523432343234324,
+      "latency_p50_ms": 20.73254995048046,
+      "latency_p95_ms": 21.97733516804874
+    },
+    "onnx": {
+      "size_mb": 17.015087,
+      "top1": 0.8322112211221122,
+      "top5": 0.952079207920792,
+      "latency_p50_ms": 13.524999958463013,
+      "latency_p95_ms": 14.565780013799667
+    },
+    "onnx_quantized": {
+      "size_mb": 5.253037,
+      "top1": 0.2983498349834984,
+      "top5": 0.5292409240924092,
+      "latency_p50_ms": 15.283949906006455,
+      "latency_p95_ms": 16.672690073028207
+    },
+    "worst_classes": [
+      {
+        "label": "steak",
+        "top1": 0.5625
+      },
+      {
+        "label": "filet_mignon",
+        "top1": 0.6486486196517944
+      },
+      {
+        "label": "bread_pudding",
+        "top1": 0.6507936716079712
+      },
+      {
+        "label": "chocolate_mousse",
+        "top1": 0.6527777910232544
+      },
+      {
+        "label": "cheesecake",
+        "top1": 0.6571428775787354
+      }
+    ]
+  },
+  {
+    "name": "convnext_tiny",
+    "experiment": "convnext_tiny",
+    "learning_rate": 0.0001,
+    "fit_seconds": 1207.883270099992,
+    "pytorch": {
+      "size_mb": 111.635163,
+      "top1": 0.8805280528052806,
+      "top5": 0.9701650165016502,
+      "latency_p50_ms": 90.5854000011459,
+      "latency_p95_ms": 98.28503006137908
+    },
+    "onnx": {
+      "size_mb": 112.12356,
+      "top1": 0.8805280528052806,
+      "top5": 0.9701650165016502,
+      "latency_p50_ms": 84.03304999228567,
+      "latency_p95_ms": 89.9143700953573
+    },
+    "onnx_quantized": {
+      "size_mb": 28.474444,
+      "top1": 0.8575577557755776,
+      "top5": 0.9602640264026403,
+      "latency_p50_ms": 42.134499992243946,
+      "latency_p95_ms": 46.16295485757291
+    },
+    "worst_classes": [
+      {
+        "label": "steak",
+        "top1": 0.59375
+      },
+      {
+        "label": "pork_chop",
+        "top1": 0.7142857313156128
+      },
+      {
+        "label": "tuna_tartare",
+        "top1": 0.7307692170143127
+      },
+      {
+        "label": "chocolate_mousse",
+        "top1": 0.75
+      },
+      {
+        "label": "filet_mignon",
+        "top1": 0.7702702879905701
+      }
+    ]
+  },
+  {
+    "name": "convnext_large",
+    "experiment": "convnext_large",
+    "learning_rate": 0.0001,
+    "fit_seconds": 4939.3145975000225,
+    "pytorch": {
+      "size_mb": 785.625491,
+      "top1": 0.9004620462046204,
+      "top5": 0.9753135313531354,
+      "latency_p50_ms": 594.4322999566793,
+      "latency_p95_ms": 642.8911100374535
+    },
+    "onnx": {
+      "size_mb": 786.55184,
+      "top1": 0.9004620462046204,
+      "top5": 0.9753135313531354,
+      "latency_p50_ms": 553.509849938564,
+      "latency_p95_ms": 594.8283049976453
+    },
+    "onnx_quantized": {
+      "size_mb": 198.426492,
+      "top1": 0.8121452145214522,
+      "top5": 0.9502310231023102,
+      "latency_p50_ms": 204.69775015953928,
+      "latency_p95_ms": 212.76191495126113
+    },
+    "worst_classes": [
+      {
+        "label": "steak",
+        "top1": 0.65625
+      },
+      {
+        "label": "chocolate_mousse",
+        "top1": 0.7083333134651184
+      },
+      {
+        "label": "filet_mignon",
+        "top1": 0.7297297120094299
+      },
+      {
+        "label": "pork_chop",
+        "top1": 0.7428571581840515
+      },
+      {
+        "label": "cheesecake",
+        "top1": 0.7571428418159485
+      }
+    ]
+  }
+]

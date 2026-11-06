@@ -130,6 +130,7 @@ src/fruity/
     cli.py        # the entry point: thin, parses arguments, delegates at once
     lib/          # all other Python
         training/     # training the classifier
+        evaluation/   # measuring trained models and choosing one
         serving/      # the HTTP API
         frontend/     # the demo page
         shared/       # what they all use: never imports them

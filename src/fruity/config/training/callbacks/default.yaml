@@ -10,7 +10,7 @@ model_checkpoint:
   filename: "epoch_{epoch:03d}"
   monitor: "val/acc"
   mode: "max"
-  save_last: True
+  save_last: False
   auto_insert_metric_name: False
 
 early_stopping:

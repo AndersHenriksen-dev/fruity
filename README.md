@@ -11,7 +11,7 @@ You need [uv](https://docs.astral.sh/uv/getting-started/installation/), which al
 ```bash
 uv sync --all-extras
 uv run pytest
-uv run fruity train experiment=convnext
+uv run fruity train experiment=convnext_tiny
 uv run fruity serve
 ```
 

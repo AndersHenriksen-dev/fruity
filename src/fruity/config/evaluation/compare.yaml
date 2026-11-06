@@ -1,0 +1,14 @@
+# Read by lib/evaluation/compare.py: which trained models to measure, and the selection rule from docs/decisions.md
+runs_dir: outputs/comparison
+experiments: [mobilenet, efficientnet, convnext_tiny, convnext_large]
+probes_path: evals/lr_probe.json
+results_path: evals/comparison.json
+report_path: evals/RESULTS.md
+chart_path: evals/comparison.png
+margin: 0.03
+max_p95_ms: 1000
+core: 2
+latency_images: 200
+latency_warmup: 20
+calibration_images: 200
+worst_classes: 5

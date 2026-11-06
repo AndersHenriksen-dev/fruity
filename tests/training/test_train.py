@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import hydra
+import pytest
 import torch
-from lightning.pytorch import LightningDataModule
+from lightning.pytorch import LightningDataModule, Trainer
 from PIL import Image
 from torch.utils.data import DataLoader, TensorDataset
 
@@ -36,7 +38,18 @@ class TinyImages(LightningDataModule):
         return self._loader()
 
 
-def test_a_run_trains_tests_and_saves_a_model_that_serving_can_load(tmp_path: Path) -> None:
+def test_a_run_trains_tests_and_saves_a_model_that_serving_can_load(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    validated: list[str] = []
+    real_validate = Trainer.validate
+
+    def validate(trainer: Trainer, **arguments: object) -> object:
+        validated.append(str(arguments["ckpt_path"]))
+        return real_validate(trainer, **arguments)
+
+    monkeypatch.setattr(Trainer, "validate", validate)
     with hydra.initialize_config_dir(str(CONFIG_DIR / "training"), version_base="1.3"):
         config = hydra.compose(
             "train.yaml",
@@ -53,6 +66,7 @@ def test_a_run_trains_tests_and_saves_a_model_that_serving_can_load(tmp_path: Pa
                 "model.net.pretrained=false",
                 "trainer.max_epochs=1",
                 "trainer.accelerator=cpu",
+                "trainer.precision=32",
                 "~callbacks.rich_progress_bar",
                 "test=true",
             ],
@@ -61,6 +75,10 @@ def test_a_run_trains_tests_and_saves_a_model_that_serving_can_load(tmp_path: Pa
     metrics = train(config)
 
     assert 0.0 <= metrics["test/acc"] <= 1.0
+    assert [Path(checkpoint).parent.name for checkpoint in validated] == ["checkpoints"]
+    summary = json.loads((tmp_path / "metrics.json").read_text(encoding="utf-8"))
+    assert summary["model"] == "resnet18"
+    assert summary["fit_seconds"] > 0
     classifier = load_classifier("resnet18", tmp_path / "serving/model.pth", tmp_path / "serving/labels.json", 64)
     assert classifier.labels == dict(enumerate(CLASSES))
     assert classify(classifier, Image.new("RGB", (80, 60)), top_k=1)[0].label in CLASSES

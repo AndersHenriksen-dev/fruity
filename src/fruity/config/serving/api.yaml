@@ -1,5 +1,5 @@
 # Read by lib/serving/api.py: the model the API serves
-model_name: convnext_large
+model_name: convnext_tiny
 weights_path: models/model.pth
 labels_path: models/labels.json
 image_size: 224

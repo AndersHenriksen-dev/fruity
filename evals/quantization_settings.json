@@ -1,0 +1,11 @@
+{
+  "plain": 0.878,
+  "baseline": 0.22,
+  "no_per_channel": 0.214,
+  "reduce_range": 0.14466666666666667,
+  "signed_activations": 0.21933333333333332,
+  "conv_and_matmul_only": 0.8473333333333334,
+  "conv_only": 0.854,
+  "percentile": 0.582,
+  "symmetric": 0.008666666666666666
+}

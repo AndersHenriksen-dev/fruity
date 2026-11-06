@@ -1,0 +1,11 @@
+# @package _global_
+tags: [comparison, convnext_large]
+
+datamodule:
+  batch_size: 32
+
+model:
+  optimizer:
+    lr: 0.0001
+  net:
+    model_name: convnext_large

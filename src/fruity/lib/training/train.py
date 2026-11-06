@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import time
 from pathlib import Path
 from typing import cast
 
@@ -66,12 +67,25 @@ def train(config: DictConfig) -> dict[str, float]:
         callbacks=instantiate_callbacks(config.get("callbacks")),
         logger=build_logger(config),
     )
+    started = time.perf_counter()
     trainer.fit(model=model, datamodule=datamodule, ckpt_path=config.get("ckpt_path"))
+    fit_seconds = time.perf_counter() - started
     best = cast(ModelCheckpoint, trainer.checkpoint_callback).best_model_path
-    save_for_serving(best, datamodule.classes, Path(config.paths.output_dir) / "serving")
+    output = Path(config.paths.output_dir)
+    save_for_serving(best, datamodule.classes, output / "serving")
+    # The last epoch's metrics would otherwise be saved beside the best epoch's weights.
+    trainer.validate(model=model, datamodule=datamodule, ckpt_path=best)
     if config.get("test"):
         trainer.test(model=model, datamodule=datamodule, ckpt_path=best)
-    return {name: float(value) for name, value in trainer.callback_metrics.items()}
+    metrics = {name: float(value) for name, value in trainer.callback_metrics.items()}
+    summary = {
+        "model": config.model.net.model_name,
+        "epochs": trainer.current_epoch,
+        "fit_seconds": fit_seconds,
+        **metrics,
+    }
+    (output / "metrics.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    return metrics
 
 
 @hydra.main(version_base="1.3", config_path="../../config/training", config_name="train.yaml")

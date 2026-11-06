@@ -6,11 +6,32 @@ from collections.abc import Callable, Iterable
 
 import torch
 from lightning.pytorch import LightningModule
+from lightning.pytorch.utilities.types import OptimizerLRSchedulerConfig
+from torch.optim.lr_scheduler import CosineAnnealingLR, LinearLR, SequentialLR
 from torchmetrics import MeanMetric
 from torchmetrics.classification import MulticlassAccuracy
 
 Batch = tuple[torch.Tensor, torch.Tensor]
 OptimizerFactory = Callable[[Iterable[torch.nn.Parameter]], torch.optim.Optimizer]
+
+
+def build_schedule(optimizer: torch.optim.Optimizer, total_steps: int, warmup_fraction: float) -> SequentialLR:
+    """Raise the learning rate from near zero, then lower it along a cosine.
+
+    A full rate from the first step can wreck pretrained weights, while the new final layer is still random.
+
+    Args:
+        optimizer: The optimizer whose rate to change.
+        total_steps: How many steps the whole training has.
+        warmup_fraction: The share of the steps spent raising the rate.
+
+    Returns:
+        A schedule to step once per training step.
+    """
+    warmup_steps = max(1, int(total_steps * warmup_fraction))
+    warmup = LinearLR(optimizer, start_factor=0.01, total_iters=warmup_steps)
+    decay = CosineAnnealingLR(optimizer, T_max=max(1, total_steps - warmup_steps))
+    return SequentialLR(optimizer, [warmup, decay], milestones=[warmup_steps])
 
 
 class StageMetrics(torch.nn.Module):
@@ -27,18 +48,26 @@ class StageMetrics(torch.nn.Module):
 class Classifier(LightningModule):
     """Train, validate and test any model that turns images into class scores."""
 
-    def __init__(self, net: torch.nn.Module, optimizer: OptimizerFactory, num_classes: int) -> None:
+    def __init__(
+        self,
+        net: torch.nn.Module,
+        optimizer: OptimizerFactory,
+        num_classes: int,
+        warmup_fraction: float,
+    ) -> None:
         """Set up the loss and the metrics.
 
         Args:
             net: The model to train.
             optimizer: Builds the optimizer from the model's parameters.
             num_classes: How many classes the model separates.
+            warmup_fraction: The share of training spent raising the learning rate.
         """
         super().__init__()
         self.save_hyperparameters(logger=True, ignore=["net", "optimizer"])
         self.net = net
         self.optimizer = optimizer
+        self.warmup_fraction = warmup_fraction
         self.criterion = torch.nn.CrossEntropyLoss()
         self.train_metrics = StageMetrics(num_classes)
         self.val_metrics = StageMetrics(num_classes)
@@ -74,6 +103,9 @@ class Classifier(LightningModule):
         """Test on one batch."""
         return self._step(batch, "test", self.test_metrics)
 
-    def configure_optimizers(self) -> torch.optim.Optimizer:
-        """Build the optimizer."""
-        return self.optimizer(self.parameters())
+    def configure_optimizers(self) -> OptimizerLRSchedulerConfig:
+        """Build the optimizer and its schedule."""
+        optimizer = self.optimizer(self.parameters())
+        steps = int(self.trainer.estimated_stepping_batches)
+        schedule = build_schedule(optimizer, steps, self.warmup_fraction)
+        return {"optimizer": optimizer, "lr_scheduler": {"scheduler": schedule, "interval": "step"}}
