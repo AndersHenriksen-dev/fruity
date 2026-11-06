@@ -10,12 +10,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from fruity.lib.evaluation.selection import ModelResult, within_margin
-
-_BACKGROUND = "#0d1114"
-_BORDER = "#3a4656"
-_TEXT = "#e4eaf2"
-_MUTED = "#a7b3c2"
-_ACCENT = "#81a8d6"
+from fruity.lib.shared.palette import ACCENT, BACKGROUND, BORDER, MUTED, TEXT
 
 
 def _comparison_table(results: list[ModelResult]) -> list[str]:
@@ -109,34 +104,34 @@ def write_results(
 
 def draw_chart(results: list[ModelResult], chosen: ModelResult, max_p95_ms: float, path: Path) -> None:
     """Draw accuracy against latency, with the chosen model marked."""
-    figure, axes = plt.subplots(figsize=(8, 4.5), dpi=200, facecolor=_BACKGROUND)
-    axes.set_facecolor(_BACKGROUND)
-    axes.axvline(max_p95_ms, color=_BORDER, linewidth=1, linestyle="--")
+    figure, axes = plt.subplots(figsize=(8, 4.5), dpi=200, facecolor=BACKGROUND)
+    axes.set_facecolor(BACKGROUND)
+    axes.axvline(max_p95_ms, color=BORDER, linewidth=1, linestyle="--")
     axes.annotate(
         "latency limit",
         (max_p95_ms, 0.02),
         xycoords=("data", "axes fraction"),
         xytext=(-6, 0),
         textcoords="offset points",
-        color=_MUTED,
+        color=MUTED,
         ha="right",
     )
     for result in results:
         is_chosen = result.name == chosen.name
         x, y = result.pytorch.latency_p95_ms, result.pytorch.top1 * 100
-        axes.scatter(x, y, s=90, color=_ACCENT if is_chosen else _BACKGROUND, edgecolor=_ACCENT, linewidth=2, zorder=3)
+        axes.scatter(x, y, s=90, color=ACCENT if is_chosen else BACKGROUND, edgecolor=ACCENT, linewidth=2, zorder=3)
         label = f"{result.name}, {result.pytorch.size_mb:.0f} MB" + (" (chosen)" if is_chosen else "")
-        axes.annotate(label, (x, y), xytext=(0, 12), textcoords="offset points", color=_TEXT, ha="center")
+        axes.annotate(label, (x, y), xytext=(0, 12), textcoords="offset points", color=TEXT, ha="center")
     axes.set_xscale("log")
     axes.margins(x=0.2, y=0.2)
-    axes.set_xlabel("p95 latency on one CPU core (ms, log scale)", color=_MUTED)
-    axes.set_ylabel("Validation top-1 accuracy (%)", color=_MUTED)
-    axes.tick_params(colors=_MUTED, which="both")
-    axes.grid(color=_BORDER, linewidth=0.5, alpha=0.5)
+    axes.set_xlabel("p95 latency on one CPU core (ms, log scale)", color=MUTED)
+    axes.set_ylabel("Validation top-1 accuracy (%)", color=MUTED)
+    axes.tick_params(colors=MUTED, which="both")
+    axes.grid(color=BORDER, linewidth=0.5, alpha=0.5)
     for side in ("top", "right"):
         axes.spines[side].set_visible(False)
     for side in ("left", "bottom"):
-        axes.spines[side].set_color(_BORDER)
+        axes.spines[side].set_color(BORDER)
     figure.tight_layout()
-    figure.savefig(path, facecolor=_BACKGROUND)
+    figure.savefig(path, facecolor=BACKGROUND)
     plt.close(figure)

@@ -50,6 +50,11 @@ resource "azurerm_container_app" "api" {
       cpu    = 0.5
       memory = "1Gi"
 
+      env {
+        name  = "FRUITY_REQUESTS_PER_MINUTE"
+        value = tostring(var.requests_per_minute)
+      }
+
       readiness_probe {
         transport = "HTTP"
         path      = "/health"

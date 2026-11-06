@@ -19,8 +19,10 @@ provider "azurerm" {
   resource_providers_to_register = [
     "Microsoft.App",
     "Microsoft.Consumption",
+    "Microsoft.Insights",
     "Microsoft.ManagedIdentity",
     "Microsoft.OperationalInsights",
+    "Microsoft.Portal",
     "Microsoft.Storage",
   ]
 }

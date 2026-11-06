@@ -25,6 +25,23 @@ gh variable set DEPLOY_ENABLED --body true --repo AndersHenriksen-dev/fruity
 gh workflow run deploy.yml --ref main --repo AndersHenriksen-dev/fruity
 ```
 
+## Measure it
+
+Raise the request limit first, because the load test would otherwise measure only the limit. The next deploy applies it.
+
+```bash
+gh variable set REQUESTS_PER_MINUTE --body 100000 --repo AndersHenriksen-dev/fruity
+gh workflow run deploy.yml --ref main --repo AndersHenriksen-dev/fruity
+uv run fruity loadtest --host <api_url> --output evals --azure-resource-id <api resource id>
+uv run fruity loadtest --host <api_url> --output evals --cold-starts
+gh variable delete REQUESTS_PER_MINUTE --repo AndersHenriksen-dev/fruity
+gh workflow run deploy.yml --ref main --repo AndersHenriksen-dev/fruity
+```
+
+The load test takes about 15 minutes and refuses any host except this service. Cold starts take over an hour, because the service must scale to zero before each one. Results go to `evals/LOAD.md`.
+
+The dashboard and three alerts come with the service: 5xx answers, a slow average response, and memory near the limit. Alerts go to the address in the `ALERT_EMAIL` repository variable, which must be set before the first deploy. At 20 users the average response goes over the 1 second limit, so the load test sets off the slow answer alert on purpose.
+
 ## Take it down
 
 ```bash

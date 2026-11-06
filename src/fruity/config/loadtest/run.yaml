@@ -1,0 +1,14 @@
+# Read by lib/loadtest/run.py: which hosts may be tested, and how hard. Hosts are full-match regular expressions.
+allowed_hosts:
+  - 127\.0\.0\.1
+  - localhost
+  - fruity-api\..+\.azurecontainerapps\.io
+stages: [1, 2, 5, 10, 20]
+stage_seconds: 120
+photos_meta: data/food-101/meta/train.json
+photos_dir: data/food-101/images
+photos: 20
+cold_starts: 10
+idle_seconds: 420
+cold_start_timeout_seconds: 180
+metrics_delay_seconds: 300

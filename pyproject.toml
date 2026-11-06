@@ -44,6 +44,8 @@ evaluation = [
     "torchvision>=0.23",
 ]
 
+loadtest = ["locust>=2.32", "matplotlib>=3.11.2", "requests>=2.32"]
+
 [project.scripts]
 fruity = "fruity.cli:main"
 
