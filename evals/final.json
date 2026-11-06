@@ -1,0 +1,89 @@
+{
+  "model": "convnext_tiny",
+  "run": "2026-11-06_08-11-29",
+  "sha256": "b20fb5b94508b1f4992ac446d4a1700c936d5a8ad268dd0c86791a3fd5647656",
+  "size_mb": 112.12356,
+  "pytorch_validation": {
+    "images": 7575,
+    "top1": 0.8813201320132014,
+    "top5": 0.9691089108910891
+  },
+  "validation": {
+    "images": 7575,
+    "top1": 0.8813201320132014,
+    "top5": 0.9692409240924093
+  },
+  "test": {
+    "images": 25250,
+    "top1": 0.9165544554455446,
+    "top5": 0.9877623762376238
+  },
+  "latency_p50_ms": 80.11405018623918,
+  "latency_p95_ms": 81.27472996711731,
+  "worst_classes": [
+    {
+      "label": "steak",
+      "top1": 0.6520000100135803
+    },
+    {
+      "label": "filet_mignon",
+      "top1": 0.7360000014305115
+    },
+    {
+      "label": "cheesecake",
+      "top1": 0.7720000147819519
+    },
+    {
+      "label": "foie_gras",
+      "top1": 0.7879999876022339
+    },
+    {
+      "label": "bread_pudding",
+      "top1": 0.800000011920929
+    }
+  ],
+  "candidates": [
+    {
+      "run": "outputs\\comparison\\final_convnext_tiny",
+      "learning_rate": 0.0001,
+      "weight_decay": 0.01,
+      "val_top1": 0.8805280528052806
+    },
+    {
+      "run": "outputs\\train\\runs\\2026-11-06_07-48-45",
+      "learning_rate": 0.0001449914839748774,
+      "weight_decay": 0.060110593710922346,
+      "val_top1": 0.8769636750221252
+    },
+    {
+      "run": "outputs\\train\\runs\\2026-11-06_08-11-29",
+      "learning_rate": 0.00006614530279658616,
+      "weight_decay": 0.06124897581571427,
+      "val_top1": 0.8815841674804688
+    },
+    {
+      "run": "outputs\\train\\runs\\2026-11-06_08-34-17",
+      "learning_rate": 0.00027477472566645546,
+      "weight_decay": 0.05519505687806875,
+      "val_top1": 0.8648184537887573
+    },
+    {
+      "run": "outputs\\train\\runs\\2026-11-06_08-56-54",
+      "learning_rate": 0.000180821566775278,
+      "weight_decay": 0.07235615868881286,
+      "val_top1": 0.8715511560440063
+    },
+    {
+      "run": "outputs\\train\\runs\\2026-11-06_09-19-31",
+      "learning_rate": 0.00008516787881530207,
+      "weight_decay": 0.05325657688682405,
+      "val_top1": 0.8806600570678711
+    },
+    {
+      "run": "outputs\\train\\runs\\2026-11-06_09-42-12",
+      "learning_rate": 0.00004365554065082913,
+      "weight_decay": 0.048071418999746665,
+      "val_top1": 0.8801320195198059
+    }
+  ]
+}

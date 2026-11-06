@@ -24,6 +24,7 @@ def main() -> None:
     predict.add_argument("image", type=Path)
 
     commands.add_parser("compare", help="measure the trained models, choose one and write the results")
+    commands.add_parser("finalize", help="fix the final model and score it on the test set, once")
 
     args, rest = parser.parse_known_args()
     if args.command == "train":
@@ -35,6 +36,10 @@ def main() -> None:
         from fruity.lib.evaluation.compare import main as compare
 
         compare()
+    elif args.command == "finalize":
+        from fruity.lib.evaluation.finalize import main as finalize
+
+        finalize()
     elif args.command == "predict":
         from PIL import Image
 

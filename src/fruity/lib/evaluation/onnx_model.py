@@ -29,6 +29,8 @@ def export_onnx(net: torch.nn.Module, image_size: int, path: Path) -> None:
         dynamic_axes={_INPUT: {0: "batch"}, "logits": {0: "batch"}},
         dynamo=True,
         external_data=False,
+        # The progress lines hold emoji, which crash a Windows process whose output goes to a file.
+        verbose=False,
     )
 
 
