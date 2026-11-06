@@ -73,6 +73,8 @@ def train(config: DictConfig) -> dict[str, float]:
     best = cast(ModelCheckpoint, trainer.checkpoint_callback).best_model_path
     output = Path(config.paths.output_dir)
     save_for_serving(best, datamodule.classes, output / "serving")
+    # The last epoch's metrics would otherwise be saved beside the best epoch's weights.
+    trainer.validate(model=model, datamodule=datamodule, ckpt_path=best)
     if config.get("test"):
         trainer.test(model=model, datamodule=datamodule, ckpt_path=best)
     metrics = {name: float(value) for name, value in trainer.callback_metrics.items()}

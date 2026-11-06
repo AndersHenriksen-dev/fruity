@@ -6,8 +6,9 @@ import json
 from pathlib import Path
 
 import hydra
+import pytest
 import torch
-from lightning.pytorch import LightningDataModule
+from lightning.pytorch import LightningDataModule, Trainer
 from PIL import Image
 from torch.utils.data import DataLoader, TensorDataset
 
@@ -37,7 +38,18 @@ class TinyImages(LightningDataModule):
         return self._loader()
 
 
-def test_a_run_trains_tests_and_saves_a_model_that_serving_can_load(tmp_path: Path) -> None:
+def test_a_run_trains_tests_and_saves_a_model_that_serving_can_load(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    validated: list[str] = []
+    real_validate = Trainer.validate
+
+    def validate(trainer: Trainer, **arguments: object) -> object:
+        validated.append(str(arguments["ckpt_path"]))
+        return real_validate(trainer, **arguments)
+
+    monkeypatch.setattr(Trainer, "validate", validate)
     with hydra.initialize_config_dir(str(CONFIG_DIR / "training"), version_base="1.3"):
         config = hydra.compose(
             "train.yaml",
@@ -63,6 +75,7 @@ def test_a_run_trains_tests_and_saves_a_model_that_serving_can_load(tmp_path: Pa
     metrics = train(config)
 
     assert 0.0 <= metrics["test/acc"] <= 1.0
+    assert [Path(checkpoint).parent.name for checkpoint in validated] == ["checkpoints"]
     summary = json.loads((tmp_path / "metrics.json").read_text(encoding="utf-8"))
     assert summary["model"] == "resnet18"
     assert summary["fit_seconds"] > 0
