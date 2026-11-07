@@ -26,6 +26,7 @@ uv run fruity loadtest --host URL --output DIR   # measure this project's own se
 | [.claude/reference/python-style.md](.claude/reference/python-style.md) | **Before writing or editing any `.py` file** | The single source of truth for Python here. |
 | [.claude/reference/git-workflow.md](.claude/reference/git-workflow.md) | **Before creating a branch, a commit or a pull request** | Branch names, commit messages, rebasing, pull request bodies, attribution. |
 | [.claude/settings.json](.claude/settings.json) | Changing permissions or hooks | Allowed, asked and denied commands, and the style guide hook. |
+| [docs/learn/](docs/learn/README.md) | Learning or explaining how this works | Study guide: the system, choosing a model, ONNX, containers, Terraform, CI, cost, monitoring and load testing, with questions and further reading. |
 | [.pre-commit-config.yaml](.pre-commit-config.yaml) and [.github/workflows/ci.yml](.github/workflows/ci.yml) | Changing what runs on commit or in CI | The automatic half of the style guide and the gitleaks secret scan. |
 
 ## Rules
@@ -35,6 +36,7 @@ uv run fruity loadtest --host URL --output DIR   # measure this project's own se
 - Ask before anything that costs money or creates cloud resources: `terraform apply`, a load test against the live service. Say what it does and what it costs first.
 - Before any long run, run the same code path end to end on a tiny sample and read what it writes. Give the long run a time limit and a live log.
 - Load tests run only against this repo's own service, capped in users and time.
+- When a design choice or a measured result changes, update the matching file in `docs/learn/`, including any numbers it quotes.
 - Every number in a doc traces back to a file in `evals/`. Results tables and charts are generated, never edited by hand.
 - Config is what someone could change without changing how the code works. A Python file that needs config has a YAML file at the same path under `config/`, read with `config_for(__name__, ...)`. Training composes its config with Hydra instead, under `config/training/`.
 
