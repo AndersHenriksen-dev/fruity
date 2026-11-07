@@ -23,7 +23,7 @@ resource "azurerm_automation_runbook" "teardown" {
   resource_group_name     = azurerm_resource_group.state.name
   location                = var.location
   automation_account_name = azurerm_automation_account.teardown.name
-  runbook_type            = "PowerShell72"
+  runbook_type            = "PowerShell"
   log_progress            = true
   log_verbose             = false
   content                 = file("${path.module}/teardown.ps1")
