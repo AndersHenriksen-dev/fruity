@@ -1,0 +1,18 @@
+# Read by lib/loadtest/cloud.py: which Azure metrics to save while the service runs, and where the report goes
+resource_group: fruity
+apps: [fruity-api, fruity-demo]
+chart_app: fruity-api
+window_start: "2026-11-06T12:00:00Z"
+interval: PT5M
+metrics:
+  Requests: Total
+  ResponseTime: Average
+  Replicas: Maximum
+  MemoryPercentage: Maximum
+  UsageNanoCores: Average
+  RestartCount: Maximum
+metrics_file: azure_metrics.json
+alerts_file: azure_alerts.json
+load_file: load_test.json
+report_file: CLOUD.md
+chart_file: cloud_metrics.png

@@ -17,6 +17,7 @@ uv run streamlit run src/fruity/lib/frontend/app.py   # the demo page
 uv run ruff check . && uv run ruff format --check . && uv run mypy src && uv run pytest   # what CI checks
 docker compose up --build            # the whole service on one machine, with no cloud account
 uv run fruity loadtest --host URL --output DIR   # measure this project's own service, capped by config/loadtest/run.yaml
+uv run fruity cloud-report --fetch   # save Azure's metrics while the service runs, then write evals/CLOUD.md
 ```
 
 ## Index of `.claude/` and related files

@@ -36,7 +36,9 @@ The API can do a fixed amount of work per second, so as users are added:
 
 **Little's law** ties this together: users in the system = throughput x time each spends there. With simulated users who wait about a second between requests, this is why adding users past capacity shows up as more latency, not more throughput. It also gives a sanity check on any results table.
 
-A short run at 1 vCPU on a desktop showed the shape clearly: throughput peaked at 10 users, then fell at 20, while p95 rose to several seconds. Treat that as the shape and not as a result. The real numbers come from the cloud, and go in `evals/LOAD.md`.
+The service on Azure showed exactly this. One API replica at 0.5 vCPU topped out at about 3 requests per second: at 5 users p95 was 1.2 seconds, and at 10 users 3.4 seconds, with the same throughput. A second replica only starts when one has more than 10 requests in flight, so 10 users were slow on one replica without triggering a second. At 20 users it did start, and the 20-hour steady load ran on 2 replicas almost throughout, at 7 requests per second with a p95 of 1.0 second. The numbers are in [evals/LOAD.md](../../evals/LOAD.md) and [evals/CLOUD.md](../../evals/CLOUD.md).
+
+![Requests, response time, replicas and memory over the deployment](../../evals/cloud_metrics.png)
 
 ## How the load test is designed
 
@@ -51,7 +53,9 @@ A short run at 1 vCPU on a desktop showed the shape clearly: throughput peaked a
 
 The **stages** show how far it goes. The **steady load** holds 10 users for 20 hours, which shows what a short test cannot: a slow memory leak, or something that fails after hours. It also gives the dashboard a long, real record.
 
-**Cold starts** are measured separately because they need the opposite: the service must first scale to zero, so each measurement waits about 7 minutes. The time includes pulling the image, starting the process and loading the model.
+**Cold starts** are measured separately because they need the opposite: the service must first scale to zero, so each measurement waits about 7 minutes. The time includes pulling the image, starting the process and loading the model. On Azure the median was 47.9 seconds over 10 tries. The same image starts in seconds on a machine that already has it, so most of a cold start is likely fetching the image. A smaller image would cut that, and so would keeping one replica warm, at the cost of paying for idle time.
+
+The steady load also answered the question a short test cannot: memory sat at 43% of the limit in the first hour and in the last, so nothing leaked over 20 hours. The slow answer alert fired twice during the stages and resolved by itself both times.
 
 ## What this does not show
 

@@ -34,6 +34,10 @@ def main() -> None:
     loadtest.add_argument("--cold-starts", action="store_true", help="measure cold starts instead of load")
     loadtest.add_argument("--soak", action="store_true", help="hold a steady load for most of the deployment")
 
+    cloud = commands.add_parser("cloud-report", help="write the report on the service's run on Azure")
+    cloud.add_argument("--folder", type=Path, default=Path("evals"), help="where the saved Azure data is")
+    cloud.add_argument("--fetch", action="store_true", help="first save the metrics from Azure, while the apps exist")
+
     args, rest = parser.parse_known_args()
     if args.command == "train":
         from fruity.lib.training.train import main as train
@@ -61,6 +65,13 @@ def main() -> None:
             measure_soak(args.host, args.output, args.azure_resource_id)
         else:
             measure_stages(args.host, args.output, args.azure_resource_id)
+    elif args.command == "cloud-report":
+        from fruity.lib.loadtest.cloud import fetch as save_metrics
+        from fruity.lib.loadtest.cloud import write_report
+
+        if args.fetch:
+            save_metrics(args.folder)
+        write_report(args.folder)
     elif args.command == "predict":
         from PIL import Image
 

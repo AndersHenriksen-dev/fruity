@@ -1,0 +1,16 @@
+[
+ {
+  "name": "fruity-api-slow-answers",
+  "severity": "Sev2",
+  "condition": "Resolved",
+  "started": "2026-11-06T12:31:11.7895818Z",
+  "resolved": "2026-11-06T12:56:17.6006155Z"
+ },
+ {
+  "name": "fruity-api-slow-answers",
+  "severity": "Sev2",
+  "condition": "Resolved",
+  "started": "2026-11-06T12:18:12.4732993Z",
+  "resolved": "2026-11-06T12:28:08.2887048Z"
+ }
+]
