@@ -1,0 +1,95 @@
+{
+  "target": "fruity-api.salmonbay-9ae4941b.swedencentral.azurecontainerapps.io",
+  "stages": [
+    {
+      "users": 1,
+      "seconds": 120,
+      "requests": 102,
+      "failures": 0,
+      "requests_per_second": 0.8590083162305476,
+      "p50_ms": 180.0,
+      "p95_ms": 230.0,
+      "p99_ms": 270.0,
+      "started": "2026-11-06T12:07:11.693291+00:00",
+      "finished": "2026-11-06T12:09:12.355469+00:00",
+      "max_replicas": 1.0
+    },
+    {
+      "users": 2,
+      "seconds": 120,
+      "requests": 193,
+      "failures": 0,
+      "requests_per_second": 1.6404739138965223,
+      "p50_ms": 190.0,
+      "p95_ms": 360.0,
+      "p99_ms": 480.0,
+      "started": "2026-11-06T12:09:12.451196+00:00",
+      "finished": "2026-11-06T12:11:13.138946+00:00",
+      "max_replicas": 1.0
+    },
+    {
+      "users": 5,
+      "seconds": 120,
+      "requests": 379,
+      "failures": 0,
+      "requests_per_second": 3.2086751283065373,
+      "p50_ms": 480.0,
+      "p95_ms": 1200.0,
+      "p99_ms": 1500.0,
+      "started": "2026-11-06T12:11:13.228548+00:00",
+      "finished": "2026-11-06T12:13:13.936165+00:00",
+      "max_replicas": 1.0
+    },
+    {
+      "users": 10,
+      "seconds": 120,
+      "requests": 351,
+      "failures": 0,
+      "requests_per_second": 2.958553191574706,
+      "p50_ms": 2400.0,
+      "p95_ms": 3400.0,
+      "p99_ms": 3800.0,
+      "started": "2026-11-06T12:13:14.029981+00:00",
+      "finished": "2026-11-06T12:15:14.772120+00:00",
+      "max_replicas": 1.0
+    },
+    {
+      "users": 20,
+      "seconds": 120,
+      "requests": 497,
+      "failures": 0,
+      "requests_per_second": 4.190223051558042,
+      "p50_ms": 3500.0,
+      "p95_ms": 8100.0,
+      "p99_ms": 9600.0,
+      "started": "2026-11-06T12:15:14.868579+00:00",
+      "finished": "2026-11-06T12:17:15.599294+00:00",
+      "max_replicas": 2.0
+    }
+  ],
+  "soak": {
+    "users": 10,
+    "seconds": 72000,
+    "requests": 507121,
+    "failures": 0,
+    "requests_per_second": 7.043461260284804,
+    "p50_ms": 300.0,
+    "p95_ms": 1000.0,
+    "p99_ms": 1500.0,
+    "started": "2026-11-06T12:26:45.859615+00:00",
+    "finished": "2026-11-07T08:26:46.308018+00:00",
+    "max_replicas": 2.0
+  },
+  "cold_starts_seconds": [
+    47.696382799884304,
+    57.98751510004513,
+    52.71724299993366,
+    52.93347000004724,
+    47.81536909984425,
+    47.81640430004336,
+    47.913785699987784,
+    52.820392299909145,
+    47.79477269994095,
+    47.888053899863735
+  ]
+}

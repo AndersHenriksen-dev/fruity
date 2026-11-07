@@ -48,7 +48,8 @@ def small_test(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         "photos_meta": tmp_path / "train.json",
         "photos_dir": tmp_path / "images",
         "stages": [1, 2],
-        "stage_seconds": 2,
+        # Long enough that requests finish even on a busy machine.
+        "stage_seconds": 4,
         "soak_users": 1,
         "soak_seconds": 2,
         "cold_starts": 2,
