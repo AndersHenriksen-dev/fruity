@@ -273,7 +273,8 @@ def write_report(results: BaselineResults, path: Path) -> None:
         "## Limits",
         "",
         "- The classical methods here use one simple classifier with default settings. More tuning, or a stronger "
-        "classifier such as a kernel SVM, could score higher. The published result shows what a stronger method reached.",
+        "classifier such as a kernel SVM, could score higher. "
+        "The published result shows what a stronger method reached.",
         "- The published number is from a different implementation and was measured on the test set.",
         "",
     ]
