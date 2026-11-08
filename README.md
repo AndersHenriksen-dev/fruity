@@ -47,7 +47,7 @@ The shaded span is the 20-hour steady load. Screenshots from the Azure portal:
 
 ## What it cost
 
-**The final cost is not known yet.** Azure reports some costs days late, and it had not reported the Container Apps usage, the part that ran the compute, when I finished. I will add the real figure when it does.
+**The final cost is not known yet.** Azure reports some costs days late, and it had not reported the Container Apps usage, the part that ran the compute, when I finished. I will add the real figure when it does, tracked in [issue 15](https://github.com/AndersHenriksen-dev/fruity/issues/15).
 
 What is known:
 
