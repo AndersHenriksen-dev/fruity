@@ -26,6 +26,7 @@ def main() -> None:
     commands.add_parser("compare", help="measure the trained models, choose one and write the results")
     commands.add_parser("finalize", help="fix the final model and score it on the test set, once")
     commands.add_parser("fetch", help="download the published model and verify its checksums")
+    commands.add_parser("baselines", help="measure methods without deep learning, to compare the model with")
 
     loadtest = commands.add_parser("loadtest", help="measure this project's own service under load")
     loadtest.add_argument("--host", required=True, help="the service's URL")
@@ -52,6 +53,10 @@ def main() -> None:
         from fruity.lib.evaluation.finalize import main as finalize
 
         finalize()
+    elif args.command == "baselines":
+        from fruity.lib.evaluation.baselines import main as measure_baselines
+
+        measure_baselines()
     elif args.command == "fetch":
         from fruity.lib.serving.fetch import main as fetch
 

@@ -19,57 +19,60 @@ It scores 85.76%, below the 87.05% floor. The rule that excluded smaller models 
 **5. Why can `fruity finalize` be run twice safely?**
 `evals/final.json` acts as a lock. When it exists, the command rewrites the report from it and never opens the test set.
 
+**6. Why is 88% not compared with 50%?**
+50% is chance with two classes. With 101 classes, chance is about 1%. The fair comparisons are methods without deep learning on the same images: 12.84% for hand-made features here, and 50.76% for the best published one.
+
 ## The service
 
-**6. Why does the service not need PyTorch?**
+**7. Why does the service not need PyTorch?**
 ONNX Runtime runs the exported calculation, and preprocessing is Pillow and NumPy. PyTorch is needed only to train and to export.
 
-**7. Why is `threads` set to 1?**
+**8. Why is `threads` set to 1?**
 ONNX Runtime counts the host's cores, not the container's share. Many threads on half a core fight each other.
 
-**8. Why are the model endpoints plain functions and not `async`?**
+**9. Why are the model endpoints plain functions and not `async`?**
 FastAPI runs plain functions in a thread pool. Heavy work in an `async` function would block the event loop, and `/health` would stop answering.
 
-**9. A file is named `photo.jpg` but holds text. What does the API answer, and why not a 500?**
+**10. A file is named `photo.jpg` but holds text. What does the API answer, and why not a 500?**
 422. It claims a valid type, then `read_image` fails to decode it and says so. A 500 would mean the server broke, which it did not.
 
 ## Infrastructure
 
-**10. Why are there two Terraform folders?**
+**11. Why are there two Terraform folders?**
 CI needs an identity and state storage before it can run. Bootstrap creates them by hand. Keeping the budget and kill switch there also keeps them out of reach of the deploy identity.
 
-**11. What stops a stolen copy of this repo from deploying to Azure?**
+**12. What stops a stolen copy of this repo from deploying to Azure?**
 There is no key to steal. Azure trusts only GitHub-signed tokens whose subject is this repo's `main` branch.
 
-**12. Why does merging to `main` not deploy anything after teardown?**
+**13. Why does merging to `main` not deploy anything after teardown?**
 Every deploy job needs `DEPLOY_ENABLED`, and it gets deleted at teardown. Without that, a typo fix would rebuild the service and restart the bill.
 
-**13. Why does `.dockerignore` start with `*`?**
+**14. Why does `.dockerignore` start with `*`?**
 An exclude list lets new files in by default, including secrets and data. An allowlist keeps them out by default.
 
 ## Cost
 
-**14. Why is the budget not the main cost control?**
+**15. Why is the budget not the main cost control?**
 It does not stop anything by itself, and it can act up to about two days late. In a 24-hour deployment, that is after everything has already happened.
 
-**15. Why does the budget's trigger sit at half the limit?**
+**16. Why does the budget's trigger sit at half the limit?**
 Because the data is late. Spending continues between the real moment and the moment the budget sees it, so it has to act early to stay under the limit.
 
-**16. What is the most compute can cost in 24 hours? Work it out.**
+**17. What is the most compute can cost in 24 hours? Work it out.**
 1.25 vCPU and 2.5 GiB at full caps. That is 1.25 x 0.000024 + 2.5 x 0.000003 = USD 0.0000375 per second, or USD 0.135 per hour, or USD 3.24 over 24 hours, before the free grant.
 
-**17. An empty `allowed_ip_ranges` looks harmless. Why is it refused?**
+**18. An empty `allowed_ip_ranges` looks harmless. Why is it refused?**
 With no rules, Container Apps accepts everyone, so an empty list means the opposite of what it looks like.
 
 ## Measuring
 
-**18. Why report p95 and not the average?**
+**19. Why report p95 and not the average?**
 An average hides the slow requests that people remember. It can also describe nobody's actual experience.
 
-**19. Throughput falls from 10 to 20 users. What does that tell you?**
-The service is past capacity. Requests queue and time goes on juggling. Latency will be rising fast too.
+**20. On one replica, throughput was 3.2 requests per second at 5 users and 3.0 at 10. What does that tell you?**
+The replica is full. More users only make requests wait longer: p95 went from 1.2 to 3.4 seconds. It took a second replica, at 20 users, to raise throughput again.
 
-**20. Why raise the rate limit for the load test?**
+**21. Why raise the rate limit for the load test?**
 Otherwise the test measures the limit: most requests get refused quickly, which looks like speed.
 
 ## Exercises
