@@ -1,0 +1,2527 @@
+[
+ {
+  "dish": "apple_pie",
+  "predictions": [
+   {
+    "label": "apple_pie",
+    "probability": 0.9993483424186707
+   },
+   {
+    "label": "samosa",
+    "probability": 0.0003710533201228827
+   },
+   {
+    "label": "baklava",
+    "probability": 0.00010226100857835263
+   },
+   {
+    "label": "chicken_quesadilla",
+    "probability": 3.696809653774835e-05
+   },
+   {
+    "label": "bread_pudding",
+    "probability": 3.234547330066562e-05
+   }
+  ]
+ },
+ {
+  "dish": "baby_back_ribs",
+  "predictions": [
+   {
+    "label": "baby_back_ribs",
+    "probability": 0.4940020442008972
+   },
+   {
+    "label": "steak",
+    "probability": 0.31343385577201843
+   },
+   {
+    "label": "prime_rib",
+    "probability": 0.14245370030403137
+   },
+   {
+    "label": "filet_mignon",
+    "probability": 0.035535186529159546
+   },
+   {
+    "label": "chocolate_cake",
+    "probability": 0.002579395892098546
+   }
+  ]
+ },
+ {
+  "dish": "baklava",
+  "predictions": [
+   {
+    "label": "baklava",
+    "probability": 0.9984279870986938
+   },
+   {
+    "label": "apple_pie",
+    "probability": 0.0009933996479958296
+   },
+   {
+    "label": "samosa",
+    "probability": 0.00013468954421114177
+   },
+   {
+    "label": "garlic_bread",
+    "probability": 9.96087328530848e-05
+   },
+   {
+    "label": "bread_pudding",
+    "probability": 6.320409738691524e-05
+   }
+  ]
+ },
+ {
+  "dish": "beef_carpaccio",
+  "predictions": [
+   {
+    "label": "beef_carpaccio",
+    "probability": 0.9993576407432556
+   },
+   {
+    "label": "pho",
+    "probability": 0.00018412894860375673
+   },
+   {
+    "label": "pizza",
+    "probability": 4.54758592240978e-05
+   },
+   {
+    "label": "caprese_salad",
+    "probability": 4.349935261416249e-05
+   },
+   {
+    "label": "beef_tartare",
+    "probability": 4.030175114166923e-05
+   }
+  ]
+ },
+ {
+  "dish": "beef_tartare",
+  "predictions": [
+   {
+    "label": "beef_tartare",
+    "probability": 0.9965183734893799
+   },
+   {
+    "label": "tuna_tartare",
+    "probability": 0.003209352493286133
+   },
+   {
+    "label": "beef_carpaccio",
+    "probability": 0.0001916440378408879
+   },
+   {
+    "label": "beet_salad",
+    "probability": 2.0707229850813746e-05
+   },
+   {
+    "label": "foie_gras",
+    "probability": 1.0081749678647611e-05
+   }
+  ]
+ },
+ {
+  "dish": "beet_salad",
+  "predictions": [
+   {
+    "label": "beet_salad",
+    "probability": 0.9959697723388672
+   },
+   {
+    "label": "beef_tartare",
+    "probability": 0.0006663306267000735
+   },
+   {
+    "label": "grilled_cheese_sandwich",
+    "probability": 0.0005487862508744001
+   },
+   {
+    "label": "fried_calamari",
+    "probability": 0.00033958451240323484
+   },
+   {
+    "label": "greek_salad",
+    "probability": 0.00027810176834464073
+   }
+  ]
+ },
+ {
+  "dish": "beignets",
+  "predictions": [
+   {
+    "label": "beignets",
+    "probability": 0.998829185962677
+   },
+   {
+    "label": "french_toast",
+    "probability": 0.0006274387123994529
+   },
+   {
+    "label": "donuts",
+    "probability": 9.056973794940859e-05
+   },
+   {
+    "label": "panna_cotta",
+    "probability": 6.0862214013468474e-05
+   },
+   {
+    "label": "strawberry_shortcake",
+    "probability": 5.861400859430432e-05
+   }
+  ]
+ },
+ {
+  "dish": "bibimbap",
+  "predictions": [
+   {
+    "label": "peking_duck",
+    "probability": 0.9785171151161194
+   },
+   {
+    "label": "bibimbap",
+    "probability": 0.0062729427590966225
+   },
+   {
+    "label": "pork_chop",
+    "probability": 0.003441042499616742
+   },
+   {
+    "label": "grilled_salmon",
+    "probability": 0.0015443176962435246
+   },
+   {
+    "label": "sashimi",
+    "probability": 0.0013694349909201264
+   }
+  ]
+ },
+ {
+  "dish": "bread_pudding",
+  "predictions": [
+   {
+    "label": "bread_pudding",
+    "probability": 0.939774751663208
+   },
+   {
+    "label": "lasagna",
+    "probability": 0.024261899292469025
+   },
+   {
+    "label": "apple_pie",
+    "probability": 0.007760483771562576
+   },
+   {
+    "label": "tiramisu",
+    "probability": 0.006134143099188805
+   },
+   {
+    "label": "macaroni_and_cheese",
+    "probability": 0.00563791673630476
+   }
+  ]
+ },
+ {
+  "dish": "breakfast_burrito",
+  "predictions": [
+   {
+    "label": "breakfast_burrito",
+    "probability": 0.9686240553855896
+   },
+   {
+    "label": "falafel",
+    "probability": 0.01357140764594078
+   },
+   {
+    "label": "tacos",
+    "probability": 0.013407592661678791
+   },
+   {
+    "label": "chicken_quesadilla",
+    "probability": 0.0015570916002616286
+   },
+   {
+    "label": "peking_duck",
+    "probability": 0.00095736252842471
+   }
+  ]
+ },
+ {
+  "dish": "bruschetta",
+  "predictions": [
+   {
+    "label": "bruschetta",
+    "probability": 0.9999399185180664
+   },
+   {
+    "label": "croque_madame",
+    "probability": 8.150610483426135e-06
+   },
+   {
+    "label": "garlic_bread",
+    "probability": 7.76993874751497e-06
+   },
+   {
+    "label": "tuna_tartare",
+    "probability": 6.9170828282949515e-06
+   },
+   {
+    "label": "mussels",
+    "probability": 4.368044756120071e-06
+   }
+  ]
+ },
+ {
+  "dish": "caesar_salad",
+  "predictions": [
+   {
+    "label": "caesar_salad",
+    "probability": 0.9412312507629395
+   },
+   {
+    "label": "beet_salad",
+    "probability": 0.03024645522236824
+   },
+   {
+    "label": "greek_salad",
+    "probability": 0.021211417391896248
+   },
+   {
+    "label": "lasagna",
+    "probability": 0.0009538758895359933
+   },
+   {
+    "label": "caprese_salad",
+    "probability": 0.0008805691613815725
+   }
+  ]
+ },
+ {
+  "dish": "cannoli",
+  "predictions": [
+   {
+    "label": "cannoli",
+    "probability": 0.998060405254364
+   },
+   {
+    "label": "sushi",
+    "probability": 0.0005069987382739782
+   },
+   {
+    "label": "pancakes",
+    "probability": 0.00019546512339729816
+   },
+   {
+    "label": "churros",
+    "probability": 0.0001045303069986403
+   },
+   {
+    "label": "grilled_cheese_sandwich",
+    "probability": 9.596182644600049e-05
+   }
+  ]
+ },
+ {
+  "dish": "caprese_salad",
+  "predictions": [
+   {
+    "label": "caprese_salad",
+    "probability": 0.9567592740058899
+   },
+   {
+    "label": "bruschetta",
+    "probability": 0.023927751928567886
+   },
+   {
+    "label": "deviled_eggs",
+    "probability": 0.006363356485962868
+   },
+   {
+    "label": "scallops",
+    "probability": 0.0017597235273569822
+   },
+   {
+    "label": "huevos_rancheros",
+    "probability": 0.0015132802072912455
+   }
+  ]
+ },
+ {
+  "dish": "carrot_cake",
+  "predictions": [
+   {
+    "label": "carrot_cake",
+    "probability": 0.912293016910553
+   },
+   {
+    "label": "tiramisu",
+    "probability": 0.017892278730869293
+   },
+   {
+    "label": "apple_pie",
+    "probability": 0.011968283914029598
+   },
+   {
+    "label": "french_toast",
+    "probability": 0.011908737011253834
+   },
+   {
+    "label": "chocolate_cake",
+    "probability": 0.010854797437787056
+   }
+  ]
+ },
+ {
+  "dish": "ceviche",
+  "predictions": [
+   {
+    "label": "ceviche",
+    "probability": 0.9987722039222717
+   },
+   {
+    "label": "lobster_roll_sandwich",
+    "probability": 0.00047911080764606595
+   },
+   {
+    "label": "pulled_pork_sandwich",
+    "probability": 0.00011155908578075469
+   },
+   {
+    "label": "tacos",
+    "probability": 5.8969439123757184e-05
+   },
+   {
+    "label": "crab_cakes",
+    "probability": 4.3039075535489246e-05
+   }
+  ]
+ },
+ {
+  "dish": "cheese_plate",
+  "predictions": [
+   {
+    "label": "cheese_plate",
+    "probability": 0.9997466206550598
+   },
+   {
+    "label": "peking_duck",
+    "probability": 3.176556128892116e-05
+   },
+   {
+    "label": "foie_gras",
+    "probability": 2.1180796466069296e-05
+   },
+   {
+    "label": "steak",
+    "probability": 1.5197027096292004e-05
+   },
+   {
+    "label": "omelette",
+    "probability": 9.976716683013365e-06
+   }
+  ]
+ },
+ {
+  "dish": "cheesecake",
+  "predictions": [
+   {
+    "label": "cheesecake",
+    "probability": 0.9177840948104858
+   },
+   {
+    "label": "pancakes",
+    "probability": 0.018805107101798058
+   },
+   {
+    "label": "hamburger",
+    "probability": 0.018582511693239212
+   },
+   {
+    "label": "chocolate_cake",
+    "probability": 0.005872602108865976
+   },
+   {
+    "label": "tiramisu",
+    "probability": 0.005114691331982613
+   }
+  ]
+ },
+ {
+  "dish": "chicken_curry",
+  "predictions": [
+   {
+    "label": "chicken_curry",
+    "probability": 0.9811334013938904
+   },
+   {
+    "label": "hot_and_sour_soup",
+    "probability": 0.008692704141139984
+   },
+   {
+    "label": "miso_soup",
+    "probability": 0.0014813269954174757
+   },
+   {
+    "label": "samosa",
+    "probability": 0.0013539380161091685
+   },
+   {
+    "label": "pho",
+    "probability": 0.000899365812074393
+   }
+  ]
+ },
+ {
+  "dish": "chicken_quesadilla",
+  "predictions": [
+   {
+    "label": "chicken_quesadilla",
+    "probability": 0.9987275004386902
+   },
+   {
+    "label": "breakfast_burrito",
+    "probability": 0.000869878102093935
+   },
+   {
+    "label": "huevos_rancheros",
+    "probability": 0.0002446939470246434
+   },
+   {
+    "label": "tacos",
+    "probability": 3.2245818147202954e-05
+   },
+   {
+    "label": "pad_thai",
+    "probability": 2.63788770098472e-05
+   }
+  ]
+ },
+ {
+  "dish": "chicken_wings",
+  "predictions": [
+   {
+    "label": "chicken_wings",
+    "probability": 0.9974385499954224
+   },
+   {
+    "label": "baby_back_ribs",
+    "probability": 0.0020717803854495287
+   },
+   {
+    "label": "pulled_pork_sandwich",
+    "probability": 0.00013055432646069676
+   },
+   {
+    "label": "chicken_curry",
+    "probability": 4.65598568553105e-05
+   },
+   {
+    "label": "waffles",
+    "probability": 3.2239538995781913e-05
+   }
+  ]
+ },
+ {
+  "dish": "chocolate_cake",
+  "predictions": [
+   {
+    "label": "tiramisu",
+    "probability": 0.9937288761138916
+   },
+   {
+    "label": "chocolate_cake",
+    "probability": 0.003240010468289256
+   },
+   {
+    "label": "macarons",
+    "probability": 0.000813332328107208
+   },
+   {
+    "label": "cannoli",
+    "probability": 0.0005617695860564709
+   },
+   {
+    "label": "grilled_cheese_sandwich",
+    "probability": 0.00023812659492250532
+   }
+  ]
+ },
+ {
+  "dish": "chocolate_mousse",
+  "predictions": [
+   {
+    "label": "chocolate_mousse",
+    "probability": 0.8472546339035034
+   },
+   {
+    "label": "ice_cream",
+    "probability": 0.14513325691223145
+   },
+   {
+    "label": "chocolate_cake",
+    "probability": 0.0031585011165589094
+   },
+   {
+    "label": "creme_brulee",
+    "probability": 0.0012644713278859854
+   },
+   {
+    "label": "tiramisu",
+    "probability": 0.0006897231214679778
+   }
+  ]
+ },
+ {
+  "dish": "churros",
+  "predictions": [
+   {
+    "label": "churros",
+    "probability": 0.9996963739395142
+   },
+   {
+    "label": "waffles",
+    "probability": 4.887067916570231e-05
+   },
+   {
+    "label": "hot_dog",
+    "probability": 4.854320650338195e-05
+   },
+   {
+    "label": "frozen_yogurt",
+    "probability": 2.299998413946014e-05
+   },
+   {
+    "label": "donuts",
+    "probability": 1.8588583770906553e-05
+   }
+  ]
+ },
+ {
+  "dish": "clam_chowder",
+  "predictions": [
+   {
+    "label": "chicken_curry",
+    "probability": 0.6722381114959717
+   },
+   {
+    "label": "lobster_bisque",
+    "probability": 0.15219387412071228
+   },
+   {
+    "label": "french_onion_soup",
+    "probability": 0.0822322890162468
+   },
+   {
+    "label": "shrimp_and_grits",
+    "probability": 0.05147415027022362
+   },
+   {
+    "label": "hot_and_sour_soup",
+    "probability": 0.00943165086209774
+   }
+  ]
+ },
+ {
+  "dish": "club_sandwich",
+  "predictions": [
+   {
+    "label": "club_sandwich",
+    "probability": 0.969015896320343
+   },
+   {
+    "label": "pulled_pork_sandwich",
+    "probability": 0.018256744369864464
+   },
+   {
+    "label": "lobster_roll_sandwich",
+    "probability": 0.005471828393638134
+   },
+   {
+    "label": "falafel",
+    "probability": 0.0015679122880101204
+   },
+   {
+    "label": "bruschetta",
+    "probability": 0.0011096432572230697
+   }
+  ]
+ },
+ {
+  "dish": "crab_cakes",
+  "predictions": [
+   {
+    "label": "crab_cakes",
+    "probability": 0.9897039532661438
+   },
+   {
+    "label": "macaroni_and_cheese",
+    "probability": 0.005954990163445473
+   },
+   {
+    "label": "pork_chop",
+    "probability": 0.0015953220427036285
+   },
+   {
+    "label": "grilled_salmon",
+    "probability": 0.000581219675950706
+   },
+   {
+    "label": "scallops",
+    "probability": 0.00030124865588732064
+   }
+  ]
+ },
+ {
+  "dish": "creme_brulee",
+  "predictions": [
+   {
+    "label": "creme_brulee",
+    "probability": 0.9996803998947144
+   },
+   {
+    "label": "bread_pudding",
+    "probability": 4.5880049583502114e-05
+   },
+   {
+    "label": "cheesecake",
+    "probability": 3.422749068704434e-05
+   },
+   {
+    "label": "apple_pie",
+    "probability": 2.369327557971701e-05
+   },
+   {
+    "label": "lobster_bisque",
+    "probability": 2.167871207348071e-05
+   }
+  ]
+ },
+ {
+  "dish": "croque_madame",
+  "predictions": [
+   {
+    "label": "pancakes",
+    "probability": 0.9386602640151978
+   },
+   {
+    "label": "croque_madame",
+    "probability": 0.03560539335012436
+   },
+   {
+    "label": "club_sandwich",
+    "probability": 0.00713420519605279
+   },
+   {
+    "label": "french_toast",
+    "probability": 0.006034691818058491
+   },
+   {
+    "label": "huevos_rancheros",
+    "probability": 0.0033693313598632812
+   }
+  ]
+ },
+ {
+  "dish": "cup_cakes",
+  "predictions": [
+   {
+    "label": "cup_cakes",
+    "probability": 0.9854353666305542
+   },
+   {
+    "label": "chocolate_mousse",
+    "probability": 0.010449855588376522
+   },
+   {
+    "label": "chocolate_cake",
+    "probability": 0.0023270784877240658
+   },
+   {
+    "label": "red_velvet_cake",
+    "probability": 0.0005296854651533067
+   },
+   {
+    "label": "ice_cream",
+    "probability": 0.0004429942346177995
+   }
+  ]
+ },
+ {
+  "dish": "deviled_eggs",
+  "predictions": [
+   {
+    "label": "deviled_eggs",
+    "probability": 0.9997914433479309
+   },
+   {
+    "label": "cup_cakes",
+    "probability": 6.753323395969346e-05
+   },
+   {
+    "label": "gyoza",
+    "probability": 2.404066253802739e-05
+   },
+   {
+    "label": "apple_pie",
+    "probability": 1.0455319170432631e-05
+   },
+   {
+    "label": "ceviche",
+    "probability": 9.556962140777614e-06
+   }
+  ]
+ },
+ {
+  "dish": "donuts",
+  "predictions": [
+   {
+    "label": "donuts",
+    "probability": 0.9982092380523682
+   },
+   {
+    "label": "chocolate_cake",
+    "probability": 0.0012523477198556066
+   },
+   {
+    "label": "carrot_cake",
+    "probability": 4.4759904994862154e-05
+   },
+   {
+    "label": "frozen_yogurt",
+    "probability": 3.1201889214571565e-05
+   },
+   {
+    "label": "waffles",
+    "probability": 2.9751168767688796e-05
+   }
+  ]
+ },
+ {
+  "dish": "dumplings",
+  "predictions": [
+   {
+    "label": "dumplings",
+    "probability": 0.9998124241828918
+   },
+   {
+    "label": "gyoza",
+    "probability": 0.00017558115359861404
+   },
+   {
+    "label": "ravioli",
+    "probability": 5.109296125738183e-06
+   },
+   {
+    "label": "peking_duck",
+    "probability": 1.8652232256499701e-06
+   },
+   {
+    "label": "carrot_cake",
+    "probability": 6.083427592784574e-07
+   }
+  ]
+ },
+ {
+  "dish": "edamame",
+  "predictions": [
+   {
+    "label": "edamame",
+    "probability": 0.9999597072601318
+   },
+   {
+    "label": "seaweed_salad",
+    "probability": 1.0654746802174486e-05
+   },
+   {
+    "label": "samosa",
+    "probability": 2.646481334522832e-06
+   },
+   {
+    "label": "tiramisu",
+    "probability": 1.1482833315312746e-06
+   },
+   {
+    "label": "escargots",
+    "probability": 1.1426748187659541e-06
+   }
+  ]
+ },
+ {
+  "dish": "eggs_benedict",
+  "predictions": [
+   {
+    "label": "eggs_benedict",
+    "probability": 0.9989022016525269
+   },
+   {
+    "label": "croque_madame",
+    "probability": 0.000708859704900533
+   },
+   {
+    "label": "bruschetta",
+    "probability": 0.00011484646529424936
+   },
+   {
+    "label": "steak",
+    "probability": 5.066888843430206e-05
+   },
+   {
+    "label": "crab_cakes",
+    "probability": 4.7420180635526776e-05
+   }
+  ]
+ },
+ {
+  "dish": "escargots",
+  "predictions": [
+   {
+    "label": "escargots",
+    "probability": 0.9998290538787842
+   },
+   {
+    "label": "takoyaki",
+    "probability": 2.392779424553737e-05
+   },
+   {
+    "label": "scallops",
+    "probability": 1.9865539798047394e-05
+   },
+   {
+    "label": "garlic_bread",
+    "probability": 1.7202686649397947e-05
+   },
+   {
+    "label": "baklava",
+    "probability": 8.304139555548318e-06
+   }
+  ]
+ },
+ {
+  "dish": "falafel",
+  "predictions": [
+   {
+    "label": "falafel",
+    "probability": 0.7355144023895264
+   },
+   {
+    "label": "takoyaki",
+    "probability": 0.11446478217840195
+   },
+   {
+    "label": "crab_cakes",
+    "probability": 0.10893292725086212
+   },
+   {
+    "label": "escargots",
+    "probability": 0.008242410607635975
+   },
+   {
+    "label": "cup_cakes",
+    "probability": 0.004121775273233652
+   }
+  ]
+ },
+ {
+  "dish": "filet_mignon",
+  "predictions": [
+   {
+    "label": "steak",
+    "probability": 0.42310523986816406
+   },
+   {
+    "label": "filet_mignon",
+    "probability": 0.408765584230423
+   },
+   {
+    "label": "prime_rib",
+    "probability": 0.13673989474773407
+   },
+   {
+    "label": "spaghetti_carbonara",
+    "probability": 0.015296894125640392
+   },
+   {
+    "label": "pho",
+    "probability": 0.004371467512100935
+   }
+  ]
+ },
+ {
+  "dish": "fish_and_chips",
+  "predictions": [
+   {
+    "label": "fish_and_chips",
+    "probability": 0.9987419247627258
+   },
+   {
+    "label": "french_fries",
+    "probability": 0.0008239718154072762
+   },
+   {
+    "label": "macaroni_and_cheese",
+    "probability": 8.080147381406277e-05
+   },
+   {
+    "label": "chicken_wings",
+    "probability": 5.9937970945611596e-05
+   },
+   {
+    "label": "tacos",
+    "probability": 3.648915662779473e-05
+   }
+  ]
+ },
+ {
+  "dish": "foie_gras",
+  "predictions": [
+   {
+    "label": "foie_gras",
+    "probability": 0.9448293447494507
+   },
+   {
+    "label": "grilled_salmon",
+    "probability": 0.02676420286297798
+   },
+   {
+    "label": "pork_chop",
+    "probability": 0.02667519450187683
+   },
+   {
+    "label": "filet_mignon",
+    "probability": 0.00039879814721643925
+   },
+   {
+    "label": "scallops",
+    "probability": 0.00024973732070066035
+   }
+  ]
+ },
+ {
+  "dish": "french_fries",
+  "predictions": [
+   {
+    "label": "french_fries",
+    "probability": 0.9915383458137512
+   },
+   {
+    "label": "fish_and_chips",
+    "probability": 0.002948477165773511
+   },
+   {
+    "label": "club_sandwich",
+    "probability": 0.0011519476538524032
+   },
+   {
+    "label": "croque_madame",
+    "probability": 0.0006341086118482053
+   },
+   {
+    "label": "hamburger",
+    "probability": 0.0004588172596413642
+   }
+  ]
+ },
+ {
+  "dish": "french_onion_soup",
+  "predictions": [
+   {
+    "label": "french_onion_soup",
+    "probability": 0.9989996552467346
+   },
+   {
+    "label": "macaroni_and_cheese",
+    "probability": 0.0003836196556221694
+   },
+   {
+    "label": "lasagna",
+    "probability": 0.00026729769888333976
+   },
+   {
+    "label": "escargots",
+    "probability": 0.00012566173973027617
+   },
+   {
+    "label": "clam_chowder",
+    "probability": 8.416103082709014e-05
+   }
+  ]
+ },
+ {
+  "dish": "french_toast",
+  "predictions": [
+   {
+    "label": "french_toast",
+    "probability": 0.999670147895813
+   },
+   {
+    "label": "pancakes",
+    "probability": 0.00012509599037002772
+   },
+   {
+    "label": "foie_gras",
+    "probability": 3.81963218387682e-05
+   },
+   {
+    "label": "waffles",
+    "probability": 3.661797018139623e-05
+   },
+   {
+    "label": "grilled_cheese_sandwich",
+    "probability": 1.9788494682870805e-05
+   }
+  ]
+ },
+ {
+  "dish": "fried_calamari",
+  "predictions": [
+   {
+    "label": "fried_calamari",
+    "probability": 0.9960297346115112
+   },
+   {
+    "label": "onion_rings",
+    "probability": 0.0026365213561803102
+   },
+   {
+    "label": "pork_chop",
+    "probability": 0.0004378356970846653
+   },
+   {
+    "label": "fish_and_chips",
+    "probability": 8.965218876255676e-05
+   },
+   {
+    "label": "oysters",
+    "probability": 7.727109914412722e-05
+   }
+  ]
+ },
+ {
+  "dish": "fried_rice",
+  "predictions": [
+   {
+    "label": "fried_rice",
+    "probability": 0.9986827969551086
+   },
+   {
+    "label": "risotto",
+    "probability": 0.0005264713545329869
+   },
+   {
+    "label": "edamame",
+    "probability": 7.106441626092419e-05
+   },
+   {
+    "label": "chicken_quesadilla",
+    "probability": 6.057229984435253e-05
+   },
+   {
+    "label": "chicken_curry",
+    "probability": 5.6425844377372414e-05
+   }
+  ]
+ },
+ {
+  "dish": "frozen_yogurt",
+  "predictions": [
+   {
+    "label": "frozen_yogurt",
+    "probability": 0.8486508131027222
+   },
+   {
+    "label": "ice_cream",
+    "probability": 0.07066059857606888
+   },
+   {
+    "label": "cup_cakes",
+    "probability": 0.03434814512729645
+   },
+   {
+    "label": "strawberry_shortcake",
+    "probability": 0.023786522448062897
+   },
+   {
+    "label": "chocolate_mousse",
+    "probability": 0.016497762873768806
+   }
+  ]
+ },
+ {
+  "dish": "garlic_bread",
+  "predictions": [
+   {
+    "label": "garlic_bread",
+    "probability": 0.7796114683151245
+   },
+   {
+    "label": "pizza",
+    "probability": 0.21197666227817535
+   },
+   {
+    "label": "lasagna",
+    "probability": 0.0021108619403094053
+   },
+   {
+    "label": "bruschetta",
+    "probability": 0.001771139563061297
+   },
+   {
+    "label": "chicken_curry",
+    "probability": 0.0013129898579791188
+   }
+  ]
+ },
+ {
+  "dish": "gnocchi",
+  "predictions": [
+   {
+    "label": "gnocchi",
+    "probability": 0.9960895776748657
+   },
+   {
+    "label": "macaroni_and_cheese",
+    "probability": 0.002692727604880929
+   },
+   {
+    "label": "fried_calamari",
+    "probability": 0.00016835118003655225
+   },
+   {
+    "label": "clam_chowder",
+    "probability": 8.478301606373861e-05
+   },
+   {
+    "label": "garlic_bread",
+    "probability": 8.283845818368718e-05
+   }
+  ]
+ },
+ {
+  "dish": "greek_salad",
+  "predictions": [
+   {
+    "label": "greek_salad",
+    "probability": 0.9999289512634277
+   },
+   {
+    "label": "caprese_salad",
+    "probability": 3.170413037878461e-05
+   },
+   {
+    "label": "falafel",
+    "probability": 8.406888809986413e-06
+   },
+   {
+    "label": "bibimbap",
+    "probability": 4.283340331312502e-06
+   },
+   {
+    "label": "lasagna",
+    "probability": 4.165905011177529e-06
+   }
+  ]
+ },
+ {
+  "dish": "grilled_cheese_sandwich",
+  "predictions": [
+   {
+    "label": "grilled_cheese_sandwich",
+    "probability": 0.9991245865821838
+   },
+   {
+    "label": "chicken_quesadilla",
+    "probability": 0.00041761965258046985
+   },
+   {
+    "label": "croque_madame",
+    "probability": 8.797788177616894e-05
+   },
+   {
+    "label": "macaroni_and_cheese",
+    "probability": 4.5001652324572206e-05
+   },
+   {
+    "label": "hamburger",
+    "probability": 4.21985678258352e-05
+   }
+  ]
+ },
+ {
+  "dish": "grilled_salmon",
+  "predictions": [
+   {
+    "label": "grilled_salmon",
+    "probability": 0.9992959499359131
+   },
+   {
+    "label": "pork_chop",
+    "probability": 0.000259507040027529
+   },
+   {
+    "label": "risotto",
+    "probability": 0.00012139951286371797
+   },
+   {
+    "label": "filet_mignon",
+    "probability": 7.744778849883005e-05
+   },
+   {
+    "label": "chicken_curry",
+    "probability": 6.0118902183603495e-05
+   }
+  ]
+ },
+ {
+  "dish": "guacamole",
+  "predictions": [
+   {
+    "label": "guacamole",
+    "probability": 0.9970548152923584
+   },
+   {
+    "label": "hummus",
+    "probability": 0.0020364399533718824
+   },
+   {
+    "label": "chicken_quesadilla",
+    "probability": 0.0004895549500361085
+   },
+   {
+    "label": "nachos",
+    "probability": 0.00013388767547439784
+   },
+   {
+    "label": "tuna_tartare",
+    "probability": 6.82728859828785e-05
+   }
+  ]
+ },
+ {
+  "dish": "gyoza",
+  "predictions": [
+   {
+    "label": "gyoza",
+    "probability": 0.9917534589767456
+   },
+   {
+    "label": "dumplings",
+    "probability": 0.007947188802063465
+   },
+   {
+    "label": "pancakes",
+    "probability": 7.767438364680856e-05
+   },
+   {
+    "label": "ravioli",
+    "probability": 6.514879351016134e-05
+   },
+   {
+    "label": "garlic_bread",
+    "probability": 2.0159877749392763e-05
+   }
+  ]
+ },
+ {
+  "dish": "hamburger",
+  "predictions": [
+   {
+    "label": "hamburger",
+    "probability": 0.980237603187561
+   },
+   {
+    "label": "hot_dog",
+    "probability": 0.010520928539335728
+   },
+   {
+    "label": "pulled_pork_sandwich",
+    "probability": 0.0038104678969830275
+   },
+   {
+    "label": "lobster_roll_sandwich",
+    "probability": 0.0012901105219498277
+   },
+   {
+    "label": "grilled_cheese_sandwich",
+    "probability": 0.0007428640965372324
+   }
+  ]
+ },
+ {
+  "dish": "hot_and_sour_soup",
+  "predictions": [
+   {
+    "label": "hot_and_sour_soup",
+    "probability": 0.9998687505722046
+   },
+   {
+    "label": "fried_rice",
+    "probability": 2.9352688216022216e-05
+   },
+   {
+    "label": "french_onion_soup",
+    "probability": 1.9449480532784946e-05
+   },
+   {
+    "label": "miso_soup",
+    "probability": 1.6652958947815932e-05
+   },
+   {
+    "label": "risotto",
+    "probability": 1.6035764929256402e-05
+   }
+  ]
+ },
+ {
+  "dish": "hot_dog",
+  "predictions": [
+   {
+    "label": "hot_dog",
+    "probability": 0.9982911944389343
+   },
+   {
+    "label": "hamburger",
+    "probability": 0.00025570488651283085
+   },
+   {
+    "label": "pulled_pork_sandwich",
+    "probability": 0.0001428767282050103
+   },
+   {
+    "label": "falafel",
+    "probability": 0.00011543033178895712
+   },
+   {
+    "label": "greek_salad",
+    "probability": 0.00010254697554046288
+   }
+  ]
+ },
+ {
+  "dish": "huevos_rancheros",
+  "predictions": [
+   {
+    "label": "huevos_rancheros",
+    "probability": 0.9744802713394165
+   },
+   {
+    "label": "eggs_benedict",
+    "probability": 0.005974563304334879
+   },
+   {
+    "label": "scallops",
+    "probability": 0.0045691984705626965
+   },
+   {
+    "label": "bruschetta",
+    "probability": 0.002970006549730897
+   },
+   {
+    "label": "caprese_salad",
+    "probability": 0.0013509582495316863
+   }
+  ]
+ },
+ {
+  "dish": "hummus",
+  "predictions": [
+   {
+    "label": "hummus",
+    "probability": 0.9958072900772095
+   },
+   {
+    "label": "falafel",
+    "probability": 0.0025711734779179096
+   },
+   {
+    "label": "deviled_eggs",
+    "probability": 0.00023249616788234562
+   },
+   {
+    "label": "cup_cakes",
+    "probability": 0.0001632827043067664
+   },
+   {
+    "label": "guacamole",
+    "probability": 0.0001396718726027757
+   }
+  ]
+ },
+ {
+  "dish": "ice_cream",
+  "predictions": [
+   {
+    "label": "panna_cotta",
+    "probability": 0.48113885521888733
+   },
+   {
+    "label": "ice_cream",
+    "probability": 0.30958840250968933
+   },
+   {
+    "label": "creme_brulee",
+    "probability": 0.05810235068202019
+   },
+   {
+    "label": "apple_pie",
+    "probability": 0.04913071542978287
+   },
+   {
+    "label": "baklava",
+    "probability": 0.02216590754687786
+   }
+  ]
+ },
+ {
+  "dish": "lasagna",
+  "predictions": [
+   {
+    "label": "lasagna",
+    "probability": 0.9988654851913452
+   },
+   {
+    "label": "chicken_wings",
+    "probability": 0.0001252033544005826
+   },
+   {
+    "label": "spaghetti_bolognese",
+    "probability": 0.00011249173985561356
+   },
+   {
+    "label": "apple_pie",
+    "probability": 9.329984459327534e-05
+   },
+   {
+    "label": "pizza",
+    "probability": 7.078842463670298e-05
+   }
+  ]
+ },
+ {
+  "dish": "lobster_bisque",
+  "predictions": [
+   {
+    "label": "lobster_bisque",
+    "probability": 0.9994170665740967
+   },
+   {
+    "label": "chicken_curry",
+    "probability": 0.00028737387037836015
+   },
+   {
+    "label": "shrimp_and_grits",
+    "probability": 3.216561526642181e-05
+   },
+   {
+    "label": "crab_cakes",
+    "probability": 3.1580588256474584e-05
+   },
+   {
+    "label": "foie_gras",
+    "probability": 2.815046173054725e-05
+   }
+  ]
+ },
+ {
+  "dish": "lobster_roll_sandwich",
+  "predictions": [
+   {
+    "label": "lobster_roll_sandwich",
+    "probability": 0.9998488426208496
+   },
+   {
+    "label": "hot_dog",
+    "probability": 7.44952994864434e-05
+   },
+   {
+    "label": "french_fries",
+    "probability": 3.299812306067906e-05
+   },
+   {
+    "label": "pulled_pork_sandwich",
+    "probability": 9.968889571609907e-06
+   },
+   {
+    "label": "hamburger",
+    "probability": 6.673758434772026e-06
+   }
+  ]
+ },
+ {
+  "dish": "macaroni_and_cheese",
+  "predictions": [
+   {
+    "label": "macaroni_and_cheese",
+    "probability": 0.7829217314720154
+   },
+   {
+    "label": "poutine",
+    "probability": 0.09589360654354095
+   },
+   {
+    "label": "french_fries",
+    "probability": 0.01714114099740982
+   },
+   {
+    "label": "risotto",
+    "probability": 0.016721630468964577
+   },
+   {
+    "label": "grilled_salmon",
+    "probability": 0.006911461241543293
+   }
+  ]
+ },
+ {
+  "dish": "macarons",
+  "predictions": [
+   {
+    "label": "macarons",
+    "probability": 0.9996676445007324
+   },
+   {
+    "label": "red_velvet_cake",
+    "probability": 0.00011085104779340327
+   },
+   {
+    "label": "chocolate_cake",
+    "probability": 4.869570693699643e-05
+   },
+   {
+    "label": "strawberry_shortcake",
+    "probability": 1.9826789866783656e-05
+   },
+   {
+    "label": "ice_cream",
+    "probability": 1.4701736290589906e-05
+   }
+  ]
+ },
+ {
+  "dish": "miso_soup",
+  "predictions": [
+   {
+    "label": "miso_soup",
+    "probability": 0.747456967830658
+   },
+   {
+    "label": "hot_and_sour_soup",
+    "probability": 0.18581508100032806
+   },
+   {
+    "label": "ramen",
+    "probability": 0.05002938583493233
+   },
+   {
+    "label": "french_onion_soup",
+    "probability": 0.010722034610807896
+   },
+   {
+    "label": "lobster_bisque",
+    "probability": 0.002245625713840127
+   }
+  ]
+ },
+ {
+  "dish": "mussels",
+  "predictions": [
+   {
+    "label": "mussels",
+    "probability": 0.9993757605552673
+   },
+   {
+    "label": "paella",
+    "probability": 0.00023843193775974214
+   },
+   {
+    "label": "hummus",
+    "probability": 8.886706200428307e-05
+   },
+   {
+    "label": "risotto",
+    "probability": 6.19708516751416e-05
+   },
+   {
+    "label": "lobster_bisque",
+    "probability": 3.3568492654012516e-05
+   }
+  ]
+ },
+ {
+  "dish": "nachos",
+  "predictions": [
+   {
+    "label": "nachos",
+    "probability": 0.9985173344612122
+   },
+   {
+    "label": "huevos_rancheros",
+    "probability": 0.0010646665468811989
+   },
+   {
+    "label": "french_fries",
+    "probability": 0.00012083614274160936
+   },
+   {
+    "label": "chicken_quesadilla",
+    "probability": 9.581724589224905e-05
+   },
+   {
+    "label": "guacamole",
+    "probability": 5.906232036068104e-05
+   }
+  ]
+ },
+ {
+  "dish": "omelette",
+  "predictions": [
+   {
+    "label": "omelette",
+    "probability": 0.9993388056755066
+   },
+   {
+    "label": "french_toast",
+    "probability": 0.00019610767776612192
+   },
+   {
+    "label": "carrot_cake",
+    "probability": 0.00014664929767604917
+   },
+   {
+    "label": "fried_rice",
+    "probability": 0.00013232069613877684
+   },
+   {
+    "label": "apple_pie",
+    "probability": 1.6085788956843317e-05
+   }
+  ]
+ },
+ {
+  "dish": "onion_rings",
+  "predictions": [
+   {
+    "label": "onion_rings",
+    "probability": 0.9953740239143372
+   },
+   {
+    "label": "fried_calamari",
+    "probability": 0.0040049427188932896
+   },
+   {
+    "label": "churros",
+    "probability": 0.00018376523803453892
+   },
+   {
+    "label": "hamburger",
+    "probability": 6.134824070613831e-05
+   },
+   {
+    "label": "lobster_roll_sandwich",
+    "probability": 5.173514364287257e-05
+   }
+  ]
+ },
+ {
+  "dish": "oysters",
+  "predictions": [
+   {
+    "label": "oysters",
+    "probability": 0.9995365142822266
+   },
+   {
+    "label": "mussels",
+    "probability": 0.0001753732212819159
+   },
+   {
+    "label": "scallops",
+    "probability": 2.056513767456636e-05
+   },
+   {
+    "label": "beef_tartare",
+    "probability": 1.581456854182761e-05
+   },
+   {
+    "label": "hot_and_sour_soup",
+    "probability": 1.4961342458263971e-05
+   }
+  ]
+ },
+ {
+  "dish": "pad_thai",
+  "predictions": [
+   {
+    "label": "pad_thai",
+    "probability": 0.9951466917991638
+   },
+   {
+    "label": "hot_and_sour_soup",
+    "probability": 0.0027630163822323084
+   },
+   {
+    "label": "ramen",
+    "probability": 0.00112020259257406
+   },
+   {
+    "label": "pho",
+    "probability": 0.0005189044750295579
+   },
+   {
+    "label": "carrot_cake",
+    "probability": 8.196476846933365e-05
+   }
+  ]
+ },
+ {
+  "dish": "paella",
+  "predictions": [
+   {
+    "label": "paella",
+    "probability": 0.999695897102356
+   },
+   {
+    "label": "risotto",
+    "probability": 9.842081635724753e-05
+   },
+   {
+    "label": "hummus",
+    "probability": 4.5894146751379594e-05
+   },
+   {
+    "label": "pizza",
+    "probability": 1.1783962690969929e-05
+   },
+   {
+    "label": "chocolate_cake",
+    "probability": 8.434502888121642e-06
+   }
+  ]
+ },
+ {
+  "dish": "pancakes",
+  "predictions": [
+   {
+    "label": "pancakes",
+    "probability": 0.9952352643013
+   },
+   {
+    "label": "grilled_cheese_sandwich",
+    "probability": 0.0015270033618435264
+   },
+   {
+    "label": "french_toast",
+    "probability": 0.0003574885195121169
+   },
+   {
+    "label": "carrot_cake",
+    "probability": 0.0003515858843456954
+   },
+   {
+    "label": "clam_chowder",
+    "probability": 0.0003508552326820791
+   }
+  ]
+ },
+ {
+  "dish": "panna_cotta",
+  "predictions": [
+   {
+    "label": "panna_cotta",
+    "probability": 0.7140271067619324
+   },
+   {
+    "label": "creme_brulee",
+    "probability": 0.20858632028102875
+   },
+   {
+    "label": "chocolate_mousse",
+    "probability": 0.05133824050426483
+   },
+   {
+    "label": "tiramisu",
+    "probability": 0.010560121387243271
+   },
+   {
+    "label": "cheesecake",
+    "probability": 0.006676066666841507
+   }
+  ]
+ },
+ {
+  "dish": "peking_duck",
+  "predictions": [
+   {
+    "label": "peking_duck",
+    "probability": 0.997672975063324
+   },
+   {
+    "label": "pho",
+    "probability": 0.0010167681612074375
+   },
+   {
+    "label": "bibimbap",
+    "probability": 0.0002670687681529671
+   },
+   {
+    "label": "pad_thai",
+    "probability": 0.0002616762649267912
+   },
+   {
+    "label": "ramen",
+    "probability": 0.0001161606633104384
+   }
+  ]
+ },
+ {
+  "dish": "pho",
+  "predictions": [
+   {
+    "label": "ramen",
+    "probability": 0.7229644060134888
+   },
+   {
+    "label": "pad_thai",
+    "probability": 0.10102058202028275
+   },
+   {
+    "label": "pho",
+    "probability": 0.069407157599926
+   },
+   {
+    "label": "hot_and_sour_soup",
+    "probability": 0.021916639059782028
+   },
+   {
+    "label": "miso_soup",
+    "probability": 0.02033988945186138
+   }
+  ]
+ },
+ {
+  "dish": "pizza",
+  "predictions": [
+   {
+    "label": "pizza",
+    "probability": 0.993989109992981
+   },
+   {
+    "label": "shrimp_and_grits",
+    "probability": 0.0018221222562715411
+   },
+   {
+    "label": "huevos_rancheros",
+    "probability": 0.0010479794582352042
+   },
+   {
+    "label": "omelette",
+    "probability": 0.0008196437847800553
+   },
+   {
+    "label": "apple_pie",
+    "probability": 0.0005528244655579329
+   }
+  ]
+ },
+ {
+  "dish": "pork_chop",
+  "predictions": [
+   {
+    "label": "steak",
+    "probability": 0.47730952501296997
+   },
+   {
+    "label": "pork_chop",
+    "probability": 0.25673961639404297
+   },
+   {
+    "label": "filet_mignon",
+    "probability": 0.15986959636211395
+   },
+   {
+    "label": "grilled_salmon",
+    "probability": 0.057549651712179184
+   },
+   {
+    "label": "beef_tartare",
+    "probability": 0.01608101651072502
+   }
+  ]
+ },
+ {
+  "dish": "poutine",
+  "predictions": [
+   {
+    "label": "poutine",
+    "probability": 0.9999797344207764
+   },
+   {
+    "label": "french_fries",
+    "probability": 7.779027328069787e-06
+   },
+   {
+    "label": "waffles",
+    "probability": 1.8515827377996175e-06
+   },
+   {
+    "label": "churros",
+    "probability": 1.0927932407867047e-06
+   },
+   {
+    "label": "hamburger",
+    "probability": 6.591238843611791e-07
+   }
+  ]
+ },
+ {
+  "dish": "prime_rib",
+  "predictions": [
+   {
+    "label": "prime_rib",
+    "probability": 0.9938321113586426
+   },
+   {
+    "label": "steak",
+    "probability": 0.004117337986826897
+   },
+   {
+    "label": "pulled_pork_sandwich",
+    "probability": 0.0004840837209485471
+   },
+   {
+    "label": "ramen",
+    "probability": 0.0004367415385786444
+   },
+   {
+    "label": "pork_chop",
+    "probability": 0.0003518438898026943
+   }
+  ]
+ },
+ {
+  "dish": "pulled_pork_sandwich",
+  "predictions": [
+   {
+    "label": "pulled_pork_sandwich",
+    "probability": 0.5560027956962585
+   },
+   {
+    "label": "baklava",
+    "probability": 0.3553371727466583
+   },
+   {
+    "label": "apple_pie",
+    "probability": 0.023506149649620056
+   },
+   {
+    "label": "eggs_benedict",
+    "probability": 0.013758509419858456
+   },
+   {
+    "label": "donuts",
+    "probability": 0.010457643307745457
+   }
+  ]
+ },
+ {
+  "dish": "ramen",
+  "predictions": [
+   {
+    "label": "ramen",
+    "probability": 0.8343775272369385
+   },
+   {
+    "label": "pho",
+    "probability": 0.027603210881352425
+   },
+   {
+    "label": "caesar_salad",
+    "probability": 0.026004167273640633
+   },
+   {
+    "label": "escargots",
+    "probability": 0.02175687626004219
+   },
+   {
+    "label": "miso_soup",
+    "probability": 0.015606682747602463
+   }
+  ]
+ },
+ {
+  "dish": "ravioli",
+  "predictions": [
+   {
+    "label": "ravioli",
+    "probability": 0.4828876852989197
+   },
+   {
+    "label": "dumplings",
+    "probability": 0.4293319284915924
+   },
+   {
+    "label": "oysters",
+    "probability": 0.030838023871183395
+   },
+   {
+    "label": "samosa",
+    "probability": 0.008949737064540386
+   },
+   {
+    "label": "beignets",
+    "probability": 0.00640063313767314
+   }
+  ]
+ },
+ {
+  "dish": "red_velvet_cake",
+  "predictions": [
+   {
+    "label": "red_velvet_cake",
+    "probability": 0.9998493194580078
+   },
+   {
+    "label": "cup_cakes",
+    "probability": 0.00011290740803815424
+   },
+   {
+    "label": "strawberry_shortcake",
+    "probability": 1.4122061656962615e-05
+   },
+   {
+    "label": "chocolate_cake",
+    "probability": 5.118341505294666e-06
+   },
+   {
+    "label": "tiramisu",
+    "probability": 2.8041704354109243e-06
+   }
+  ]
+ },
+ {
+  "dish": "risotto",
+  "predictions": [
+   {
+    "label": "shrimp_and_grits",
+    "probability": 0.78044193983078
+   },
+   {
+    "label": "risotto",
+    "probability": 0.21809865534305573
+   },
+   {
+    "label": "scallops",
+    "probability": 0.001032574917189777
+   },
+   {
+    "label": "ravioli",
+    "probability": 7.996820932021365e-05
+   },
+   {
+    "label": "omelette",
+    "probability": 5.69889962207526e-05
+   }
+  ]
+ },
+ {
+  "dish": "samosa",
+  "predictions": [
+   {
+    "label": "samosa",
+    "probability": 0.9940813183784485
+   },
+   {
+    "label": "gyoza",
+    "probability": 0.003386829514056444
+   },
+   {
+    "label": "dumplings",
+    "probability": 0.0012597081949934363
+   },
+   {
+    "label": "baklava",
+    "probability": 0.00024845622829161584
+   },
+   {
+    "label": "beignets",
+    "probability": 0.0001590707979630679
+   }
+  ]
+ },
+ {
+  "dish": "sashimi",
+  "predictions": [
+   {
+    "label": "sushi",
+    "probability": 0.4096386432647705
+   },
+   {
+    "label": "sashimi",
+    "probability": 0.2526540160179138
+   },
+   {
+    "label": "scallops",
+    "probability": 0.11873731017112732
+   },
+   {
+    "label": "oysters",
+    "probability": 0.09399665147066116
+   },
+   {
+    "label": "foie_gras",
+    "probability": 0.04193856939673424
+   }
+  ]
+ },
+ {
+  "dish": "scallops",
+  "predictions": [
+   {
+    "label": "scallops",
+    "probability": 0.9999380111694336
+   },
+   {
+    "label": "filet_mignon",
+    "probability": 1.4947283489163965e-05
+   },
+   {
+    "label": "grilled_salmon",
+    "probability": 8.302477908728179e-06
+   },
+   {
+    "label": "steak",
+    "probability": 5.340286861610366e-06
+   },
+   {
+    "label": "sushi",
+    "probability": 4.190708295936929e-06
+   }
+  ]
+ },
+ {
+  "dish": "seaweed_salad",
+  "predictions": [
+   {
+    "label": "seaweed_salad",
+    "probability": 0.9992629885673523
+   },
+   {
+    "label": "tuna_tartare",
+    "probability": 0.00011744510265998542
+   },
+   {
+    "label": "ramen",
+    "probability": 8.467824227409437e-05
+   },
+   {
+    "label": "miso_soup",
+    "probability": 2.3700013116467744e-05
+   },
+   {
+    "label": "sushi",
+    "probability": 2.316765494470019e-05
+   }
+  ]
+ },
+ {
+  "dish": "shrimp_and_grits",
+  "predictions": [
+   {
+    "label": "shrimp_and_grits",
+    "probability": 0.9997343420982361
+   },
+   {
+    "label": "hot_and_sour_soup",
+    "probability": 4.7429326514247805e-05
+   },
+   {
+    "label": "ravioli",
+    "probability": 4.320128937251866e-05
+   },
+   {
+    "label": "risotto",
+    "probability": 1.813349263102282e-05
+   },
+   {
+    "label": "pad_thai",
+    "probability": 1.4319239198812284e-05
+   }
+  ]
+ },
+ {
+  "dish": "spaghetti_bolognese",
+  "predictions": [
+   {
+    "label": "spaghetti_bolognese",
+    "probability": 0.9991574287414551
+   },
+   {
+    "label": "spaghetti_carbonara",
+    "probability": 0.0003471338131930679
+   },
+   {
+    "label": "lobster_bisque",
+    "probability": 3.4701548429438844e-05
+   },
+   {
+    "label": "waffles",
+    "probability": 3.3045318559743464e-05
+   },
+   {
+    "label": "lasagna",
+    "probability": 3.1285126169677824e-05
+   }
+  ]
+ },
+ {
+  "dish": "spaghetti_carbonara",
+  "predictions": [
+   {
+    "label": "spaghetti_carbonara",
+    "probability": 0.9994451403617859
+   },
+   {
+    "label": "spaghetti_bolognese",
+    "probability": 0.00040298691601492465
+   },
+   {
+    "label": "macaroni_and_cheese",
+    "probability": 2.2176478523761034e-05
+   },
+   {
+    "label": "waffles",
+    "probability": 9.960361239791382e-06
+   },
+   {
+    "label": "pho",
+    "probability": 6.638929789914982e-06
+   }
+  ]
+ },
+ {
+  "dish": "spring_rolls",
+  "predictions": [
+   {
+    "label": "spring_rolls",
+    "probability": 0.9944968819618225
+   },
+   {
+    "label": "peking_duck",
+    "probability": 0.003586685052141547
+   },
+   {
+    "label": "samosa",
+    "probability": 0.000334820564603433
+   },
+   {
+    "label": "pancakes",
+    "probability": 0.00025666895089671016
+   },
+   {
+    "label": "caesar_salad",
+    "probability": 0.00015423410513903946
+   }
+  ]
+ },
+ {
+  "dish": "steak",
+  "predictions": [
+   {
+    "label": "steak",
+    "probability": 0.9043867588043213
+   },
+   {
+    "label": "prime_rib",
+    "probability": 0.07395318895578384
+   },
+   {
+    "label": "filet_mignon",
+    "probability": 0.006760649383068085
+   },
+   {
+    "label": "pork_chop",
+    "probability": 0.005324589088559151
+   },
+   {
+    "label": "pizza",
+    "probability": 0.0009895408293232322
+   }
+  ]
+ },
+ {
+  "dish": "strawberry_shortcake",
+  "predictions": [
+   {
+    "label": "strawberry_shortcake",
+    "probability": 0.999656081199646
+   },
+   {
+    "label": "cheesecake",
+    "probability": 0.0002608821669127792
+   },
+   {
+    "label": "red_velvet_cake",
+    "probability": 2.2928388716536574e-05
+   },
+   {
+    "label": "pancakes",
+    "probability": 1.1835289114969783e-05
+   },
+   {
+    "label": "tiramisu",
+    "probability": 1.0851196748262737e-05
+   }
+  ]
+ },
+ {
+  "dish": "sushi",
+  "predictions": [
+   {
+    "label": "sushi",
+    "probability": 0.8028523325920105
+   },
+   {
+    "label": "sashimi",
+    "probability": 0.19660337269306183
+   },
+   {
+    "label": "seaweed_salad",
+    "probability": 8.52972298162058e-05
+   },
+   {
+    "label": "scallops",
+    "probability": 6.81873643770814e-05
+   },
+   {
+    "label": "edamame",
+    "probability": 5.0645492592593655e-05
+   }
+  ]
+ },
+ {
+  "dish": "tacos",
+  "predictions": [
+   {
+    "label": "tacos",
+    "probability": 0.9377386569976807
+   },
+   {
+    "label": "falafel",
+    "probability": 0.015456870198249817
+   },
+   {
+    "label": "beef_carpaccio",
+    "probability": 0.005735668819397688
+   },
+   {
+    "label": "bruschetta",
+    "probability": 0.005170253571122885
+   },
+   {
+    "label": "samosa",
+    "probability": 0.004772229120135307
+   }
+  ]
+ },
+ {
+  "dish": "takoyaki",
+  "predictions": [
+   {
+    "label": "takoyaki",
+    "probability": 0.9997639060020447
+   },
+   {
+    "label": "gnocchi",
+    "probability": 0.00015962276665959507
+   },
+   {
+    "label": "crab_cakes",
+    "probability": 6.490871328423964e-06
+   },
+   {
+    "label": "tacos",
+    "probability": 5.36556399310939e-06
+   },
+   {
+    "label": "gyoza",
+    "probability": 5.212717496760888e-06
+   }
+  ]
+ },
+ {
+  "dish": "tiramisu",
+  "predictions": [
+   {
+    "label": "lasagna",
+    "probability": 0.30497023463249207
+   },
+   {
+    "label": "tiramisu",
+    "probability": 0.2919304072856903
+   },
+   {
+    "label": "baklava",
+    "probability": 0.09498956799507141
+   },
+   {
+    "label": "apple_pie",
+    "probability": 0.06606611609458923
+   },
+   {
+    "label": "bread_pudding",
+    "probability": 0.045892927795648575
+   }
+  ]
+ },
+ {
+  "dish": "tuna_tartare",
+  "predictions": [
+   {
+    "label": "tuna_tartare",
+    "probability": 0.9151230454444885
+   },
+   {
+    "label": "guacamole",
+    "probability": 0.07669439911842346
+   },
+   {
+    "label": "ceviche",
+    "probability": 0.004372935276478529
+   },
+   {
+    "label": "huevos_rancheros",
+    "probability": 0.0011330978013575077
+   },
+   {
+    "label": "chicken_quesadilla",
+    "probability": 0.001009813160635531
+   }
+  ]
+ },
+ {
+  "dish": "waffles",
+  "predictions": [
+   {
+    "label": "waffles",
+    "probability": 0.9760988354682922
+   },
+   {
+    "label": "apple_pie",
+    "probability": 0.0208207406103611
+   },
+   {
+    "label": "french_fries",
+    "probability": 0.0005595484399236739
+   },
+   {
+    "label": "baklava",
+    "probability": 0.0003699096560012549
+   },
+   {
+    "label": "cheesecake",
+    "probability": 0.0003002770245075226
+   }
+  ]
+ }
+]

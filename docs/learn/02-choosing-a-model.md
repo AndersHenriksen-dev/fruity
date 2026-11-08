@@ -62,6 +62,14 @@ Final numbers: 91.66% on test and 88.13% on validation. Test scores are usually 
 
 So validation is scored on messier data. The likely conclusion, not proven, is that a noisy label costs points even when the model is right. Real uploads may be messier than the test set too, so 91.66% is not a promise about photos from a phone.
 
+## On photos from outside the dataset
+
+A test set from the same source as the training data can flatter a model, because both share the same photographers, cameras and styles. So the model was also run on one openly licensed photo per dish from Wikimedia Commons. It named 90 of the 101 right and had the right dish in its top 5 for 100. Its mistakes are close calls, such as filet mignon taken for steak, pho for ramen and sashimi for sushi. With one photo per dish, that 89% could be 6 points either way, so it is a rough check that the model works on photos it has never seen the like of, not a second test score. The details are in [evals/PHOTOS.md](../../evals/PHOTOS.md).
+
+The same photos make the model's features visible. Placing every dish by how alike the model finds it groups desserts, soups, salads and fried food, though nobody told it those groups exist:
+
+![All 101 dishes placed by how alike the model finds them](../images/visuals/dish_map.jpg)
+
 ## In this repo
 
 - [decisions.md](../decisions.md): entries 1 to 6, the choices above with their reasons.
@@ -69,3 +77,4 @@ So validation is scored on messier data. The likely conclusion, not proven, is t
 - [selection.py](../../src/fruity/lib/evaluation/selection.py): the rule as code.
 - [finalize.py](../../src/fruity/lib/evaluation/finalize.py): how the test set is guarded. `evals/final.json` is the lock.
 - [sweep.yml](../../src/fruity/config/training/sweep.yml): the sweep.
+- [visuals/draw.py](../../src/fruity/lib/visuals/draw.py): the photo results, the gallery, where it looks, and the map.

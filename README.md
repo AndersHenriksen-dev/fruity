@@ -17,12 +17,27 @@ This is a fork of [wdmdev/fruity](https://github.com/wdmdev/fruity), my group pr
 | Test accuracy, `convnext_tiny` as ONNX | 91.66% top-1, 98.78% top-5 | [evals/FINAL.md](evals/FINAL.md) |
 | Validation accuracy, same model | 88.13% top-1 | [evals/FINAL.md](evals/FINAL.md) |
 | Without deep learning, same validation images | 12.84% top-1 | [evals/BASELINES.md](evals/BASELINES.md) |
+| Photos from outside Food-101, one per dish | 90 of 101 right, 100 of 101 in the top 5 | [evals/PHOTOS.md](evals/PHOTOS.md) |
 | Steady load, 10 users for 20 hours | 7.0 requests per second, p95 1,000 ms, 0 failures | [evals/LOAD.md](evals/LOAD.md) |
 | One API replica at 0.5 vCPU | about 3 requests per second before requests queue | [evals/LOAD.md](evals/LOAD.md) |
 | Cold start, from zero replicas to an answer | median 47.9 seconds | [evals/LOAD.md](evals/LOAD.md) |
 | Memory over the steady load | 43% of the limit in the first hour and the last, so no leak | [evals/CLOUD.md](evals/CLOUD.md) |
 
 The model was chosen by a rule committed before any results existed: the smallest model within 3 points of the best on validation. It picked `convnext_tiny` over `convnext_large`, which is 7 times larger for 2 more points. [docs/decisions.md](docs/decisions.md) has the reasons behind this and every other choice.
+
+## What the model sees
+
+None of these photos is from Food-101. They are one openly licensed photo per dish from Wikimedia Commons, credited in [docs/images/photos/CREDITS.md](docs/images/photos/CREDITS.md), and the model named 90 of the 101 right. The gallery shows every ninth dish, so the sample was not picked by how well it did:
+
+![Twelve food photos, each with the model's three first answers and their probabilities](docs/images/visuals/gallery.jpg)
+
+Where it looks: each photo beside a copy that stays bright only where covering that part of the photo made the model less sure of the right dish. It mostly looks at the food, but the waffles show it also uses the background:
+
+![Four food photos beside copies lit where covering the photo lowered the model's confidence](docs/images/visuals/where_it_looks.jpg)
+
+A map of all 101 dishes, placed by how alike the model finds them, from its features on the validation images. Nobody told it which dishes belong together, yet desserts, soups and pasta, salads, and fried food each end up in their own region:
+
+![All 101 dishes as photos on a grid, with similar dishes next to each other](docs/images/visuals/dish_map.jpg)
 
 ## How it fits together
 
@@ -76,7 +91,7 @@ Training needs Food-101 and a GPU: `uv run fruity train experiment=convnext_tiny
 
 ## Limits
 
-- It is a food classifier with 101 classes. Real photos may score below the test set, whose images were reviewed by hand.
+- It is a food classifier with 101 classes. On 101 photos from outside the dataset it got 89% right, but one photo per dish is a rough check, good to about 6 points either way.
 - The load test is small, from one machine. It says nothing about much larger traffic.
 - The service ran for 24 hours and is not live now. The demo can be brought back with the steps in `infra/README.md`.
 - There is no drift detection, so the service would not notice if its inputs changed.

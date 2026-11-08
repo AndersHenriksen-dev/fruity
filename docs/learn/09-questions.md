@@ -75,6 +75,9 @@ The replica is full. More users only make requests wait longer: p95 went from 1.
 **21. Why raise the rate limit for the load test?**
 Otherwise the test measures the limit: most requests get refused quickly, which looks like speed.
 
+**22. The waffle photo's map lights up the background. Is the method broken?**
+Not necessarily. Covering part of the background really did lower the model's confidence, so the model uses more than the food. Models often learn from plates, tables and lighting that go with a dish, which is one reason photos from elsewhere can score lower.
+
 ## Exercises
 
 1. **Move the threshold.** Change `margin` in `compare.yaml` to 0.01, run `uv run fruity compare`, and read which model wins. Then undo it. Do not rerun `fruity finalize`.
