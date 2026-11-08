@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 820" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">The group project in 2024 and this fork now</title>
+  <desc id="desc">A side by side comparison. Data: a custom split at 100 by 100 pixels then, the official split at 224 pixels now. Model: one model at about 76 percent then, four compared by a fixed rule now. Serving: PyTorch then, ONNX Runtime with a pinned release now. Cloud: Google Cloud then, Azure in Terraform with spending limits now. CI: tests and formatting then, plus types, image builds, Terraform tests and a secret scan now. Monitoring: not done then, alerts, a dashboard and a 24 hour run now.</desc>
+  <rect width="640" height="820" fill="#0d1114"/>
+
+  <text x="20" y="36" fill="#a7b3c2" font-size="14">The group project, 2024</text>
+  <text x="330" y="36" fill="#81a8d6" font-size="14" font-weight="600">This fork, 2026</text>
+  <line x1="20" y1="50" x2="620" y2="50" stroke="#3a4656"/>
+
+  <g font-size="14">
+    <text x="20" y="80" fill="#e4eaf2" font-weight="600">Data</text>
+    <rect x="20" y="90" width="290" height="70" rx="8" fill="#151a20" stroke="#3a4656"/>
+    <text x="34" y="118" fill="#a7b3c2">Food-101 at 100 by 100 pixels,</text>
+    <text x="34" y="140" fill="#a7b3c2">with our own split</text>
+    <rect x="330" y="90" width="290" height="70" rx="8" fill="#1b2129" stroke="#81a8d6"/>
+    <text x="344" y="118" fill="#e4eaf2">Official split at 224 pixels,</text>
+    <text x="344" y="140" fill="#e4eaf2">test set read once</text>
+
+    <text x="20" y="194" fill="#e4eaf2" font-weight="600">Model</text>
+    <rect x="20" y="204" width="290" height="70" rx="8" fill="#151a20" stroke="#3a4656"/>
+    <text x="34" y="232" fill="#a7b3c2">One model, about 76%,</text>
+    <text x="34" y="254" fill="#a7b3c2">on that split</text>
+    <rect x="330" y="204" width="290" height="70" rx="8" fill="#1b2129" stroke="#81a8d6"/>
+    <text x="344" y="232" fill="#e4eaf2">4 models and a sweep, chosen</text>
+    <text x="344" y="254" fill="#e4eaf2">by a rule; beside baselines</text>
+
+    <text x="20" y="308" fill="#e4eaf2" font-weight="600">Serving</text>
+    <rect x="20" y="318" width="290" height="70" rx="8" fill="#151a20" stroke="#3a4656"/>
+    <text x="34" y="346" fill="#a7b3c2">FastAPI and Streamlit,</text>
+    <text x="34" y="368" fill="#a7b3c2">with PyTorch</text>
+    <rect x="330" y="318" width="290" height="70" rx="8" fill="#1b2129" stroke="#81a8d6"/>
+    <text x="344" y="346" fill="#e4eaf2">ONNX Runtime, no PyTorch;</text>
+    <text x="344" y="368" fill="#e4eaf2">model pinned by checksum</text>
+
+    <text x="20" y="422" fill="#e4eaf2" font-weight="600">Cloud</text>
+    <rect x="20" y="432" width="290" height="70" rx="8" fill="#151a20" stroke="#3a4656"/>
+    <text x="34" y="460" fill="#a7b3c2">Google Cloud, with data</text>
+    <text x="34" y="482" fill="#a7b3c2">and models in DVC</text>
+    <rect x="330" y="432" width="290" height="70" rx="8" fill="#1b2129" stroke="#81a8d6"/>
+    <text x="344" y="460" fill="#e4eaf2">Azure in Terraform, 24 hours,</text>
+    <text x="344" y="482" fill="#e4eaf2">with built-in spending limits</text>
+
+    <text x="20" y="536" fill="#e4eaf2" font-weight="600">CI</text>
+    <rect x="20" y="546" width="290" height="70" rx="8" fill="#151a20" stroke="#3a4656"/>
+    <text x="34" y="574" fill="#a7b3c2">Tests and formatting</text>
+    <rect x="330" y="546" width="290" height="70" rx="8" fill="#1b2129" stroke="#81a8d6"/>
+    <text x="344" y="574" fill="#e4eaf2">Plus types, image builds,</text>
+    <text x="344" y="596" fill="#e4eaf2">Terraform tests, secret scan</text>
+
+    <text x="20" y="650" fill="#e4eaf2" font-weight="600">Monitoring</text>
+    <rect x="20" y="660" width="290" height="70" rx="8" fill="#151a20" stroke="#3a4656"/>
+    <text x="34" y="688" fill="#a7b3c2">Not done</text>
+    <rect x="330" y="660" width="290" height="70" rx="8" fill="#1b2129" stroke="#81a8d6"/>
+    <text x="344" y="688" fill="#e4eaf2">3 alerts, a dashboard,</text>
+    <text x="344" y="710" fill="#e4eaf2">a 20-hour load and cold starts</text>
+  </g>
+
+  <text x="20" y="780" fill="#a7b3c2" font-size="13">The 2024 version is tagged dtu-2024. Both columns use</text>
+  <text x="20" y="800" fill="#a7b3c2" font-size="13">Hydra and Weights &amp; Biases.</text>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 830" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Architecture of the service on Azure</title>
+  <desc id="desc">A visitor from an allowed address reaches a demo page and an API in an Azure Container Apps environment. The demo page calls the API. Azure Monitor and Log Analytics watch the apps and email alerts. A kill switch runbook removes the apps after 24 hours or at half the budget. GitHub holds the images, the model release and the deploy workflow.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#81a8d6"/>
+    </marker>
+  </defs>
+  <rect width="640" height="830" fill="#0d1114"/>
+
+  <rect x="190" y="20" width="260" height="50" rx="8" fill="#1b2129" stroke="#81a8d6" stroke-width="1.5"/>
+  <text x="320" y="51" fill="#e4eaf2" font-size="16" text-anchor="middle">You, from an allowed address</text>
+  <line x1="320" y1="70" x2="320" y2="143" stroke="#81a8d6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="330" y="98" fill="#a7b3c2" font-size="13">HTTPS</text>
+
+  <rect x="20" y="110" width="600" height="460" rx="10" fill="none" stroke="#3a4656" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="34" y="132" fill="#a7b3c2" font-size="13">Azure, one resource group</text>
+
+  <rect x="40" y="145" width="560" height="170" rx="8" fill="#151a20" stroke="#3a4656"/>
+  <text x="56" y="168" fill="#a7b3c2" font-size="13">Container Apps environment</text>
+  <rect x="60" y="182" width="225" height="112" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="172" y="214" fill="#e4eaf2" font-size="16" text-anchor="middle" font-weight="600">Demo page</text>
+  <text x="172" y="240" fill="#a7b3c2" font-size="14" text-anchor="middle">Streamlit</text>
+  <text x="172" y="264" fill="#a7b3c2" font-size="14" text-anchor="middle">0.25 vCPU, 1 replica</text>
+  <rect x="355" y="182" width="225" height="112" rx="8" fill="#1b2129" stroke="#81a8d6" stroke-width="1.5"/>
+  <text x="467" y="214" fill="#e4eaf2" font-size="16" text-anchor="middle" font-weight="600">API</text>
+  <text x="467" y="240" fill="#a7b3c2" font-size="14" text-anchor="middle">FastAPI, ONNX Runtime</text>
+  <text x="467" y="264" fill="#a7b3c2" font-size="14" text-anchor="middle">0.5 vCPU, 0 to 2 replicas</text>
+  <line x1="285" y1="238" x2="353" y2="238" stroke="#81a8d6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="345" width="560" height="78" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="320" y="374" fill="#e4eaf2" font-size="16" text-anchor="middle" font-weight="600">Kill switch: Automation runbook</text>
+  <text x="320" y="400" fill="#a7b3c2" font-size="14" text-anchor="middle">runs at 24 hours, or at half the budget</text>
+  <line x1="320" y1="345" x2="320" y2="317" stroke="#a7b3c2" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="330" y="337" fill="#a7b3c2" font-size="13">removes the apps</text>
+
+  <rect x="40" y="448" width="270" height="100" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="175" y="482" fill="#e4eaf2" font-size="16" text-anchor="middle" font-weight="600">Azure Monitor</text>
+  <text x="175" y="508" fill="#a7b3c2" font-size="14" text-anchor="middle">3 alerts, a dashboard</text>
+  <rect x="330" y="448" width="270" height="100" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="465" y="482" fill="#e4eaf2" font-size="16" text-anchor="middle" font-weight="600">Log Analytics</text>
+  <text x="465" y="508" fill="#a7b3c2" font-size="14" text-anchor="middle">capped at 0.2 GB a day</text>
+  <path d="M30,238 L30,498 L38,498" fill="none" stroke="#81a8d6" stroke-width="1.5"/>
+  <line x1="30" y1="238" x2="40" y2="238" stroke="#81a8d6" stroke-width="1.5"/>
+  <text x="0" y="0" fill="#a7b3c2" font-size="12" transform="translate(24,470) rotate(-90)">metrics</text>
+  <path d="M610,238 L610,498 L602,498" fill="none" stroke="#81a8d6" stroke-width="1.5"/>
+  <line x1="600" y1="238" x2="610" y2="238" stroke="#81a8d6" stroke-width="1.5"/>
+  <text x="0" y="0" fill="#a7b3c2" font-size="12" transform="translate(622,410) rotate(90)">logs</text>
+
+  <line x1="175" y1="548" x2="175" y2="608" stroke="#81a8d6" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="80" y="610" width="190" height="46" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="175" y="639" fill="#e4eaf2" font-size="15" text-anchor="middle">Email to me</text>
+
+  <line x1="465" y1="688" x2="465" y2="572" stroke="#81a8d6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="475" y="620" fill="#a7b3c2" font-size="13">images pulled,</text>
+  <text x="475" y="638" fill="#a7b3c2" font-size="13">Terraform applied</text>
+
+  <rect x="20" y="690" width="600" height="120" rx="10" fill="none" stroke="#3a4656" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="34" y="712" fill="#a7b3c2" font-size="13">GitHub</text>
+  <rect x="36" y="722" width="182" height="74" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="127" y="752" fill="#e4eaf2" font-size="15" text-anchor="middle">Container Registry</text>
+  <text x="127" y="776" fill="#a7b3c2" font-size="13" text-anchor="middle">both images</text>
+  <rect x="229" y="722" width="182" height="74" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="320" y="752" fill="#e4eaf2" font-size="15" text-anchor="middle">Release</text>
+  <text x="320" y="776" fill="#a7b3c2" font-size="13" text-anchor="middle">model.onnx, SHA-256</text>
+  <rect x="422" y="722" width="182" height="74" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="513" y="752" fill="#e4eaf2" font-size="15" text-anchor="middle">Actions</text>
+  <text x="513" y="776" fill="#a7b3c2" font-size="13" text-anchor="middle">signs in without a key</text>
+</svg>

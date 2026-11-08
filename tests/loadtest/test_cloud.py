@@ -59,6 +59,7 @@ def folder(tmp_path: Path) -> Path:
 
 def test_the_report_comes_from_the_saved_files(folder: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(cloud.CONFIG, "apps", ["fruity-api"])
+    monkeypatch.setattr(cloud.CONFIG, "sizes", {"fruity-api": cloud.AppSize(vcpu=0.5, memory_gib=1.0)})
     monkeypatch.setattr("sys.argv", ["fruity", "cloud-report", "--folder", str(folder)])
     cli.main()
     report = (folder / "CLOUD.md").read_text(encoding="utf-8")
@@ -66,6 +67,7 @@ def test_the_report_comes_from_the_saved_files(folder: Path, monkeypatch: pytest
     assert "2 replicas in 12 of 13 steps" in report
     assert "40% of the limit in the first hour and 40% in the last" in report
     assert "| `fruity-api-slow-answers` | Sev2 | 2026-11-06 12:20 | 2026-11-06 12:30 |" in report
+    assert "| vCPU-seconds | 4,200 | 180,000 | 2% |" in report
     assert (folder / "cloud_metrics.png").stat().st_size > 0
 
 

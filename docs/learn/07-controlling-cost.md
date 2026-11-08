@@ -49,6 +49,14 @@ Nothing here makes a higher bill strictly impossible, and it is better to say th
 
 Azure bills in the account's currency, so a budget amount is in that currency too. The 60 here means DKK, about USD 9.
 
+## What the run cost
+
+The service ran from 2026-11-06 12:00 to 2026-11-07 11:36 UTC. The timer fired on schedule at 11:13 and the runbook removed the apps, so the last layer was never needed.
+
+**The final cost is not known yet.** Azure reports some services days late, and it had not reported the Container Apps usage, the part that ran the compute, when the project was finished. Everything it had reported, from storage, logs, alert rules and the kill switch, came to 0.0009 DKK.
+
+[evals/CLOUD.md](../../evals/CLOUD.md) estimates the compute from the replica history: about 53% of the monthly free grant for vCPU and memory, and 25% of the free requests. So the compute is expected to cost nothing. That stays an estimate until Azure's own figure arrives, and this page gets updated then.
+
 ## Why the deployment is temporary
 
 The service runs for a known window, the evidence gets recorded, and it comes down. That costs the live demo link, but gives a bill you can bound in advance. The results stay, and one command can bring it back.
