@@ -1,0 +1,18 @@
+# Read by lib/visuals/draw.py: what the graphics show, and where they and their numbers go
+model_path: models/model.onnx
+labels_path: models/labels.json
+image_size: 224
+# Every n-th dish in alphabetical order, so the sample is not picked by how well the model does.
+gallery_every: 9
+gallery_columns: 4
+occlusion_dishes: [pizza, sushi, waffles, eggs_benedict]
+occlusion_patch: 56
+occlusion_stride: 8
+map_columns: 11
+map_rows: 10
+map_thumb: 104
+map_perplexity: 15
+features_cache: outputs/visuals/validation_features.npz
+results_path: evals/real_photos.json
+report_path: evals/PHOTOS.md
+image_dir: docs/images/visuals

@@ -27,6 +27,8 @@ def main() -> None:
     commands.add_parser("finalize", help="fix the final model and score it on the test set, once")
     commands.add_parser("fetch", help="download the published model and verify its checksums")
     commands.add_parser("baselines", help="measure methods without deep learning, to compare the model with")
+    visuals = commands.add_parser("visuals", help="score the model on openly licensed photos and draw the graphics")
+    visuals.add_argument("--fetch", action="store_true", help="first download the photos from Wikimedia Commons")
 
     loadtest = commands.add_parser("loadtest", help="measure this project's own service under load")
     loadtest.add_argument("--host", required=True, help="the service's URL")
@@ -53,6 +55,10 @@ def main() -> None:
         from fruity.lib.evaluation.finalize import main as finalize
 
         finalize()
+    elif args.command == "visuals":
+        from fruity.lib.visuals.draw import main as draw_visuals
+
+        draw_visuals(args.fetch)
     elif args.command == "baselines":
         from fruity.lib.evaluation.baselines import main as measure_baselines
 

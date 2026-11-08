@@ -11,6 +11,7 @@ uv run fruity train experiment=convnext_tiny   # train; Hydra overrides follow
 uv run fruity compare                # measure the trained models, choose one, write evals/RESULTS.md
 uv run fruity finalize               # fix the final model, score it on the test set once, write evals/FINAL.md
 uv run fruity baselines              # score methods without deep learning on the same validation images, write evals/BASELINES.md
+uv run fruity visuals --fetch         # photos from Wikimedia Commons, scored by the model; writes the gallery, maps and evals/PHOTOS.md
 uv run fruity fetch                  # download the published model to models/ and verify its checksums
 uv run fruity serve                  # serve the model on http://127.0.0.1:8000
 uv run fruity predict photo.jpg      # name the food in one image
@@ -64,6 +65,7 @@ src/fruity/
 |   |-- serving/           the HTTP API
 |   |-- frontend/          the demo page
 |   |-- loadtest/          measuring the running service under load
+|   |-- visuals/           graphics from openly licensed photos and the model
 |   `-- shared/            what they all use: nothing here imports them
 `-- config/                the same subfolders as lib/: serving/api.py reads serving/api.yaml
 tests/                     the same subfolders again
