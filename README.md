@@ -6,7 +6,7 @@ A food image classifier that I trained, packaged, ran on Azure for 24 hours and 
 - **507,121 requests with 0 failures** in a 20-hour steady load on Azure Container Apps, with the API scaling between 0 and 2 replicas.
 - **A cost limit built into the infrastructure**, because Azure has no spending limit for this subscription type: replica caps, a kill switch on a 24-hour timer, an address allowlist and a budget. The timer removed the service on schedule.
 
-This is a fork of [wdmdev/fruity](https://github.com/wdmdev/fruity), my group project for the DTU course 02476 Machine Learning Operations, by William Diedrichsen Marstrand, Karl Byberg Ulbæk, August Semrau Andersen and me. The project as we handed it in is tagged [`dtu-2024`](https://github.com/AndersHenriksen-dev/fruity/tree/dtu-2024). Everything else here I added afterwards.
+It started as a group project in the DTU course 02476 Machine Learning Operations, which I decided to keep working on after the course. The version we handed in is tagged [`dtu-2024`](https://github.com/AndersHenriksen-dev/fruity/tree/dtu-2024). Everything else here I added afterwards.
 
 ![From the group project in 2024 to this fork](docs/diagrams/then-and-now.svg)
 

@@ -45,7 +45,7 @@ uv run fruity cloud-report --fetch   # save Azure's metrics while the service ru
 
 ## Attribution: the agent never credits itself
 
-Anders is the only author of commits, pull request bodies, comments and docs from here on. No `Co-Authored-By:` trailer naming a tool, agent or model, no "Generated with" line, and no text that says an AI tool built or helped with the work. Credit the original group by name. Never override `user.name`, `user.email` or `--author`.
+Anders is the only author of commits, pull request bodies, comments and docs from here on. No `Co-Authored-By:` trailer naming a tool, agent or model, no "Generated with" line, and no text that says an AI tool built or helped with the work. Say that it began as a group project from the course, without naming the other members. Never override `user.name`, `user.email` or `--author`.
 
 ## Writing style (everything that is not Python)
 
