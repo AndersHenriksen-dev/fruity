@@ -33,3 +33,7 @@ Quantizing only `Conv`, `MatMul` and `Gemm` layers is deliberate. Quantizing eve
 A Weights & Biases sweep of 6 runs tried learning rates from 3e-5 to 3e-4 and weight decay from 0 to 0.1. Its best run reached 88.16% on validation against 88.05% from the comparison run. The rule was set before the sweep: the best validation score wins, so the sweep's run is the final model. The 0.11 point gain is about 8 images and well inside what sampling alone can move, so it is not evidence of a better model. The clearer finding is that rates above 1e-4 score lower. The numbers are in `evals/FINAL.md`.
 
 The test set is read by `fruity finalize` only, after the run and the form are fixed and the ONNX file has matched PyTorch on validation. `evals/final.json` is the lock: while it exists, the command rewrites the report and does not read the test set.
+
+## 7. Accuracy is reported beside methods without deep learning
+
+With 101 classes, chance is about 1%, not the 50% many readers assume from two-class problems. So `evals/BASELINES.md` puts the model beside guessing, the most common class, two classical methods built here on hand-made features, and the best published method without deep learning. The classical methods are scored on the same validation images as the models, so the test set stays closed. Each has one fixed setting, because tuning them on the images they are scored on would flatter them.

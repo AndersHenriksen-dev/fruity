@@ -20,6 +20,21 @@ It is easy to justify any choice after the fact. So the rule was committed to gi
 
 The git history proves the order. It also expresses a real trade-off: accuracy matters, but a model 7 times smaller that starts faster and costs less is worth 2 points.
 
+## What the accuracy is compared with
+
+A number like 88% means little alone. Many readers assume 50% is the floor, because that is chance with two classes. With 101 classes, guessing is right about 1% of the time. So the useful comparisons are methods that do not use deep learning, scored on the same validation images:
+
+| Method | Top-1 |
+|---|---:|
+| Guessing | 0.99% |
+| Always the most common class | 0.81% |
+| Colour histogram, logistic regression | 7.97% |
+| Colour, shape and texture, chi-squared kernel | 12.84% |
+| Best published without deep learning, on test | 50.76% |
+| `convnext_tiny` | 88.13% |
+
+Hand-made features such as colour, edge directions (HOG) and texture (LBP) describe a whole image, and food of one kind looks different from photo to photo. The published method did far better by finding small, telling parts of each dish, and the pretrained network does better again, because it learned what to look for from millions of images. The table and its sources are in [evals/BASELINES.md](../../evals/BASELINES.md).
+
 ## Transfer learning
 
 Each model starts from weights already trained on ImageNet, with only its final layer replaced for 101 classes. Everything before that final layer already knows edges, textures and shapes, so ten epochs is enough.

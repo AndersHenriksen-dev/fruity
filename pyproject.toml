@@ -39,6 +39,8 @@ evaluation = [
     "onnxscript>=0.7.2",
     "pillow>=11",
     "psutil>=7.2.2",
+    "scikit-image>=0.25",
+    "scikit-learn>=1.6",
     "timm>=1.0",
     "torch>=2.8",
     "torchvision>=0.23",
@@ -115,7 +117,7 @@ strict_equality = true
 
 # These ship without type information.
 [[tool.mypy.overrides]]
-module = ["hydra.*", "onnxruntime.*", "psutil.*", "timm.*", "torchvision.*", "wandb.*"]
+module = ["hydra.*", "onnxruntime.*", "psutil.*", "skimage.*", "sklearn.*", "timm.*", "torchvision.*", "wandb.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

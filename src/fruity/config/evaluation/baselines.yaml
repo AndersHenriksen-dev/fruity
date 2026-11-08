@@ -1,0 +1,18 @@
+# Read by lib/evaluation/baselines.py: methods without deep learning, measured on the same validation images as the models
+image_size: 128
+color_bins: [8, 4, 4] # hue, saturation, value
+hog_cell: 16
+lbp_points: 8
+lbp_radius: 1
+lbp_grid: 2
+max_iter: 300
+chi2_steps: 2
+workers: 16
+features_dir: outputs/baselines
+results_path: evals/baselines.json
+report_path: evals/BASELINES.md
+final_results: evals/final.json
+published:
+  name: Random forests on mined image parts (Bossard et al., ECCV 2014)
+  url: https://link.springer.com/chapter/10.1007/978-3-319-10599-4_29
+  top1: 0.5076
