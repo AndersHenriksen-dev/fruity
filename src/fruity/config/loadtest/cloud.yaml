@@ -16,3 +16,11 @@ alerts_file: azure_alerts.json
 load_file: load_test.json
 report_file: CLOUD.md
 chart_file: cloud_metrics.png
+# The replica sizes in infra/main.tf, and Azure's monthly free grant for Container Apps
+sizes:
+  fruity-api: {vcpu: 0.5, memory_gib: 1.0}
+  fruity-demo: {vcpu: 0.25, memory_gib: 0.5}
+free_grant:
+  vcpu_seconds: 180000
+  gib_seconds: 360000
+  requests: 2000000

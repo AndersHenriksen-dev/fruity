@@ -24,6 +24,21 @@ from fruity.lib.shared.palette import ACCENT, BACKGROUND, BORDER, MUTED, TEXT
 from fruity.lib.shared.settings import config_for
 
 
+class AppSize(BaseModel):
+    """What one replica of an app is given, as set in infra/main.tf."""
+
+    vcpu: float
+    memory_gib: float
+
+
+class FreeGrant(BaseModel):
+    """What Azure gives each subscription free every month."""
+
+    vcpu_seconds: float
+    gib_seconds: float
+    requests: float
+
+
 class CloudConfig(BaseModel):
     """Which metrics to save, and where the results go."""
 
@@ -38,6 +53,8 @@ class CloudConfig(BaseModel):
     load_file: str
     report_file: str
     chart_file: str
+    sizes: dict[str, AppSize]
+    free_grant: FreeGrant
 
 
 CONFIG = config_for(__name__, CloudConfig)
@@ -179,6 +196,34 @@ def _alert_rows(alerts: list[Alert]) -> list[str]:
     return rows
 
 
+def _usage_lines(saved: SavedMetrics) -> list[str]:
+    """Estimate what the apps used against the free grant, from replica counts and each replica's size.
+
+    Each step counts the most replicas seen in its 5 minutes, so this is an upper estimate.
+    """
+    step_seconds = 300
+    vcpu = gib = requests = 0.0
+    for app, size in CONFIG.sizes.items():
+        replica_seconds = sum(point.value for point in saved.apps[app]["Replicas"]) * step_seconds
+        vcpu += replica_seconds * size.vcpu
+        gib += replica_seconds * size.memory_gib
+        requests += sum(point.value for point in saved.apps[app]["Requests"])
+    grant = CONFIG.free_grant
+    return [
+        "## Use against the free grant",
+        "",
+        "| What | Used | Free each month | Share |",
+        "|---|---:|---:|---:|",
+        f"| vCPU-seconds | {vcpu:,.0f} | {grant.vcpu_seconds:,.0f} | {vcpu / grant.vcpu_seconds:.0%} |",
+        f"| GiB-seconds | {gib:,.0f} | {grant.gib_seconds:,.0f} | {gib / grant.gib_seconds:.0%} |",
+        f"| Requests | {requests:,.0f} | {grant.requests:,.0f} | {requests / grant.requests:.0%} |",
+        "",
+        "Worked out from the most replicas seen in each 5-minute step and each replica's size, so it is an upper "
+        "estimate. It is not a bill: Azure's own figures are what count.",
+        "",
+    ]
+
+
 def write_report(folder: Path) -> None:
     """Write the cloud report and chart from the files saved in a folder."""
     saved = SavedMetrics.model_validate_json((folder / CONFIG.metrics_file).read_text(encoding="utf-8"))
@@ -220,6 +265,7 @@ def write_report(folder: Path) -> None:
             f"with a peak of {max(memory):.0f}%. A leak would show as a climb.",
             "",
         ]
+    lines += _usage_lines(saved)
     lines += [
         "## Alerts that fired",
         "",

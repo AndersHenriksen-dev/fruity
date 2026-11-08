@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 880" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">From pull request to running service</title>
+  <desc id="desc">Every pull request runs lint, types and tests, builds both images, checks the Terraform and scans for secrets. After a merge to main, nothing deploys unless DEPLOY_ENABLED is on. If it is, GitHub Actions builds and pushes the images, signs in to Azure without a stored key, applies Terraform and runs a smoke test.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#81a8d6"/>
+    </marker>
+  </defs>
+  <rect width="640" height="880" fill="#0d1114"/>
+
+  <rect x="170" y="20" width="300" height="50" rx="8" fill="#1b2129" stroke="#81a8d6" stroke-width="1.5"/>
+  <text x="320" y="51" fill="#e4eaf2" font-size="16" text-anchor="middle" font-weight="600">Pull request</text>
+  <line x1="320" y1="70" x2="320" y2="103" stroke="#81a8d6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="20" y="105" width="600" height="200" rx="10" fill="none" stroke="#3a4656" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="34" y="127" fill="#a7b3c2" font-size="13">CI, on every pull request</text>
+  <rect x="36" y="140" width="276" height="70" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="174" y="170" fill="#e4eaf2" font-size="15" text-anchor="middle">Lint, types, tests</text>
+  <text x="174" y="193" fill="#a7b3c2" font-size="13" text-anchor="middle">ruff, mypy, pytest</text>
+  <rect x="328" y="140" width="276" height="70" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="466" y="170" fill="#e4eaf2" font-size="15" text-anchor="middle">Build both images</text>
+  <text x="466" y="193" fill="#a7b3c2" font-size="13" text-anchor="middle">fails on a wrong model checksum</text>
+  <rect x="36" y="222" width="276" height="70" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="174" y="252" fill="#e4eaf2" font-size="15" text-anchor="middle">Check the Terraform</text>
+  <text x="174" y="275" fill="#a7b3c2" font-size="13" text-anchor="middle">format, validate, tests on mocks</text>
+  <rect x="328" y="222" width="276" height="70" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="466" y="252" fill="#e4eaf2" font-size="15" text-anchor="middle">Scan for secrets</text>
+  <text x="466" y="275" fill="#a7b3c2" font-size="13" text-anchor="middle">gitleaks</text>
+  <line x1="320" y1="305" x2="320" y2="338" stroke="#81a8d6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="170" y="340" width="300" height="50" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="320" y="371" fill="#e4eaf2" font-size="16" text-anchor="middle" font-weight="600">Merge to main</text>
+  <line x1="320" y1="390" x2="320" y2="423" stroke="#81a8d6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <path d="M320,425 L470,470 L320,515 L170,470 Z" fill="#1b2129" stroke="#81a8d6" stroke-width="1.5"/>
+  <text x="320" y="466" fill="#e4eaf2" font-size="15" text-anchor="middle">DEPLOY_ENABLED</text>
+  <text x="320" y="488" fill="#e4eaf2" font-size="15" text-anchor="middle">on?</text>
+  <line x1="470" y1="470" x2="508" y2="470" stroke="#a7b3c2" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="478" y="460" fill="#a7b3c2" font-size="13">no</text>
+  <rect x="510" y="440" width="112" height="60" rx="8" fill="#151a20" stroke="#3a4656"/>
+  <text x="566" y="466" fill="#a7b3c2" font-size="13" text-anchor="middle">Nothing</text>
+  <text x="566" y="485" fill="#a7b3c2" font-size="13" text-anchor="middle">is deployed</text>
+  <line x1="320" y1="515" x2="320" y2="548" stroke="#81a8d6" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="330" y="536" fill="#a7b3c2" font-size="13">yes</text>
+
+  <rect x="20" y="550" width="600" height="310" rx="10" fill="none" stroke="#3a4656" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="34" y="572" fill="#a7b3c2" font-size="13">Deploy workflow</text>
+  <rect x="80" y="584" width="480" height="50" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="320" y="615" fill="#e4eaf2" font-size="15" text-anchor="middle">Build and push both images to GitHub</text>
+  <line x1="320" y1="634" x2="320" y2="652" stroke="#81a8d6" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="80" y="654" width="480" height="58" rx="8" fill="#1b2129" stroke="#81a8d6" stroke-width="1.5"/>
+  <text x="320" y="679" fill="#e4eaf2" font-size="15" text-anchor="middle">Sign in to Azure with a short-lived token</text>
+  <text x="320" y="700" fill="#a7b3c2" font-size="13" text-anchor="middle">no stored key; rights on one resource group only</text>
+  <line x1="320" y1="712" x2="320" y2="730" stroke="#81a8d6" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="80" y="732" width="480" height="50" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="320" y="763" fill="#e4eaf2" font-size="15" text-anchor="middle">terraform apply</text>
+  <line x1="320" y1="782" x2="320" y2="800" stroke="#81a8d6" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="80" y="802" width="480" height="46" rx="8" fill="#1b2129" stroke="#3a4656"/>
+  <text x="320" y="831" fill="#e4eaf2" font-size="15" text-anchor="middle">Smoke test: /health and one image</text>
+</svg>

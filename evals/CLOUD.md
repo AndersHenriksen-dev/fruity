@@ -11,6 +11,16 @@ From 2026-11-06 12:00 to 2026-11-07 11:00 UTC, in 277 steps of 5 minutes, Azure 
 - The API ran 2 replicas in 236 of 240 steps.
 - Memory averaged 43% of the limit in the first hour and 43% in the last, with a peak of 43%. A leak would show as a climb.
 
+## Use against the free grant
+
+| What | Used | Free each month | Share |
+|---|---:|---:|---:|
+| vCPU-seconds | 95,850 | 180,000 | 53% |
+| GiB-seconds | 191,700 | 360,000 | 53% |
+| Requests | 508,826 | 2,000,000 | 25% |
+
+Worked out from the most replicas seen in each 5-minute step and each replica's size, so it is an upper estimate. It is not a bill: Azure's own figures are what count.
+
 ## Alerts that fired
 
 | Alert | Severity | Fired (UTC) | Resolved (UTC) |
